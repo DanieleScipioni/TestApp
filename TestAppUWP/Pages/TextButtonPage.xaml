@@ -1,0 +1,331 @@
+﻿<Page
+    x:Class="TestAppUWP.Pages.TextButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Color x:Key="PrimaryColor">#CC0006</Color>
+        <SolidColorBrush x:Key="PrimaryColorBrush" Color="{StaticResource PrimaryColor}" />
+        <Style x:Key="QuickPositionPathStyleOpen" TargetType="Path">
+            <Setter Property="Data" Value="M 399.03,198.20
+           C 399.03,198.20 484.60,198.20 484.60,198.20
+             484.60,198.20 484.60,180.42 484.60,180.42
+             484.60,180.42 399.03,180.42 399.03,180.42
+             399.03,180.42 399.03,198.20 399.03,198.20 Z
+           M 369.10,130.77
+           C 369.10,130.77 454.67,130.77 454.67,130.77
+             454.67,130.77 454.67,112.99 454.67,112.99
+             454.67,112.99 369.10,112.99 369.10,112.99
+             369.10,112.99 369.10,130.77 369.10,130.77 Z
+           M 369.10,398.95
+           C 369.10,398.95 454.67,398.95 454.67,398.95
+             454.67,398.95 454.67,381.17 454.67,381.17
+             454.67,381.17 369.10,381.17 369.10,381.17
+             369.10,381.17 369.10,398.95 369.10,398.95 Z
+           M 398.90,331.91
+           C 398.90,331.91 484.47,331.91 484.47,331.91
+             484.47,331.91 484.47,314.13 484.47,314.13
+             484.47,314.13 398.90,314.13 398.90,314.13
+             398.90,314.13 398.90,331.91 398.90,331.91 Z
+           M 415.08,247.11
+           C 415.08,247.11 415.08,264.89 415.08,264.89
+             415.08,264.89 500.65,264.89 500.65,264.89
+             500.65,264.89 500.65,247.11 500.65,247.11
+             500.65,247.11 415.07,247.11 415.07,247.11
+             415.07,247.11 415.08,247.11 415.08,247.11 Z
+           M 179.48,238.72
+           C 179.48,238.72 105.73,238.72 105.73,238.72
+             105.73,238.72 105.73,274.44 105.73,274.44
+             105.73,274.44 179.48,274.44 179.48,274.44
+             179.48,274.44 179.48,348.19 179.48,348.19
+             179.48,348.19 215.21,348.19 215.21,348.19
+             215.21,348.19 215.21,274.44 215.21,274.44
+             215.21,274.44 288.96,274.44 288.96,274.44
+             288.96,274.44 288.96,238.71 288.96,238.71
+             288.96,238.71 215.21,238.71 215.21,238.71
+             215.21,238.71 215.21,164.96 215.21,164.96
+             215.21,164.96 179.48,164.96 179.48,164.96
+             179.48,164.96 179.48,238.72 179.48,238.72 Z
+           M 197.92,100.43
+           C 284.34,100.43 353.49,169.57 353.49,256.00
+             353.49,341.27 284.35,411.57 197.92,411.57
+             112.65,411.57 42.35,342.43 42.35,256.00
+             42.35,169.58 111.49,100.44 197.92,100.44
+             197.92,100.44 197.92,100.43 197.92,100.43 Z
+           M 197.92,71.63
+           C 96.51,71.63 13.54,154.59 13.54,256.00
+             13.54,357.41 96.51,440.38 197.92,440.38
+             299.32,440.38 382.29,357.41 382.29,256.00
+             382.29,154.59 299.32,71.62 197.92,71.62
+             197.92,71.62 197.92,71.63 197.92,71.63 Z">
+            </Setter>
+        </Style>
+
+        <Style x:Key="QuickPositionPathStyleOpen1" TargetType="Path">
+            <Setter Property="Data" Value="M 399.03,198.20
+           C 399.03,198.20 484.60,198.20 484.60,198.20
+             484.60,198.20 484.60,180.42 484.60,180.42
+             484.60,180.42 399.03,180.42 399.03,180.42
+             399.03,180.42 399.03,198.20 399.03,198.20 Z
+           M 369.10,130.77
+           C 369.10,130.77 454.67,130.77 454.67,130.77
+             454.67,130.77 454.67,112.99 454.67,112.99
+             454.67,112.99 369.10,112.99 369.10,112.99
+             369.10,112.99 369.10,130.77 369.10,130.77 Z
+           M 369.10,398.95
+           C 369.10,398.95 454.67,398.95 454.67,398.95
+             454.67,398.95 454.67,381.17 454.67,381.17
+             454.67,381.17 369.10,381.17 369.10,381.17
+             369.10,381.17 369.10,398.95 369.10,398.95 Z
+           M 398.90,331.91
+           C 398.90,331.91 484.47,331.91 484.47,331.91
+             484.47,331.91 484.47,314.13 484.47,314.13
+             484.47,314.13 398.90,314.13 398.90,314.13
+             398.90,314.13 398.90,331.91 398.90,331.91 Z
+           M 415.08,247.11
+           C 415.08,247.11 415.08,264.89 415.08,264.89
+             415.08,264.89 500.65,264.89 500.65,264.89
+             500.65,264.89 500.65,247.11 500.65,247.11
+             500.65,247.11 415.07,247.11 415.07,247.11
+             415.07,247.11 415.08,247.11 415.08,247.11 Z
+           M 179.48,238.72
+           C 179.48,238.72 105.73,238.72 105.73,238.72
+             105.73,238.72 105.73,274.44 105.73,274.44
+             105.73,274.44 179.48,274.44 179.48,274.44
+             179.48,274.44 179.48,348.19 179.48,348.19
+             179.48,348.19 215.21,348.19 215.21,348.19
+             215.21,348.19 215.21,274.44 215.21,274.44
+             215.21,274.44 288.96,274.44 288.96,274.44
+             288.96,274.44 288.96,238.71 288.96,238.71
+             288.96,238.71 215.21,238.71 215.21,238.71
+             215.21,238.71 215.21,164.96 215.21,164.96
+             215.21,164.96 179.48,164.96 179.48,164.96
+             179.48,164.96 179.48,238.72 179.48,238.72 Z
+           M 197.92,100.43
+           C 284.34,100.43 353.49,169.57 353.49,256.00
+             353.49,341.27 284.35,411.57 197.92,411.57
+             112.65,411.57 42.35,342.43 42.35,256.00
+             42.35,169.58 111.49,100.44 197.92,100.44
+             197.92,100.44 197.92,100.43 197.92,100.43 Z
+           M 197.92,71.63
+           C 96.51,71.63 13.54,154.59 13.54,256.00
+             13.54,357.41 96.51,440.38 197.92,440.38
+             299.32,440.38 382.29,357.41 382.29,256.00
+             382.29,154.59 299.32,71.62 197.92,71.62
+             197.92,71.62 197.92,71.63 197.92,71.63 Z">
+            </Setter>
+        </Style>
+
+        <Style x:Key="QuickPositionPathStyleOpen2" TargetType="Path">
+            <Setter Property="Data" Value="M 399.03,198.20
+           C 399.03,198.20 484.60,198.20 484.60,198.20
+             484.60,198.20 484.60,180.42 484.60,180.42
+             484.60,180.42 399.03,180.42 399.03,180.42
+             399.03,180.42 399.03,198.20 399.03,198.20 Z
+           M 369.10,130.77
+           C 369.10,130.77 454.67,130.77 454.67,130.77
+             454.67,130.77 454.67,112.99 454.67,112.99
+             454.67,112.99 369.10,112.99 369.10,112.99
+             369.10,112.99 369.10,130.77 369.10,130.77 Z
+           M 369.10,398.95
+           C 369.10,398.95 454.67,398.95 454.67,398.95
+             454.67,398.95 454.67,381.17 454.67,381.17
+             454.67,381.17 369.10,381.17 369.10,381.17
+             369.10,381.17 369.10,398.95 369.10,398.95 Z
+           M 398.90,331.91
+           C 398.90,331.91 484.47,331.91 484.47,331.91
+             484.47,331.91 484.47,314.13 484.47,314.13
+             484.47,314.13 398.90,314.13 398.90,314.13
+             398.90,314.13 398.90,331.91 398.90,331.91 Z
+           M 415.08,247.11
+           C 415.08,247.11 415.08,264.89 415.08,264.89
+             415.08,264.89 500.65,264.89 500.65,264.89
+             500.65,264.89 500.65,247.11 500.65,247.11
+             500.65,247.11 415.07,247.11 415.07,247.11
+             415.07,247.11 415.08,247.11 415.08,247.11 Z
+           M 179.48,238.72
+           C 179.48,238.72 105.73,238.72 105.73,238.72
+             105.73,238.72 105.73,274.44 105.73,274.44
+             105.73,274.44 179.48,274.44 179.48,274.44
+             179.48,274.44 179.48,348.19 179.48,348.19
+             179.48,348.19 215.21,348.19 215.21,348.19
+             215.21,348.19 215.21,274.44 215.21,274.44
+             215.21,274.44 288.96,274.44 288.96,274.44
+             288.96,274.44 288.96,238.71 288.96,238.71
+             288.96,238.71 215.21,238.71 215.21,238.71
+             215.21,238.71 215.21,164.96 215.21,164.96
+             215.21,164.96 179.48,164.96 179.48,164.96
+             179.48,164.96 179.48,238.72 179.48,238.72 Z
+           M 197.92,100.43
+           C 284.34,100.43 353.49,169.57 353.49,256.00
+             353.49,341.27 284.35,411.57 197.92,411.57
+             112.65,411.57 42.35,342.43 42.35,256.00
+             42.35,169.58 111.49,100.44 197.92,100.44
+             197.92,100.44 197.92,100.43 197.92,100.43 Z
+           M 197.92,71.63
+           C 96.51,71.63 13.54,154.59 13.54,256.00
+             13.54,357.41 96.51,440.38 197.92,440.38
+             299.32,440.38 382.29,357.41 382.29,256.00
+             382.29,154.59 299.32,71.62 197.92,71.62
+             197.92,71.62 197.92,71.63 197.92,71.63 Z">
+            </Setter>
+        </Style>
+     
+        <Style x:Key="LinkButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="FocusVisualMargin" Value="-3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" >
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Opacity"
+                                                             To="0.2" Duration="0"/>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              BorderBrush="{TemplateBinding BorderBrush}"
+                                              BorderThickness="{TemplateBinding BorderThickness}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              AutomationProperties.AccessibilityView="Raw" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Border Height="50"/>
+        
+        <Button HorizontalAlignment="Center" Style="{StaticResource TextBlockButtonStyle}" Width="42" Height="42">
+            <Button.Template>
+                <ControlTemplate>
+                    <Grid Background="#00ffffff">
+                        <Path Fill="{StaticResource PrimaryColorBrush}" Style="{StaticResource QuickPositionPathStyleOpen}" Stretch="Uniform" Margin="3" />
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button HorizontalAlignment="Center" Style="{StaticResource LinkButtonStyle}" Width="42" Height="42">
+            <Path Fill="{StaticResource PrimaryColorBrush}" Style="{StaticResource QuickPositionPathStyleOpen1}" Stretch="Uniform"/>
+        </Button>
+
+        <Button HorizontalAlignment="Center" Style="{StaticResource TextBlockButtonStyle}" Width="42" Height="42" Padding="0">
+            <Path Fill="{StaticResource PrimaryColorBrush}" Style="{StaticResource QuickPositionPathStyleOpen2}" Stretch="Uniform"/>
+        </Button>
+
+        <Button HorizontalAlignment="Center" Style="{StaticResource TextBlockButtonStyle}" Width="42" Height="42">
+            <SymbolIcon Foreground="{StaticResource PrimaryColorBrush}" Symbol="Find"  />
+        </Button>
+
+        <Button Width="23" Height="45" Margin="0,0,0,-15" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Command="{Binding AddToCartCommand}" Style="{StaticResource LinkButtonStyle}" >
+            <Viewbox>
+                <Grid>
+                    <Path Data="M505.663,832.32c0-31.637,25.687-57.29,57.29-57.289c31.671,0,57.324,25.653,57.324,57.289
+                                      c0,31.636-25.653,57.272-57.324,57.272C531.351,889.592,505.663,863.957,505.663,832.32 M218.149,832.32
+		                              c0,31.637,25.653,57.272,57.255,57.272c31.636,0,57.324-25.636,57.324-57.272c0-31.636-25.687-57.289-57.324-57.289
+		                              C243.802,775.03,218.149,800.683,218.149,832.32 M870.523,74.122c-33.896,7.84-71.983,42.105-85.055,76.476
+		                              s-55.846,62.065-95.555,61.836l-539.735-3.312c-39.744-0.282-64.69,30.901-55.881,69.605l56.128,245.371
+		                              c8.879,38.687,48.2,70.257,87.874,70.486l306.573,1.938c39.674,0.229,62.241,26.003,50.402,57.608
+		                              c-11.839,31.57-53.679,56.974-93.353,56.692l-257.298-2.396c-39.744-0.212-46.826,12.244-46.897,26.69
+		                              c-0.07,14.393,6.888,25.369,46.597,25.615l293.466,2.572c39.674,0.265,83.171-29.615,97.105-66.857l11.909-31.87
+		                              c13.864-37.102,25.421-67.279,25.704-67.279c0.282,0,11.874-30.09,25.809-67.262L822.71,200.085
+		                              c14.041-37.136,46.791-72.283,73.181-78.537c26.426-6.219,45.206-22.532,41.911-36.397
+		                              C934.578,71.233,904.435,66.301,870.523,74.122"
+                          Stretch="Uniform">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <RotateTransform Angle="0" />
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Grid>
+            </Viewbox>
+        </Button>
+
+        <Button Width="23" Height="45" Margin="0,0,0,-15" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Command="{Binding AddToCartCommand}" Style="{StaticResource LinkButtonStyle}" >
+            <Path Data="M505.663,832.32c0-31.637,25.687-57.29,57.29-57.289c31.671,0,57.324,25.653,57.324,57.289
+                                c0,31.636-25.653,57.272-57.324,57.272C531.351,889.592,505.663,863.957,505.663,832.32 M218.149,832.32
+		                        c0,31.637,25.653,57.272,57.255,57.272c31.636,0,57.324-25.636,57.324-57.272c0-31.636-25.687-57.289-57.324-57.289
+		                        C243.802,775.03,218.149,800.683,218.149,832.32 M870.523,74.122c-33.896,7.84-71.983,42.105-85.055,76.476
+		                        s-55.846,62.065-95.555,61.836l-539.735-3.312c-39.744-0.282-64.69,30.901-55.881,69.605l56.128,245.371
+		                        c8.879,38.687,48.2,70.257,87.874,70.486l306.573,1.938c39.674,0.229,62.241,26.003,50.402,57.608
+		                        c-11.839,31.57-53.679,56.974-93.353,56.692l-257.298-2.396c-39.744-0.212-46.826,12.244-46.897,26.69
+		                        c-0.07,14.393,6.888,25.369,46.597,25.615l293.466,2.572c39.674,0.265,83.171-29.615,97.105-66.857l11.909-31.87
+		                        c13.864-37.102,25.421-67.279,25.704-67.279c0.282,0,11.874-30.09,25.809-67.262L822.71,200.085
+		                        c14.041-37.136,46.791-72.283,73.181-78.537c26.426-6.219,45.206-22.532,41.911-36.397
+		                        C934.578,71.233,904.435,66.301,870.523,74.122"
+                    Stretch="Uniform">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+        </Button>
+
+        <Button HorizontalAlignment="Center" Style="{StaticResource TextBlockButtonStyle}" Width="42" Height="42">
+            <FontIcon Foreground="{StaticResource PrimaryColorBrush}" Glyph="&#xE946;"  />
+        </Button>
+
+        <Button HorizontalAlignment="Center" Width="42" Height="42" Background="Transparent">
+            <FontIcon Foreground="{StaticResource PrimaryColorBrush}" Glyph="&#xE946;"  />
+        </Button>
+
+        <Button HorizontalAlignment="Center" Style="{StaticResource TextBlockButtonStyle}" Width="42" Height="42">
+            <TextBlock Text="Ciao"/>
+        </Button>
+
+    </StackPanel>
+</Page>

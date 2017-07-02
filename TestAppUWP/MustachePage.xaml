@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="TestAppUWP.MustachePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding Converter={StaticResource ViewModelLocator}, RelativeSource={RelativeSource Self}}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Press Render to render the template" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="Source">
+            Hello {{Name}}<LineBreak/> 
+            You have just won {{Value}} {{Currency}}!<LineBreak/>
+            {{#InCa}}<LineBreak/>
+            Well, {{TaxedValue}} {{Currency}}, after taxes.<LineBreak/>
+            {{/InCa}}
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="Target"/>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                HorizontalAlignment="Stretch"
+                Click="ButtonBase_OnClick">Render</Button>
+    </Grid> 
+</Page>

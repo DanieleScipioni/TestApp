@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="TestAppUWP.Pages.SplitViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TemplatePivotItem.Visibilty" Value="Collapsed"/>
+                        <Setter Target="DataPivotItem.Visibilty" Value="Collapsed"/>
+                        <Setter Target="BothPivotItem.Visibilty" Value="Visibile"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Pivot SelectionChanged="Pivot_OnSelectionChanged">
+            <PivotItem Header="Template" x:Name="TemplatePivotItem">
+                <TextBox AcceptsReturn="True" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         Text="Ciao ciao"
+                         PlaceholderText="Fill with your template" />
+            </PivotItem>
+            <PivotItem Header="Data" x:Name="DataPivotItem">
+                <TextBox AcceptsReturn="True" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         Text="Ciao ciao"
+                         PlaceholderText="Fill with your template" />
+            </PivotItem>
+            <PivotItem Header="Both" x:Name="BothPivotItem" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox AcceptsReturn="True" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         Text="Ciao ciao"
+                         PlaceholderText="Fill with your template" />
+                    <TextBox AcceptsReturn="True" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         Text="Ciao ciao"
+                         PlaceholderText="Fill with your template" />
+                </StackPanel>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
