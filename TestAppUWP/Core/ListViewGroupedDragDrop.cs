@@ -37,7 +37,6 @@ namespace TestAppUWP.Core
 
     public class ListViewGroupedDragDrop
     {
-        private readonly ListView _listView;
         private readonly Color _colorValue;
 
         private List<GroupedItem> _dragGroupedItems;
@@ -52,7 +51,6 @@ namespace TestAppUWP.Core
             var uiSettings = new UISettings();
             _colorValue = uiSettings.GetColorValue(UIColorType.Accent);
 
-            _listView = listView;
             _lastOverItemAndIndex = new Tuple<ListViewItem, int>(null, -1);
             _lastPlacementMode = PlacementMode.Mouse;
             
@@ -168,7 +166,7 @@ namespace TestAppUWP.Core
 
             if (_lastOverItemAndIndex.Item1 == null) return;
 
-            var groupedItem = (GroupedItem) _listView.ItemFromContainer(_lastOverItemAndIndex.Item1);
+            var groupedItem = (GroupedItem)listView.ItemFromContainer(_lastOverItemAndIndex.Item1);
             int indexOf = groupedItem.Group.IndexOf(groupedItem);
             if (_lastPlacementMode == PlacementMode.Bottom) indexOf++;
 
