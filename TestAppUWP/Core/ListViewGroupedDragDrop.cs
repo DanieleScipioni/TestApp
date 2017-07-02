@@ -10,6 +10,7 @@ using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -43,7 +44,7 @@ namespace TestAppUWP.Core
 
         private Tuple<ListViewItem, int> _lastOverItemAndIndex;
         private Brush _lastBorderBrush;
-        private bool _lastSetBefore;
+        private PlacementMode _lastPlacementMode;
         private ScrollMode _lastScrollMode;
 
         public ListViewGroupedDragDrop(ListView listView)
@@ -53,7 +54,8 @@ namespace TestAppUWP.Core
 
             _listView = listView;
             _lastOverItemAndIndex = new Tuple<ListViewItem, int>(null, -1);
-
+            _lastPlacementMode = PlacementMode.Mouse;
+            
             listView.DragItemsStarting += ListViewOnDragItemsStarting;
             listView.DragItemsCompleted += ListViewOnDragItemsCompleted;
             listView.DragEnter += ListViewOnDragEnter;
@@ -119,7 +121,7 @@ namespace TestAppUWP.Core
 
             if (currentOverItemAndIndex == null) return;
 
-            if (currentOverItemAndIndex.Item2 != _lastOverItemAndIndex.Item2)
+            if (currentOverItemAndIndex.Item2 != _lastOverItemAndIndex.Item2 && currentOverItemAndIndex.Item1 != null)
             {
                 if (_lastOverItemAndIndex?.Item1 != null)
                 {
@@ -134,13 +136,13 @@ namespace TestAppUWP.Core
             if (currentOverItemAndIndex.Item1 == null) return;
 
             Point point = dragEventArgs.GetPosition(currentOverItemAndIndex.Item1);
-            bool setBefore = point.Y < currentOverItemAndIndex.Item1.ActualHeight / 2;
-            if (setBefore && _lastSetBefore || !setBefore && !_lastSetBefore) return;
+            PlacementMode currentPlacementMode = point.Y < currentOverItemAndIndex.Item1.ActualHeight / 2 ? PlacementMode.Top : PlacementMode.Bottom;
+            if (currentPlacementMode == _lastPlacementMode) return;
 
-            _lastSetBefore = setBefore;
+            _lastPlacementMode = currentPlacementMode;
             currentOverItemAndIndex.Item1.BorderBrush = new SolidColorBrush(_colorValue);
 
-            currentOverItemAndIndex.Item1.BorderThickness = setBefore
+            currentOverItemAndIndex.Item1.BorderThickness = currentPlacementMode == PlacementMode.Top
                 ? new Thickness(0, 1, 0, 0)
                 : new Thickness(0, 0, 0, 1);
         }
@@ -168,23 +170,13 @@ namespace TestAppUWP.Core
 
             var groupedItem = (GroupedItem) _listView.ItemFromContainer(_lastOverItemAndIndex.Item1);
             int indexOf = groupedItem.Group.IndexOf(groupedItem);
-            if (_lastSetBefore)
+            if (_lastPlacementMode == PlacementMode.Bottom) indexOf++;
+
+            for (int i = _dragGroupedItems.Count - 1; i >= 0; i--)
             {
-                for (int i = _dragGroupedItems.Count - 1; i >= 0; i--)
-                {
-                    GroupedItem dragGroupedItem = _dragGroupedItems[i];
-                    dragGroupedItem.Group = groupedItem.Group;
-                    groupedItem.Group.Insert(indexOf, dragGroupedItem);
-                }
-            }
-            else
-            {
-                for (int i = _dragGroupedItems.Count - 1; i >= 0; i--)
-                {
-                    GroupedItem dragGroupedItem = _dragGroupedItems[i];
-                    dragGroupedItem.Group = groupedItem.Group;
-                    groupedItem.Group.Insert(indexOf + 1, dragGroupedItem);
-                }
+                GroupedItem dragGroupedItem = _dragGroupedItems[i];
+                dragGroupedItem.Group = groupedItem.Group;
+                groupedItem.Group.Insert(indexOf, dragGroupedItem);
             }
 
             _lastOverItemAndIndex.Item1.BorderBrush = _lastBorderBrush;
@@ -192,6 +184,7 @@ namespace TestAppUWP.Core
 
             _lastOverItemAndIndex = new Tuple<ListViewItem, int>(null, -1);
             _lastBorderBrush = null;
+            _lastPlacementMode = PlacementMode.Mouse;
 
             _dragGroupedItems = null;
             dragEventArgs.Handled = true;
@@ -211,6 +204,7 @@ namespace TestAppUWP.Core
 
             _lastOverItemAndIndex = new Tuple<ListViewItem, int>(null, -1);
             _lastBorderBrush = null;
+            _lastPlacementMode = PlacementMode.Mouse;
 
             dragEventArgs.Handled = true;
         }
