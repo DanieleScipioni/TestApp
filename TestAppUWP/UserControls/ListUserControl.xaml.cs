@@ -21,7 +21,6 @@ namespace TestAppUWP.UserControls
         {
             InitializeComponent();
 
-
             _collectionViewSource = new CollectionViewSource
             {
                 IsSourceGrouped = true,
@@ -59,9 +58,14 @@ namespace TestAppUWP.UserControls
                 new StringWrapper {String = "5_O"}
             };
 
-            List<Group> list = (from item in collection group item by item.String.Substring(0, 1) into grp select grp)
-                .Select(stringWrappers => new Group(stringWrappers.Key,
-                    stringWrappers)).ToList();
+            List<Group> list = (from item in collection
+                group item by item.String.Substring(0, 1)
+                into grp
+                select new Group(grp.Key, grp)).ToList();
+
+            //List<Group> list = (from item in collection group item by item.String.Substring(0, 1) into grp select grp)
+            //    .Select(stringWrappers => new Group(stringWrappers.Key,
+            //        stringWrappers)).ToList();
             _collectionViewSource.Source = list;
         }
     }

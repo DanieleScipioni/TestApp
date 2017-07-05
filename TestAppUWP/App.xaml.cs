@@ -43,7 +43,7 @@ namespace TestAppUWP
             // just ensure that the window is active
             if (rootFrame == null)
             {
-                rootFrame = new ListUserControl();
+                rootFrame = new CartAnimationUserControl();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

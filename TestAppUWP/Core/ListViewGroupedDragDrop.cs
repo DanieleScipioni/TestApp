@@ -21,14 +21,14 @@ namespace TestAppUWP.Core
         public Group Group { get; set; }
     }
 
-    public class Group : ObservableCollection<GroupedItem>
+    public sealed class Group : ObservableCollection<GroupedItem>
     {
         public string GroupName { get; }
 
         public Group(string groupName, IEnumerable<GroupedItem> collection) : base(collection)
         {
             GroupName = groupName;
-            foreach (GroupedItem groupedItem in collection)
+            foreach (GroupedItem groupedItem in Items)
             {
                 groupedItem.Group = this;
             }
@@ -53,7 +53,7 @@ namespace TestAppUWP.Core
 
             _lastOverItemAndIndex = new Tuple<ListViewItem, int>(null, -1);
             _lastPlacementMode = PlacementMode.Mouse;
-            
+
             listView.DragItemsStarting += ListViewOnDragItemsStarting;
             listView.DragItemsCompleted += ListViewOnDragItemsCompleted;
             listView.DragEnter += ListViewOnDragEnter;
@@ -61,7 +61,6 @@ namespace TestAppUWP.Core
             listView.DragLeave += ListViewOnDragLeave;
             listView.Drop += ListViewOnDrop;
             listView.DropCompleted += ListViewOnDropCompleted;
-
         }
 
         private async void ListViewOnDragEnter(object sender, DragEventArgs dragEventArgs)
@@ -79,8 +78,8 @@ namespace TestAppUWP.Core
 
             DragOperationDeferral dragOperationDeferral = dragEventArgs.GetDeferral();
 
-            BitmapImage bitmapImage = await GetBitmapImage(currentOverListViewItem);
-            dragEventArgs.DragUIOverride?.SetContentFromBitmapImage(bitmapImage);
+            BitmapImage bitmapImage = await currentOverListViewItem.GetBitmapImage();
+            //dragEventArgs.DragUIOverride?.SetContentFromBitmapImage(bitmapImage);
 
             foreach (GroupedItem groupedItem in _dragGroupedItems)
             {
@@ -90,20 +89,6 @@ namespace TestAppUWP.Core
 
             dragEventArgs.Handled = true;
             dragOperationDeferral.Complete();
-        }
-
-        private static async Task<BitmapImage> GetBitmapImage(UIElement uiElement)
-        {
-            var renderTargetBitmap = new RenderTargetBitmap();
-            await renderTargetBitmap.RenderAsync(uiElement);
-            var bitmapImage = new BitmapImage();
-            using (var stream = new InMemoryRandomAccessStream())
-            {
-                await stream.WriteAsync(await renderTargetBitmap.GetPixelsAsync());
-                stream.Seek(0);
-                bitmapImage.SetSource(stream);
-            }
-            return bitmapImage;
         }
 
         private void ListViewOnDragOver(object sender, DragEventArgs dragEventArgs)
