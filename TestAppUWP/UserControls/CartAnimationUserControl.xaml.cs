@@ -24,7 +24,7 @@ namespace TestAppUWP.UserControls
             InitializeComponent();
             Loaded += (sender, args) =>
             {
-                Visual visual = ElementCompositionPreview.GetElementVisual(Window.Current.Content);
+                Visual visual = ElementCompositionPreview.GetElementVisual(this);
                 _compositor = visual.Compositor;
                 _containerVisual = _compositor.CreateContainerVisual();
                 ElementCompositionPreview.SetElementChildVisual(this, _containerVisual);
@@ -36,8 +36,10 @@ namespace TestAppUWP.UserControls
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
 
+            CubicBezierEasingFunction cubicBezierEasingFunction = _compositor.CreateCubicBezierEasingFunction(new Vector2(0.5f, 0f), new Vector2(1f, 0.5f));
+
             Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
-            Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(0, 0));
+            Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
 
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateColorBrush(Color.FromArgb(128, 0, 139, 139));
@@ -46,19 +48,19 @@ namespace TestAppUWP.UserControls
             _containerVisual.Children.InsertAtTop(spriteVisual);
 
             ScalarKeyFrameAnimation yOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            yOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.Y);
+            yOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.Y, cubicBezierEasingFunction);
             SetAnimationDefautls(yOffsetAnimation);
 
             ScalarKeyFrameAnimation xOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            xOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.X);
+            xOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.X, cubicBezierEasingFunction);
             SetAnimationDefautls(xOffsetAnimation);
 
             ScalarKeyFrameAnimation widthAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            widthAnimation.InsertKeyFrame(1f, (float)CartPlaceholder.ActualWidth);
+            widthAnimation.InsertKeyFrame(1f, 0f, cubicBezierEasingFunction);
             SetAnimationDefautls(widthAnimation);
 
             ScalarKeyFrameAnimation heigthAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            heigthAnimation.InsertKeyFrame(1f, (float)CartPlaceholder.ActualHeight);
+            heigthAnimation.InsertKeyFrame(1f, 0f, cubicBezierEasingFunction);
             SetAnimationDefautls(heigthAnimation);
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
