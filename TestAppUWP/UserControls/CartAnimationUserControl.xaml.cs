@@ -20,7 +20,6 @@ namespace TestAppUWP.UserControls
         private readonly CartAnimationViewModel _cartAnimationViewModel;
 
         private Compositor _compositor;
-        private ContainerVisual _containerVisual;
 
         public CartAnimationUserControl()
         {
@@ -30,8 +29,6 @@ namespace TestAppUWP.UserControls
             {
                 Visual visual = ElementCompositionPreview.GetElementVisual(this);
                 _compositor = visual.Compositor;
-                _containerVisual = _compositor.CreateContainerVisual();
-                ElementCompositionPreview.SetElementChildVisual(this, _containerVisual);
             };
         }
 
@@ -39,8 +36,6 @@ namespace TestAppUWP.UserControls
         {
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
-
-            CubicBezierEasingFunction cubicBezierEasingFunction = _compositor.CreateCubicBezierEasingFunction(new Vector2(0.5f, 0f), new Vector2(1f, 0.5f));
 
             Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
@@ -61,25 +56,24 @@ namespace TestAppUWP.UserControls
             spriteVisual.Brush = _compositor.CreateColorBrush(Color.FromArgb(128, 0, 139, 139));
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
-            _containerVisual.Children.InsertAtTop(spriteVisual);
+            ElementCompositionPreview.SetElementChildVisual(this, spriteVisual);
 
             Vector3KeyFrameAnimation offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1f, new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0), cubicBezierEasingFunction);
+            offsetAnimation.InsertKeyFrame(1f, new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0));
             SetAnimationDefautls(offsetAnimation);
 
             Vector2KeyFrameAnimation sizeAnimation = _compositor.CreateVector2KeyFrameAnimation();
-            sizeAnimation.InsertKeyFrame(1f, new Vector2(0f, 0f), cubicBezierEasingFunction);
+            sizeAnimation.InsertKeyFrame(1f, new Vector2(0f, 0f));
             SetAnimationDefautls(sizeAnimation);
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-            
+
             spriteVisual.StartAnimation("Offset", offsetAnimation);
             spriteVisual.StartAnimation("Size", sizeAnimation);
             myScopedBatch.End();
 
             void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
             {
-                _containerVisual.Children.Remove(spriteVisual);
                 spriteVisual.Dispose();
                 myScopedBatch.Completed -= BatchCompleted;
                 myScopedBatch.Dispose();
@@ -90,7 +84,7 @@ namespace TestAppUWP.UserControls
 
         private static void SetAnimationDefautls(KeyFrameAnimation animation)
         {
-            TimeSpan animationDuration = TimeSpan.FromMilliseconds(500);
+            TimeSpan animationDuration = TimeSpan.FromMilliseconds(1500);
             animation.Duration = animationDuration;
             animation.IterationBehavior = AnimationIterationBehavior.Count;
             animation.IterationCount = 1;
