@@ -1,17 +1,13 @@
-﻿using System;
-using MustacheDemo.Core;
+﻿using MustacheDemo.Core;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.Foundation;
-using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using TestAppUWP.Core;
 
 namespace TestAppUWP.UserControls
 {
@@ -20,6 +16,7 @@ namespace TestAppUWP.UserControls
         private readonly CartAnimationViewModel _cartAnimationViewModel;
 
         private Compositor _compositor;
+        private ContainerVisual _containerVisual;
 
         public CartAnimationUserControl()
         {
@@ -27,12 +24,18 @@ namespace TestAppUWP.UserControls
             InitializeComponent();
             Loaded += (sender, args) =>
             {
-                Visual visual = ElementCompositionPreview.GetElementVisual(this);
-                _compositor = visual.Compositor;
+                _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+                _containerVisual = _compositor.CreateContainerVisual();
+                ElementCompositionPreview.SetElementChildVisual(this, _containerVisual);
+            };
+            Unloaded += (sender, args) =>
+            {
+                _compositor.Dispose();
+                _containerVisual.Dispose();
             };
         }
 
-        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        public void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
@@ -40,23 +43,11 @@ namespace TestAppUWP.UserControls
             Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
 
-            var bitmapImage = new BitmapImage();
-            using (InMemoryRandomAccessStream stream = await ((UIElement)sender).GetBitmapImageStream())
-                bitmapImage.SetSource(stream);
-            var image = new Image
-            {
-                Height = frameworkElement.Height,
-                Width = frameworkElement.Width,
-                Source = bitmapImage,
-                RenderTransformOrigin = new Point(0.5, 0.5)
-            };
-            var imageBrush = new ImageBrush { ImageSource = bitmapImage };
-
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateColorBrush(Color.FromArgb(128, 0, 139, 139));
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
-            ElementCompositionPreview.SetElementChildVisual(this, spriteVisual);
+            _containerVisual.Children.InsertAtTop(spriteVisual);
 
             Vector3KeyFrameAnimation offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
             offsetAnimation.InsertKeyFrame(1f, new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0));
