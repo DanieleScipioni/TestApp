@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.Foundation;
+using Windows.Graphics.DirectX;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Composition;
 
 namespace TestAppUWP.UserControls
 {
@@ -17,6 +20,8 @@ namespace TestAppUWP.UserControls
 
         private Compositor _compositor;
         private ContainerVisual _containerVisual;
+        private CanvasDevice _canvasDevice;
+        private CompositionGraphicsDevice _graphicsDevice;
 
         public CartAnimationUserControl()
         {
@@ -27,15 +32,19 @@ namespace TestAppUWP.UserControls
                 _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
                 _containerVisual = _compositor.CreateContainerVisual();
                 ElementCompositionPreview.SetElementChildVisual(this, _containerVisual);
+                _canvasDevice = new CanvasDevice();
+                _graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(_compositor, _canvasDevice);
             };
             Unloaded += (sender, args) =>
             {
                 _compositor.Dispose();
                 _containerVisual.Dispose();
+                _canvasDevice.Dispose();
+                _graphicsDevice.Dispose();
             };
         }
 
-        public void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        public async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
@@ -43,8 +52,21 @@ namespace TestAppUWP.UserControls
             Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
 
+            CompositionDrawingSurface surface;
+            using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, new Uri("ms-appx:///Assets/Photos/pic00.jpg")))
+            {
+                surface = _graphicsDevice.CreateDrawingSurface(new Size(frameworkElement.ActualWidth, frameworkElement.ActualHeight),
+                    DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
+                using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
+                {
+                    session.Clear(Color.FromArgb(0, 0, 0, 0));
+                    session.DrawImage(canvasBitmap, new Rect(0, 0, surface.Size.Width, surface.Size.Height),
+                        new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
+                }
+            }
+
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
-            spriteVisual.Brush = _compositor.CreateColorBrush(Color.FromArgb(128, 0, 139, 139));
+            spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
             _containerVisual.Children.InsertAtTop(spriteVisual);
