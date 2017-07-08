@@ -3,11 +3,15 @@ using MustacheDemo.Core;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.Foundation;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using TestAppUWP.Core;
 
 namespace TestAppUWP.UserControls
 {
@@ -31,7 +35,7 @@ namespace TestAppUWP.UserControls
             };
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
@@ -41,34 +45,36 @@ namespace TestAppUWP.UserControls
             Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
 
+            var bitmapImage = new BitmapImage();
+            using (InMemoryRandomAccessStream stream = await ((UIElement)sender).GetBitmapImageStream())
+                bitmapImage.SetSource(stream);
+            var image = new Image
+            {
+                Height = frameworkElement.Height,
+                Width = frameworkElement.Width,
+                Source = bitmapImage,
+                RenderTransformOrigin = new Point(0.5, 0.5)
+            };
+            var imageBrush = new ImageBrush { ImageSource = bitmapImage };
+
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateColorBrush(Color.FromArgb(128, 0, 139, 139));
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
             _containerVisual.Children.InsertAtTop(spriteVisual);
 
-            ScalarKeyFrameAnimation yOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            yOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.Y, cubicBezierEasingFunction);
-            SetAnimationDefautls(yOffsetAnimation);
+            Vector3KeyFrameAnimation offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
+            offsetAnimation.InsertKeyFrame(1f, new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0), cubicBezierEasingFunction);
+            SetAnimationDefautls(offsetAnimation);
 
-            ScalarKeyFrameAnimation xOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            xOffsetAnimation.InsertKeyFrame(1f, (float)targetPoint.X, cubicBezierEasingFunction);
-            SetAnimationDefautls(xOffsetAnimation);
-
-            ScalarKeyFrameAnimation widthAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            widthAnimation.InsertKeyFrame(1f, 0f, cubicBezierEasingFunction);
-            SetAnimationDefautls(widthAnimation);
-
-            ScalarKeyFrameAnimation heigthAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            heigthAnimation.InsertKeyFrame(1f, 0f, cubicBezierEasingFunction);
-            SetAnimationDefautls(heigthAnimation);
+            Vector2KeyFrameAnimation sizeAnimation = _compositor.CreateVector2KeyFrameAnimation();
+            sizeAnimation.InsertKeyFrame(1f, new Vector2(0f, 0f), cubicBezierEasingFunction);
+            SetAnimationDefautls(sizeAnimation);
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
             
-            spriteVisual.StartAnimation("Offset.Y", yOffsetAnimation);
-            spriteVisual.StartAnimation("Offset.X", xOffsetAnimation);
-            spriteVisual.StartAnimation("Size.X", widthAnimation);
-            spriteVisual.StartAnimation("Size.Y", heigthAnimation);
+            spriteVisual.StartAnimation("Offset", offsetAnimation);
+            spriteVisual.StartAnimation("Size", sizeAnimation);
             myScopedBatch.End();
 
             void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
@@ -82,7 +88,7 @@ namespace TestAppUWP.UserControls
 
         }
 
-        private static void SetAnimationDefautls(ScalarKeyFrameAnimation animation)
+        private static void SetAnimationDefautls(KeyFrameAnimation animation)
         {
             TimeSpan animationDuration = TimeSpan.FromMilliseconds(500);
             animation.Duration = animationDuration;
