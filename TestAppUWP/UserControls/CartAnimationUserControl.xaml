@@ -19,13 +19,14 @@
                 <AppBarButton x:Name="CartPlaceholder" Icon="Placeholder" Label="{x:Bind _cartAnimationViewModel.Count, Mode=OneWay}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-        <Canvas x:Name="Canvas" Visibility="Collapsed"/>
         <GridView Grid.Row="1" x:Name="GridView"
                   ItemsSource="{x:Bind _cartAnimationViewModel.ItemSource}" SelectionMode="None"
                   IsItemClickEnabled="True" ItemClick="ListViewBase_OnItemClick">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="userControls:StringItem">
-                    <Button Content="{x:Bind V}" Command="{x:Bind Add}" Height="100" Width="100" Click="ButtonBase_OnClick"/>
+                    <Button Content="{x:Bind V}" Command="{x:Bind Add}"
+                            Height="100" Width="100"
+                            Click="ButtonBase_OnClick"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
