@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Toolkit.Uwp.UI;
 
 namespace TestAppUWP.UserControls
 {
@@ -58,7 +57,7 @@ namespace TestAppUWP.UserControls
             if (frameworkElement == null) return;
 
             DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
-            Image image = (Image) VisualTreeHelper.GetChild(dependencyObject, 0);
+            var image = (ContentPresenter) VisualTreeHelper.GetChild(dependencyObject, 0);
 
             Point point = image.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
@@ -66,7 +65,7 @@ namespace TestAppUWP.UserControls
             DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
 
             var renderTargetBitmap = new RenderTargetBitmap();
-            await renderTargetBitmap.RenderAsync(frameworkElement);
+            await renderTargetBitmap.RenderAsync(image);
             IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
 
             StorageFile storageFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("temp.bmp", CreationCollisionOption.OpenIfExists);
@@ -81,14 +80,14 @@ namespace TestAppUWP.UserControls
             }
 
             CompositionDrawingSurface surface;
-            using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, new Uri("ms-appx:///Assets/Photos/pic00.jpg")))
+            using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, new Uri("ms-appdata:///temp/temp.bmp")))
             {
-                surface = _graphicsDevice.CreateDrawingSurface(new Size(frameworkElement.ActualWidth, frameworkElement.ActualHeight),
+                surface = _graphicsDevice.CreateDrawingSurface(new Size(renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
                     DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
                 using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
                 {
                     session.Clear(Color.FromArgb(0, 0, 0, 0));
-                    session.DrawImage(canvasBitmap, new Rect(0, 0, surface.Size.Width, surface.Size.Height),
+                    session.DrawImage(canvasBitmap, new Rect(0, 0, renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
                         new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
                 }
             }
