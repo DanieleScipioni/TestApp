@@ -78,7 +78,6 @@ namespace TestAppUWP.UserControls
                     (uint)renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
                     buffer.ToArray());
                 await encoder.FlushAsync();
-                //stream.Seek(0);
 
                 using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream))
                 {
