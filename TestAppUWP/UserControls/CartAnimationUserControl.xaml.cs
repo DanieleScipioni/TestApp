@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Microsoft.Toolkit.Uwp.UI;
 
 namespace TestAppUWP.UserControls
 {
@@ -28,6 +29,7 @@ namespace TestAppUWP.UserControls
         private ContainerVisual _containerVisual;
         private CanvasDevice _canvasDevice;
         private CompositionGraphicsDevice _graphicsDevice;
+        private Viewbox _viewbox;
 
         public CartAnimationUserControl()
         {
@@ -40,6 +42,7 @@ namespace TestAppUWP.UserControls
                 ElementCompositionPreview.SetElementChildVisual(this, _containerVisual);
                 _canvasDevice = new CanvasDevice();
                 _graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(_compositor, _canvasDevice);
+                _viewbox = CartPlaceholder.FindDescendant<Viewbox>();
             };
             Unloaded += (sender, args) =>
             {
@@ -59,7 +62,6 @@ namespace TestAppUWP.UserControls
             var image = (ContentPresenter) VisualTreeHelper.GetChild(dependencyObject, 0);
 
             Point point = image.TransformToVisual(this).TransformPoint(new Point(0,0));
-            Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
 
             DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
 
@@ -99,12 +101,14 @@ namespace TestAppUWP.UserControls
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
             _containerVisual.Children.InsertAtTop(spriteVisual);
 
+            Vector3 targetOffset = GetTargetOffset(_viewbox);
             Vector3KeyFrameAnimation offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1f, new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0));
+            offsetAnimation.InsertKeyFrame(1f, targetOffset, _compositor.CreateLinearEasingFunction());
             SetAnimationDefautls(offsetAnimation);
 
+            Vector2 targetSize = GetTargetSize(_viewbox);
             Vector2KeyFrameAnimation sizeAnimation = _compositor.CreateVector2KeyFrameAnimation();
-            sizeAnimation.InsertKeyFrame(1f, new Vector2(0f, 0f));
+            sizeAnimation.InsertKeyFrame(1f, targetSize, _compositor.CreateLinearEasingFunction());
             SetAnimationDefautls(sizeAnimation);
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
@@ -126,9 +130,21 @@ namespace TestAppUWP.UserControls
 
         }
 
+        private Vector3 GetTargetOffset(FrameworkElement frameworkElement)
+        {
+            Point targetPoint = frameworkElement.TransformToVisual(this)
+                .TransformPoint(new Point(0, 0));
+            return new Vector3((float) targetPoint.X, (float) targetPoint.Y, 0f);
+        }
+
+        private static Vector2 GetTargetSize(FrameworkElement frameworkElement)
+        {
+            return new Vector2((float) frameworkElement.ActualWidth, (float) frameworkElement.ActualHeight);
+        }
+
         private static void SetAnimationDefautls(KeyFrameAnimation animation)
         {
-            TimeSpan animationDuration = TimeSpan.FromMilliseconds(1500);
+            TimeSpan animationDuration = TimeSpan.FromMilliseconds(500);
             animation.Duration = animationDuration;
             animation.IterationBehavior = AnimationIterationBehavior.Count;
             animation.IterationCount = 1;
