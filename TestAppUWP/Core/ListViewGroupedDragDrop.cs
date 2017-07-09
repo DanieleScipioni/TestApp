@@ -78,8 +78,8 @@ namespace TestAppUWP.Core
 
             DragOperationDeferral dragOperationDeferral = dragEventArgs.GetDeferral();
 
-            BitmapImage bitmapImage = await currentOverListViewItem.GetBitmapImage();
-            //dragEventArgs.DragUIOverride?.SetContentFromBitmapImage(bitmapImage);
+            BitmapImage bitmapImage = await currentOverListViewItem.ToBitmapImage();
+            dragEventArgs.DragUIOverride?.SetContentFromBitmapImage(bitmapImage);
 
             foreach (GroupedItem groupedItem in _dragGroupedItems)
             {

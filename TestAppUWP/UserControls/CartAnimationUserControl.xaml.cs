@@ -1,16 +1,24 @@
-﻿using MustacheDemo.Core;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Composition;
+using MustacheDemo.Core;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Graphics.DirectX;
+using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Composition;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Microsoft.Toolkit.Uwp.UI;
 
 namespace TestAppUWP.UserControls
 {
@@ -49,8 +57,28 @@ namespace TestAppUWP.UserControls
             var frameworkElement = sender as FrameworkElement;
             if (frameworkElement == null) return;
 
-            Point point = frameworkElement.TransformToVisual(this).TransformPoint(new Point(0,0));
+            DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
+            Image image = (Image) VisualTreeHelper.GetChild(dependencyObject, 0);
+
+            Point point = image.TransformToVisual(this).TransformPoint(new Point(0,0));
             Point targetPoint = CartPlaceholder.TransformToVisual(this).TransformPoint(new Point(CartPlaceholder.ActualWidth / 2, CartPlaceholder.ActualHeight / 2));
+
+            DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
+
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(frameworkElement);
+            IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
+
+            StorageFile storageFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("temp.bmp", CreationCollisionOption.OpenIfExists);
+            using (IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
+                    (uint) renderTargetBitmap.PixelWidth,
+                    (uint) renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
+                    buffer.ToArray());
+                await encoder.FlushAsync();
+            }
 
             CompositionDrawingSurface surface;
             using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, new Uri("ms-appx:///Assets/Photos/pic00.jpg")))
@@ -88,6 +116,7 @@ namespace TestAppUWP.UserControls
             void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
             {
                 spriteVisual.Dispose();
+                surface.Dispose();
                 myScopedBatch.Completed -= BatchCompleted;
                 myScopedBatch.Dispose();
             }
@@ -102,22 +131,20 @@ namespace TestAppUWP.UserControls
             animation.IterationBehavior = AnimationIterationBehavior.Count;
             animation.IterationCount = 1;
         }
-
-        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
-        {
-        }
     }
 
     public class StringItem : BindableBase
     {
-        public string V { get; }
         private readonly CartAnimationViewModel _cartAnimationViewModel;
+        public string Text { get; }
+        public Uri ImageUri { get; }
 
         public DelegateCommand Add { get; }
 
-        public StringItem(string v, CartAnimationViewModel cartAnimationViewModel)
+        public StringItem(string text, Uri imageUri, CartAnimationViewModel cartAnimationViewModel)
         {
-            V = v;
+            Text = text;
+            ImageUri = imageUri;
             _cartAnimationViewModel = cartAnimationViewModel;
             Add = new DelegateCommand(AddExecute);
         }
@@ -143,16 +170,13 @@ namespace TestAppUWP.UserControls
         public CartAnimationViewModel()
         {
             _count = "0";
-            ItemSource = new List<StringItem>
+
+            ItemSource = new List<StringItem>();
+            for (int i = 0; i < 46; i++)
             {
-                new StringItem("1", this),
-                new StringItem("2", this),
-                new StringItem("3", this),
-                new StringItem("4", this),
-                new StringItem("5", this),
-                new StringItem("6", this),
-                new StringItem("7", this),
-                new StringItem("8", this)
+                string fileNumber = i.ToString("00");
+
+               ItemSource.Add(new StringItem(fileNumber, new Uri($"ms-appx:///Assets/Photos/pic{fileNumber}.jpg"), this));
             };
 
         }

@@ -92,6 +92,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Core\BindableBase.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\ListViewGroupedDragDrop.cs" />

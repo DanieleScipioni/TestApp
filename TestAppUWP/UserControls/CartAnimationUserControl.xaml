@@ -5,14 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="using:TestAppUWP.UserControls"
+    xmlns:converters="using:TestAppUWP.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <converters:UriToImageSourceConvertere x:Key="UriToImageSourceConvertere"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <CommandBar DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
@@ -20,13 +23,22 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
         <GridView Grid.Row="1" x:Name="GridView"
-                  ItemsSource="{x:Bind _cartAnimationViewModel.ItemSource}" SelectionMode="None"
-                  IsItemClickEnabled="True" ItemClick="ListViewBase_OnItemClick">
+                  ItemsSource="{x:Bind _cartAnimationViewModel.ItemSource}" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="userControls:StringItem">
-                    <Button Content="{x:Bind V}" Command="{x:Bind Add}"
-                            Height="100" Width="100"
-                            Click="ButtonBase_OnClick"/>
+                    <Grid Width="200" Height="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               Source="{x:Bind ImageUri, Converter={StaticResource UriToImageSourceConvertere}}"
+                               Stretch="UniformToFill"/>
+                        <Button Grid.Column="1"
+                                Content="{x:Bind Text}" Command="{x:Bind Add}"
+                                Height="100" Width="100"
+                                Click="ButtonBase_OnClick"/>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
