@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.DirectX;
 using Windows.Graphics.Display;
@@ -59,44 +60,16 @@ namespace TestAppUWP.UserControls
             if (frameworkElement == null) return;
 
             DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
-            var image = (ContentPresenter) VisualTreeHelper.GetChild(dependencyObject, 0);
+            var image = (ContentPresenter)VisualTreeHelper.GetChild(dependencyObject, 0);
 
-            Point point = image.TransformToVisual(this).TransformPoint(new Point(0,0));
+            Point point = image.TransformToVisual(this).TransformPoint(new Point(0, 0));
 
-            DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
+            CompositionDrawingSurface surface = await GetCompositionDrawingSurface(image);
 
-            var renderTargetBitmap = new RenderTargetBitmap();
-            await renderTargetBitmap.RenderAsync(image);
-            IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
-
-            CompositionDrawingSurface surface;
-            using (var stream = new InMemoryRandomAccessStream())
-            {
-                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
-                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
-                    (uint)renderTargetBitmap.PixelWidth,
-                    (uint)renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
-                    buffer.ToArray());
-                await encoder.FlushAsync();
-
-                using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream))
-                {
-                    surface = _graphicsDevice.CreateDrawingSurface(
-                        new Size(renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
-                        DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
-                    using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
-                    {
-                        session.Clear(Color.FromArgb(0, 0, 0, 0));
-                        session.DrawImage(canvasBitmap,
-                            new Rect(0, 0, renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
-                            new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
-                    }
-                }
-            }
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
-            spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
-            spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
+            spriteVisual.Size = new Vector2((float)image.ActualWidth, (float)image.ActualHeight);
+            spriteVisual.Offset = new Vector3((float)point.X, (float)point.Y, 0f);
             _containerVisual.Children.InsertAtBottom(spriteVisual);
 
             Vector3 targetOffset = GetTargetOffset(_viewbox);
@@ -107,10 +80,10 @@ namespace TestAppUWP.UserControls
             Vector2KeyFrameAnimation sizeAnimation = _compositor.CreateVector2KeyFrameAnimation();
             SetAnimationDefautls(sizeAnimation);
 
-            var newWidth = (float) (image.ActualWidth * 1.3);
-            var newHeight = (float) (image.ActualHeight * 1.3);
-            var newX = (float) (point.X - (newWidth - image.ActualWidth) / 2);
-            var newY = (float) (point.Y - (newHeight - image.ActualHeight) / 2);
+            var newWidth = (float)(image.ActualWidth * 1.3);
+            var newHeight = (float)(image.ActualHeight * 1.3);
+            var newX = (float)(point.X - (newWidth - image.ActualWidth) / 2);
+            var newY = (float)(point.Y - (newHeight - image.ActualHeight) / 2);
 
             const float normalizedProgressKey0 = 0.3f;
             offsetAnimation.InsertKeyFrame(normalizedProgressKey0, new Vector3(newX, newY, 0f), _compositor.CreateLinearEasingFunction());
@@ -138,16 +111,63 @@ namespace TestAppUWP.UserControls
             myScopedBatch.Completed += BatchCompleted;
         }
 
+        private async Task<CompositionDrawingSurface> GetCompositionDrawingSurface(ContentPresenter image)
+        {
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(image);
+
+            CanvasBitmap canvasBitmap = await GetCanvasBitmap(renderTargetBitmap);
+
+            using (canvasBitmap)
+            {
+                return GetCompositionDrawingSurface(canvasBitmap);
+            }
+        }
+
+        private CompositionDrawingSurface GetCompositionDrawingSurface(CanvasBitmap canvasBitmap)
+        {
+            CompositionDrawingSurface surface = _graphicsDevice.CreateDrawingSurface(
+                new Size(canvasBitmap.Size.Width, canvasBitmap.Size.Height),
+                DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
+            using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
+            {
+                session.Clear(Color.FromArgb(0, 0, 0, 0));
+                session.DrawImage(canvasBitmap,
+                    new Rect(0, 0, surface.Size.Width, surface.Size.Height),
+                    new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
+            }
+            return surface;
+        }
+
+        private async Task<CanvasBitmap> GetCanvasBitmap(RenderTargetBitmap renderTargetBitmap)
+        {
+            CanvasBitmap canvasBitmap;
+            using (var stream = new InMemoryRandomAccessStream())
+            {
+                IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
+                DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
+
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore,
+                    (uint) renderTargetBitmap.PixelWidth,
+                    (uint) renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
+                    buffer.ToArray());
+                await encoder.FlushAsync();
+                canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream);
+            }
+            return canvasBitmap;
+        }
+
         private Vector3 GetTargetOffset(FrameworkElement frameworkElement)
         {
             Point targetPoint = frameworkElement.TransformToVisual(this)
                 .TransformPoint(new Point(0, 0));
-            return new Vector3((float) targetPoint.X, (float) targetPoint.Y, 0f);
+            return new Vector3((float)targetPoint.X, (float)targetPoint.Y, 0f);
         }
 
         private static Vector2 GetTargetSize(FrameworkElement frameworkElement)
         {
-            return new Vector2((float) frameworkElement.ActualWidth, (float) frameworkElement.ActualHeight);
+            return new Vector2((float)frameworkElement.ActualWidth, (float)frameworkElement.ActualHeight);
         }
 
         private static void SetAnimationDefautls(KeyFrameAnimation animation)
@@ -178,7 +198,7 @@ namespace TestAppUWP.UserControls
         {
             _cartAnimationViewModel.Add(this);
         }
-        
+
     }
 
     public class CartAnimationViewModel : BindableBase
