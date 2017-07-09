@@ -41,6 +41,8 @@ namespace TestAppUWP.UserControls
             var image = (ContentPresenter)VisualTreeHelper.GetChild(dependencyObject, 0);
 
             await _addToCartAnimation.StartAnimation(image, _viewbox);
+            var stringItem = (StringItem) frameworkElement.DataContext;
+            stringItem.Add.Execute(null);
         }
 
 

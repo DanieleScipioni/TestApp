@@ -22,7 +22,7 @@
                 <AppBarButton x:Name="CartPlaceholder" Icon="Placeholder" Label="{x:Bind _cartAnimationViewModel.Count, Mode=OneWay}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-        <GridView Grid.Row="1" x:Name="GridView"
+        <GridView Grid.Row="1"
                   ItemsSource="{x:Bind _cartAnimationViewModel.ItemSource}" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="userControls:StringItem">
@@ -35,10 +35,8 @@
                             <Image Source="{x:Bind ImageUri, Converter={StaticResource UriToImageSourceConvertere}}"
                                    Stretch="UniformToFill" HorizontalAlignment="Center"/>
                         </ContentPresenter>
-                        <Button Grid.Column="1"
-                                Content="{x:Bind Text}" Command="{x:Bind Add}"
-                                Height="100" Width="100"
-                                Click="ButtonBase_OnClick"/>
+                        <Button Grid.Column="1" Height="100" Width="100"
+                                Content="{x:Bind Text}" Click="ButtonBase_OnClick"/>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

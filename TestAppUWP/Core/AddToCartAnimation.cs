@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas.UI.Composition;
 using System;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.DirectX;
@@ -77,22 +78,24 @@ namespace TestAppUWP.Core
             sizeAnimation.InsertKeyFrame(normalizedProgressKey1, targetSize, _compositor.CreateLinearEasingFunction());
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-
-            spriteVisual.StartAnimation("Offset", offsetAnimation);
-            spriteVisual.StartAnimation("Size", sizeAnimation);
-            myScopedBatch.End();
-
-            void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
+            using (var manualResetEventSlim = new ManualResetEventSlim(false))
             {
-                myScopedBatch.Completed -= BatchCompleted;
-                myScopedBatch.Dispose();
-                spriteVisual.Dispose();
-                surface.Dispose();
-                offsetAnimation.Dispose();
-                sizeAnimation.Dispose();
+                void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
+                {
+                    myScopedBatch.Completed -= BatchCompleted;
+                    myScopedBatch.Dispose();
+                    spriteVisual.Dispose();
+                    surface.Dispose();
+                    offsetAnimation.Dispose();
+                    sizeAnimation.Dispose();
+                    manualResetEventSlim.Set();
+                }
+                myScopedBatch.Completed += BatchCompleted;
+                spriteVisual.StartAnimation("Offset", offsetAnimation);
+                spriteVisual.StartAnimation("Size", sizeAnimation);
+                myScopedBatch.End();
+                await Task.Run(() => manualResetEventSlim.Wait());
             }
-            myScopedBatch.Completed += BatchCompleted;
-
         }
 
         private async Task<CompositionDrawingSurface> GetCompositionDrawingSurface(FrameworkElement frameworkElement)
