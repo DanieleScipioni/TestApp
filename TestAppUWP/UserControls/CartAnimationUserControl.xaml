@@ -33,7 +33,7 @@
                         </Grid.ColumnDefinitions>
                         <ContentPresenter Grid.Column="0">
                             <Image Source="{x:Bind ImageUri, Converter={StaticResource UriToImageSourceConvertere}}"
-                                   Stretch="UniformToFill"/>
+                                   Stretch="UniformToFill" HorizontalAlignment="Center"/>
                         </ContentPresenter>
                         <Button Grid.Column="1"
                                 Content="{x:Bind Text}" Command="{x:Bind Add}"
