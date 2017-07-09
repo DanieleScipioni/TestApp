@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Composition;
+using Microsoft.Toolkit.Uwp.UI;
 using MustacheDemo.Core;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Toolkit.Uwp.UI;
 
 namespace TestAppUWP.UserControls
 {
@@ -70,16 +70,15 @@ namespace TestAppUWP.UserControls
             IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
 
             CompositionDrawingSurface surface;
-
             using (var stream = new InMemoryRandomAccessStream())
             {
                 BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
                 encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
-                    (uint) renderTargetBitmap.PixelWidth,
-                    (uint) renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
+                    (uint)renderTargetBitmap.PixelWidth,
+                    (uint)renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
                     buffer.ToArray());
                 await encoder.FlushAsync();
-                stream.Seek(0);
+                //stream.Seek(0);
 
                 using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream))
                 {
@@ -99,17 +98,28 @@ namespace TestAppUWP.UserControls
             spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
             spriteVisual.Offset = new Vector3((float) point.X, (float)point.Y, 0f);
-            _containerVisual.Children.InsertAtTop(spriteVisual);
+            _containerVisual.Children.InsertAtBottom(spriteVisual);
 
             Vector3 targetOffset = GetTargetOffset(_viewbox);
             Vector3KeyFrameAnimation offsetAnimation = _compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1f, targetOffset, _compositor.CreateLinearEasingFunction());
             SetAnimationDefautls(offsetAnimation);
 
             Vector2 targetSize = GetTargetSize(_viewbox);
             Vector2KeyFrameAnimation sizeAnimation = _compositor.CreateVector2KeyFrameAnimation();
-            sizeAnimation.InsertKeyFrame(1f, targetSize, _compositor.CreateLinearEasingFunction());
             SetAnimationDefautls(sizeAnimation);
+
+            var newWidth = (float) (image.ActualWidth * 1.3);
+            var newHeight = (float) (image.ActualHeight * 1.3);
+            var newX = (float) (point.X - (newWidth - image.ActualWidth) / 2);
+            var newY = (float) (point.Y - (newHeight - image.ActualHeight) / 2);
+
+            const float normalizedProgressKey0 = 0.3f;
+            offsetAnimation.InsertKeyFrame(normalizedProgressKey0, new Vector3(newX, newY, 0f), _compositor.CreateLinearEasingFunction());
+            sizeAnimation.InsertKeyFrame(normalizedProgressKey0, new Vector2(newWidth, newHeight), _compositor.CreateLinearEasingFunction());
+
+            const float normalizedProgressKey1 = 1f;
+            offsetAnimation.InsertKeyFrame(normalizedProgressKey1, targetOffset, _compositor.CreateLinearEasingFunction());
+            sizeAnimation.InsertKeyFrame(normalizedProgressKey1, targetSize, _compositor.CreateLinearEasingFunction());
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
 
@@ -127,7 +137,6 @@ namespace TestAppUWP.UserControls
                 sizeAnimation.Dispose();
             }
             myScopedBatch.Completed += BatchCompleted;
-
         }
 
         private Vector3 GetTargetOffset(FrameworkElement frameworkElement)
@@ -144,8 +153,7 @@ namespace TestAppUWP.UserControls
 
         private static void SetAnimationDefautls(KeyFrameAnimation animation)
         {
-            TimeSpan animationDuration = TimeSpan.FromMilliseconds(500);
-            animation.Duration = animationDuration;
+            animation.Duration = TimeSpan.FromMilliseconds(700);
             animation.IterationBehavior = AnimationIterationBehavior.Count;
             animation.IterationCount = 1;
         }
