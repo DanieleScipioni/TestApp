@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
+using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -78,7 +79,7 @@ namespace TestAppUWP.Core
 
             DragOperationDeferral dragOperationDeferral = dragEventArgs.GetDeferral();
 
-            BitmapImage bitmapImage = await currentOverListViewItem.ToBitmapImage();
+            BitmapImage bitmapImage = await (await currentOverListViewItem.RenderTargetBitmapBuffer()).ToBitmapImage();
             dragEventArgs.DragUIOverride?.SetContentFromBitmapImage(bitmapImage);
 
             foreach (GroupedItem groupedItem in _dragGroupedItems)

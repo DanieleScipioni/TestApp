@@ -95,6 +95,7 @@
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Core\BindableBase.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
+    <Compile Include="Core\IBufferExtension.cs" />
     <Compile Include="Core\ListViewGroupedDragDrop.cs" />
     <Compile Include="Core\UIElementExtension.cs" />
     <Compile Include="Data\BasePageParameter.cs" />
