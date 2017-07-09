@@ -9,7 +9,6 @@ using Windows.Foundation;
 using Windows.Graphics.DirectX;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Composition;
@@ -68,8 +67,9 @@ namespace TestAppUWP.UserControls
             await renderTargetBitmap.RenderAsync(image);
             IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
 
-            StorageFile storageFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("temp.bmp", CreationCollisionOption.OpenIfExists);
-            using (IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            CompositionDrawingSurface surface;
+
+            using (var stream = new InMemoryRandomAccessStream())
             {
                 BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
                 encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
@@ -77,21 +77,22 @@ namespace TestAppUWP.UserControls
                     (uint) renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
                     buffer.ToArray());
                 await encoder.FlushAsync();
-            }
+                stream.Seek(0);
 
-            CompositionDrawingSurface surface;
-            using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, new Uri("ms-appdata:///temp/temp.bmp")))
-            {
-                surface = _graphicsDevice.CreateDrawingSurface(new Size(renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
-                    DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
-                using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
+                using (CanvasBitmap canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream))
                 {
-                    session.Clear(Color.FromArgb(0, 0, 0, 0));
-                    session.DrawImage(canvasBitmap, new Rect(0, 0, renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
-                        new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
+                    surface = _graphicsDevice.CreateDrawingSurface(
+                        new Size(renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
+                        DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
+                    using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
+                    {
+                        session.Clear(Color.FromArgb(0, 0, 0, 0));
+                        session.DrawImage(canvasBitmap,
+                            new Rect(0, 0, renderTargetBitmap.PixelWidth, renderTargetBitmap.PixelHeight),
+                            new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
+                    }
                 }
             }
-
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
             spriteVisual.Size = new Vector2((float) frameworkElement.Width, (float)frameworkElement.Height);
@@ -118,6 +119,8 @@ namespace TestAppUWP.UserControls
                 surface.Dispose();
                 myScopedBatch.Completed -= BatchCompleted;
                 myScopedBatch.Dispose();
+                offsetAnimation.Dispose();
+                sizeAnimation.Dispose();
             }
             myScopedBatch.Completed += BatchCompleted;
 
@@ -171,13 +174,12 @@ namespace TestAppUWP.UserControls
             _count = "0";
 
             ItemSource = new List<StringItem>();
-            for (int i = 0; i < 46; i++)
+            for (var i = 0; i < 46; i++)
             {
                 string fileNumber = i.ToString("00");
-
-               ItemSource.Add(new StringItem(fileNumber, new Uri($"ms-appx:///Assets/Photos/pic{fileNumber}.jpg"), this));
-            };
-
+                ItemSource.Add(new StringItem(fileNumber, new Uri($"ms-appx:///Assets/Photos/pic{fileNumber}.jpg"),
+                    this));
+            }
         }
 
         public void Add(StringItem stringItem)
