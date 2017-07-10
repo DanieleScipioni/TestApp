@@ -1,4 +1,4 @@
-﻿using TestAppUWP.UserControls;
+﻿using TestAppUWP.UserControls.CartAnimation;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;

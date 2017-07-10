@@ -2,12 +2,11 @@
 using MustacheDemo.Core;
 using System;
 using System.Collections.Generic;
-using TestAppUWP.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace TestAppUWP.UserControls
+namespace TestAppUWP.UserControls.CartAnimation
 {
     public sealed partial class CartAnimationUserControl
     {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Composition;
-using System;
+﻿using System;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
@@ -15,8 +13,10 @@ using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media.Imaging;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Composition;
 
-namespace TestAppUWP.Core
+namespace TestAppUWP.UserControls.CartAnimation
 {
     public class AddToCartAnimation : IDisposable
     {

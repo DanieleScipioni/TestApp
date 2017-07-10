@@ -93,7 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
-    <Compile Include="Core\AddToCartAnimation.cs" />
+    <Compile Include="UserControls\CartAnimation\AddToCartAnimation.cs" />
     <Compile Include="Core\BindableBase.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\IBufferExtension.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Pages\Grid\GridPage.xaml.cs">
       <DependentUpon>GridPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CartAnimationUserControl.xaml.cs">
+    <Compile Include="UserControls\CartAnimation\CartAnimationUserControl.xaml.cs">
       <DependentUpon>CartAnimationUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ListUserControl.xaml.cs">
@@ -249,7 +249,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\CartAnimationUserControl.xaml">
+    <Page Include="UserControls\CartAnimation\CartAnimationUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
