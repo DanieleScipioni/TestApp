@@ -39,12 +39,10 @@ namespace TestAppUWP.UserControls.CartAnimation
             DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
             var image = (ContentPresenter)VisualTreeHelper.GetChild(dependencyObject, 0);
 
-            await _addToCartAnimation.StartAnimation(image, _viewbox);
+            await _addToCartAnimation.StartAnimation2(image, _viewbox);
             var stringItem = (StringItem) frameworkElement.DataContext;
             stringItem.Add.Execute(null);
         }
-
-
     }
 
     public class StringItem : BindableBase
