@@ -7,7 +7,12 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <Grid>
+    <Grid VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Control 1</TextBlock>
+        <Image Grid.Row="1" Source="/Assets/Photos/pic00.jpg" Margin="12"/>
     </Grid>
 </UserControl>
