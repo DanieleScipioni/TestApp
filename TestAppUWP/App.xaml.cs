@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using TestAppUWP.Samples.InterControlAnimation;
 
 namespace TestAppUWP
 {
@@ -37,20 +38,20 @@ namespace TestAppUWP
             //ApplicationVersion = $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}.{packageVersion.Revision}";
             //PackageId currentId = Package.Current.Id;
 
-            UIElement rootFrame = Window.Current.Content;
+            UIElement rootContent = Window.Current.Content;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (rootContent == null)
             {
-                rootFrame = new CartAnimationUserControl();
+                rootContent = new InterControlAnimation();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
 
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = rootContent;
             }
 
             if (e.PrelaunchActivated == false)
