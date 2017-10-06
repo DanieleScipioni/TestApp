@@ -15,6 +15,7 @@ namespace TestAppUWP.Samples.InterControlAnimation
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            var changeControlAnimation = new ChangeControlAnimation();
             ContentPresenter.Content = ContentPresenter.Content is Control1 ? 
                 (object) GetControl2() : GetControl1();
         }
@@ -28,5 +29,9 @@ namespace TestAppUWP.Samples.InterControlAnimation
         {
             return _control2 ?? (_control2 = new Control2());
         }
+    }
+
+    public class ChangeControlAnimation
+    {
     }
 }
