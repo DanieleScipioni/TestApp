@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using TestAppUWP.Samples.ImplicitAnimation;
 using TestAppUWP.Samples.InterControlAnimation;
 
 namespace TestAppUWP
@@ -44,7 +45,7 @@ namespace TestAppUWP
             // just ensure that the window is active
             if (rootContent == null)
             {
-                rootContent = new InterControlAnimation();
+                rootContent = new ImplicitAnimation();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

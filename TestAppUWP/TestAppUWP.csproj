@@ -93,6 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\ImplicitAnimation\ImplicitAnimationViewModel.cs" />
+    <Compile Include="Samples\ImplicitAnimation\InterControlAnimation.xaml.cs">
+      <DependentUpon>InterControlAnimation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\InterControlAnimation\Control1.xaml.cs">
       <DependentUpon>Control1.xaml</DependentUpon>
     </Compile>
@@ -253,6 +257,10 @@
     <Page Include="Pages\TextButtonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ImplicitAnimation\InterControlAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\InterControlAnimation\Control1.xaml">
       <SubType>Designer</SubType>

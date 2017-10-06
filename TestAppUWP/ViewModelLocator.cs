@@ -1,5 +1,6 @@
 ﻿using System;
 using TestAppUWP.Pages.Frame;
+using TestAppUWP.Samples.ImplicitAnimation;
 using TestAppUWP.ViewModels.Frame;
 using Windows.UI.Xaml.Data;
 
@@ -9,14 +10,20 @@ namespace TestAppUWP
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var mainPage = value as MainPage;
-            if (mainPage != null) return new MainPageViewModel();
+            switch (value)
+            {
+                case MainPage _:
+                    return new MainPageViewModel();
+                case FirstPage _:
+                    return new FirstPageViewModel();
+                case SecondPage _:
+                    return new SecondPageViewModel();
+                case FramePage _:
+                    return new FramePageViewModel();
+                case ImplicitAnimation _:
+                    return new ImplicitAnimationViewModel();
+            }
 
-            if (value is FirstPage) return new FirstPageViewModel();
-            if (value is SecondPage) return new SecondPageViewModel();
-
-            if (value is FramePage) return new FramePageViewModel();
-            
             return null;
         }
 
