@@ -93,9 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
-    <Compile Include="Samples\ImplicitAnimation\ImplicitAnimationViewModel.cs" />
-    <Compile Include="Samples\ImplicitAnimation\InterControlAnimation.xaml.cs">
-      <DependentUpon>InterControlAnimation.xaml</DependentUpon>
+    <Compile Include="Samples\ColorAnimation\ColorAnimationHelper.cs" />
+    <Compile Include="Samples\ColorAnimation\ColorAnimationViewModel.cs" />
+    <Compile Include="Samples\ColorAnimation\ColorAnimation.xaml.cs">
+      <DependentUpon>ColorAnimation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\InterControlAnimation\Control1.xaml.cs">
       <DependentUpon>Control1.xaml</DependentUpon>
@@ -258,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\ImplicitAnimation\InterControlAnimation.xaml">
+    <Page Include="Samples\ColorAnimation\ColorAnimation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -300,6 +301,9 @@
     <PackageReference Include="Mustache.PCL">
       <Version>1.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Samples\ImplicitAnimation\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

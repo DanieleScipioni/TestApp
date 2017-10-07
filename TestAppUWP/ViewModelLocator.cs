@@ -1,6 +1,6 @@
 ﻿using System;
 using TestAppUWP.Pages.Frame;
-using TestAppUWP.Samples.ImplicitAnimation;
+using TestAppUWP.Samples.ColorAnimation;
 using TestAppUWP.ViewModels.Frame;
 using Windows.UI.Xaml.Data;
 
@@ -20,8 +20,8 @@ namespace TestAppUWP
                     return new SecondPageViewModel();
                 case FramePage _:
                     return new FramePageViewModel();
-                case ImplicitAnimation _:
-                    return new ImplicitAnimationViewModel();
+                case ColorAnimation _:
+                    return new ColorAnimationViewModel();
             }
 
             return null;

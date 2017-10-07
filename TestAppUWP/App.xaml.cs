@@ -1,9 +1,7 @@
-﻿using TestAppUWP.UserControls.CartAnimation;
-using Windows.ApplicationModel;
+﻿using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
-using TestAppUWP.Samples.ImplicitAnimation;
-using TestAppUWP.Samples.InterControlAnimation;
+using TestAppUWP.Samples.ColorAnimation;
 
 namespace TestAppUWP
 {
@@ -45,7 +43,7 @@ namespace TestAppUWP
             // just ensure that the window is active
             if (rootContent == null)
             {
-                rootContent = new ImplicitAnimation();
+                rootContent = new ColorAnimation();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
