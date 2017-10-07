@@ -1,6 +1,6 @@
 ﻿using System;
 using Windows.UI.Core;
-using MustacheDemo.Core;
+using TestAppUWP.Core;
 using TestAppUWP.Pages.Frame;
 
 namespace TestAppUWP.ViewModels.Frame

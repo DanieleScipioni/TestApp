@@ -1,5 +1,5 @@
 ﻿using System;
-using MustacheDemo.Core;
+using TestAppUWP.Core;
 
 namespace TestAppUWP.Samples.ColorAnimation
 {

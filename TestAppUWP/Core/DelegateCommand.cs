@@ -24,7 +24,7 @@
 using System;
 using System.Windows.Input;
 
-namespace MustacheDemo.Core
+namespace TestAppUWP.Core
 {
     public class DelegateCommand : ICommand
     {

@@ -26,7 +26,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MustacheDemo.Core
+namespace TestAppUWP.Core
 {
     public class BindableBase : INotifyPropertyChanged
     {

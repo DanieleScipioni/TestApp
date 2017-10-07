@@ -1,7 +1,7 @@
-﻿using MustacheDemo.Core;
-using TestAppUWP.Data;
+﻿using TestAppUWP.Data;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using TestAppUWP.Core;
 
 namespace TestAppUWP.ViewModels.Frame
 {

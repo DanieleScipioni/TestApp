@@ -1,10 +1,10 @@
 ﻿using Microsoft.Toolkit.Uwp.UI;
-using MustacheDemo.Core;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using TestAppUWP.Core;
 
 namespace TestAppUWP.UserControls.CartAnimation
 {
