@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
+    DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}"
+    Content="{x:Bind _viewModel.MainFrame}">
     <Page.TopAppBar>
         <CommandBar VerticalContentAlignment="Stretch">
             <CommandBar.Content>
@@ -23,8 +24,4 @@
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.TopAppBar>
-    <Grid>
-        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                          Content="{x:Bind _viewModel.MainFrame}"/>
-    </Grid>
 </Page>
