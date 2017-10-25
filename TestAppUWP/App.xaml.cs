@@ -1,7 +1,7 @@
-﻿using Windows.ApplicationModel;
+﻿using TestAppUWP.Samples.CertTutorial;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
-using TestAppUWP.Samples.ColorAnimation;
 
 namespace TestAppUWP
 {
@@ -43,7 +43,7 @@ namespace TestAppUWP
             // just ensure that the window is active
             if (rootContent == null)
             {
-                rootContent = new ColorAnimation();
+                rootContent = CertTutorial.Instance;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -72,6 +72,11 @@ namespace TestAppUWP
             SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            ActivationKind activationKind = args.Kind;
         }
     }
 }

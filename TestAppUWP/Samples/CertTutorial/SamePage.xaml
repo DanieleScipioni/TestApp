@@ -1,0 +1,74 @@
+﻿<Page
+    x:Class="TestAppUWP.Samples.CertTutorial.SamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:certTutorial="using:TestAppUWP.Samples.CertTutorial"
+    mc:Ignorable="d">
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="MinWindowWidth0">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="VisualStateTextBlock.(TextBlock.Text)" Value="Less than set min width"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MinWindowWidth200">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="200"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="VisualStateTextBlock.(TextBlock.Text)" Value="Less than default min width"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="VisualStateTextBlock.(TextBlock.Text)" Value="Over min width"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="Orientation">
+                <VisualState x:Name="Landscape">
+                    <VisualState.StateTriggers>
+                        <certTutorial:OrientationStateTrigger ApplicationViewOrientation="Landscape"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OrientationTextBlock.Text" Value="Landscape"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Portrait">
+                    <VisualState.StateTriggers>
+                        <certTutorial:OrientationStateTrigger ApplicationViewOrientation="Portrait"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OrientationTextBlock.Text" Value="Portrait"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <TextBlock x:Name="TextBlock" />
+        <TextBox x:Name="TextBox"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="MinSize_OnClick" Content="MinSize to 200x200"/>
+            <Line X1="0" X2="0" Y1="1" Y2="0" Stroke="Black" Stretch="Fill" StrokeThickness="1" Margin="4,0" />
+            <TextBlock x:Name="MinSizeTExtBlock" VerticalAlignment="Center"/>
+            <Line X1="0" X2="0" Y1="1" Y2="0" Stroke="Black" Stretch="Fill" StrokeThickness="1" Margin="4,0" />
+            <Button Click="SetSize_OnClick" Content="Size to 555 x 666"/>
+        </StackPanel>
+        <TextBlock x:Name="VisualStateTextBlock" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+        <TextBlock x:Name="IsTypePresent"  TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+        <TextBlock x:Name="OrientationTextBlock" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="RunBackgroudTask" Content="Run background task"/>
+            <TextBlock x:Name="BackgroundTextBlock" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Button Click="CreateSecondaryTile" Content="CreateSecondaryTile"/>
+    </StackPanel>
+</Page>

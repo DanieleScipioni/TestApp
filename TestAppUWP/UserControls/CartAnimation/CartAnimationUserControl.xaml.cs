@@ -1,10 +1,9 @@
-﻿using Microsoft.Toolkit.Uwp.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TestAppUWP.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using TestAppUWP.Core;
 
 namespace TestAppUWP.UserControls.CartAnimation
 {
@@ -22,7 +21,7 @@ namespace TestAppUWP.UserControls.CartAnimation
             Loaded += (sender, args) =>
             {
                 _addToCartAnimation = new AddToCartAnimation(this);
-                _viewbox = CartPlaceholder.FindDescendant<Viewbox>();
+                _viewbox = null; //VisualTreeHelper.CartPlaceholder.FindDescendant<Viewbox>();
             };
             Unloaded += (sender, args) =>
             {
