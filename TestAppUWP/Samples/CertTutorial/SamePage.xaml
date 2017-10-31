@@ -70,5 +70,9 @@
             <TextBlock x:Name="BackgroundTextBlock" VerticalAlignment="Center"/>
         </StackPanel>
         <Button Click="CreateSecondaryTile" Content="CreateSecondaryTile"/>
+        <Button Click="CreateBadge" Content="Create badge"/>
+        <Button Click="CreateToast" Content="Create toast"/>
+        <Button Click="ShowShareUI" Content=" Show share UI"/>
+
     </StackPanel>
 </Page>

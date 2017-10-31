@@ -13,10 +13,7 @@ namespace TestAppUWP.Samples.CertTutorial
         private CertTutorial()
         {
             InitializeComponent();
-            Frame.Navigated += (sender, args) =>
-            {
-                TextBlock.Text = Frame.BackStack.Count.ToString();
-            };
+            Frame.Navigated += (sender, args) => TextBlock.Text = Frame.BackStack.Count.ToString();
             Frame.Navigate(typeof(SamePage), _param);
         }
 
