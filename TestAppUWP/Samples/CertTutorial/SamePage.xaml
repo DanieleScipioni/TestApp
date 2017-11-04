@@ -72,7 +72,11 @@
         <Button Click="CreateSecondaryTile" Content="CreateSecondaryTile"/>
         <Button Click="CreateBadge" Content="Create badge"/>
         <Button Click="CreateToast" Content="Create toast"/>
-        <Button Click="ShowShareUI" Content=" Show share UI"/>
-
+        <Button Click="ShowShareUi" Content=" Show share UI"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="RunAppServiceTask" Content="RunAppServiceTask"/>
+            <TextBlock x:Name="RunAppServiceTextBlock" VerticalAlignment="Center"/>
+        </StackPanel>
+        <TextBlock x:Uid="good"/>
     </StackPanel>
 </Page>

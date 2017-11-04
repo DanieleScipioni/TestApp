@@ -93,6 +93,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Map\Customer.cs" />
+    <Compile Include="Samples\Map\CustomerUserControl.xaml.cs">
+      <DependentUpon>CustomerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Map\MapViewModel.cs" />
     <Compile Include="Samples\CertTutorial\CertTutorial.xaml.cs">
       <DependentUpon>CertTutorial.xaml</DependentUpon>
     </Compile>
@@ -110,6 +115,10 @@
     </Compile>
     <Compile Include="Samples\InterControlAnimation\Control2.xaml.cs">
       <DependentUpon>Control2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Map\FlagRenderer.cs" />
+    <Compile Include="Samples\Map\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CartAnimation\AddToCartAnimation.cs" />
     <Compile Include="Core\BindableBase.cs" />
@@ -167,6 +176,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Resources\en-US\Resources.resw" />
+    <PRIResource Include="Resources\it-IT\Resources.resw" />
     <None Include="TestAppUWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +298,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\InterControlAnimation\Control2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Map\CustomerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Map\MapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

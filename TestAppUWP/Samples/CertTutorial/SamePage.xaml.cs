@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation;
@@ -23,6 +25,8 @@ using TestAppBackgroundTask;
 using XmlDocument = Windows.Data.Xml.Dom.XmlDocument;
 using XmlElement = Windows.Data.Xml.Dom.XmlElement;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Store;
+using Windows.Storage.AccessCache;
 
 namespace TestAppUWP.Samples.CertTutorial
 {
@@ -78,6 +82,22 @@ namespace TestAppUWP.Samples.CertTutorial
                         MinSizeTExtBlock.Text = $"{eventArgsSize.Width} x {eventArgsSize.Height}";
                     };
                 }
+
+                DataTransferManager t = DataTransferManager.GetForCurrentView();
+                t.DataRequested += (dataSender, dataRequestedEventArgs) =>
+                {
+                    DataPackage r = dataRequestedEventArgs.Request.Data;
+                    r.Properties.ApplicationName = "Stoca";
+                    r.Properties.Description = "stoca description";
+                    r.Properties.Title = "Stoca title";
+                    r.SetText("stoca shared");
+                };
+                t.ShareProvidersRequested += (dataSender, shareProvidersRequestedEventArgs) =>
+                {
+                };
+                t.TargetApplicationChosen += (dataSender, targetApplicationChosenEventArgs) =>
+                {
+                };
             };
 
             Unloaded += (sender, args) =>
@@ -237,20 +257,40 @@ namespace TestAppUWP.Samples.CertTutorial
             badgeUpdater.Update(badgeNotification);
         }
 
-        private void ShowShareUI(object sender, RoutedEventArgs e)
+        private void ShowShareUi(object sender, RoutedEventArgs e)
         {
-            DataTransferManager t = DataTransferManager.GetForCurrentView();
-            t.DataRequested += (dataSender, args) =>
-            {
-                DataPackage r = args.Request.Data;
-            };
-            t.ShareProvidersRequested += (dataSender, args) =>
-            {
-            };
-            t.TargetApplicationChosen += (dataSender, args) => 
-            {
-            };
+
             DataTransferManager.ShowShareUI();
+        }
+
+        private async void RunAppServiceTask(object sender, RoutedEventArgs e)
+        {
+            IReadOnlyList<AppInfo> readOnlyList = await AppServiceCatalog.FindAppServiceProvidersAsync("AppServiceServer_kj4sv7dv9awfe");
+
+            var appServiceConnection = new AppServiceConnection();
+
+            appServiceConnection.AppServiceName = "AppServiceServerBackgroundTaskName";
+            appServiceConnection.PackageFamilyName = "AppServiceServer_kj4sv7dv9awfe";
+
+            AppServiceConnectionStatus status = await appServiceConnection.OpenAsync();
+            if (status == AppServiceConnectionStatus.Success)
+            {
+                AppServiceResponse appServiceResponse = await appServiceConnection.SendMessageAsync(new ValueSet {{"a", null}, {"b", null}});
+                ValueSet responseValueSet = appServiceResponse.Message;
+                if (responseValueSet == null)
+                {
+                    RunAppServiceTextBlock.Text = "response is null";
+                    return;
+                }
+                string response = responseValueSet.ContainsKey("count")
+                    ? responseValueSet["count"].ToString()
+                    : "missing response key";
+                RunAppServiceTextBlock.Text = response;
+                return;
+            }
+            
+            RunAppServiceTextBlock.Text = "Failed to connect";
+            return;
         }
     }
 }
