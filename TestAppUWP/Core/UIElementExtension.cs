@@ -35,5 +35,20 @@ namespace TestAppUWP.Core
             await encoder.FlushAsync();
         }
 
+        public static async Task SaveUiElementToPngStream(this UIElement uiElement, IRandomAccessStream stream)
+        {
+            DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
+
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(uiElement);
+            IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
+
+            BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+            encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
+                (uint)renderTargetBitmap.PixelWidth,
+                (uint)renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
+                buffer.ToArray());
+            await encoder.FlushAsync();
+        }
     }
 }
