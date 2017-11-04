@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="TestAppUWP.Samples.Map.MapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:map="using:TestAppUWP.Samples.Map"
+    xmlns:testAppUwp="using:TestAppUWP"
+    mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <testAppUwp:ViewModelLocator x:Key="ViewModelLocator" />
+        <DataTemplate x:Key="DataTemplate" x:DataType="map:Customer">
+            <StackPanel Margin="4,0" Padding="0,8" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                <TextBlock Text="{x:Bind Number}"/>
+                <TextBlock Text="{x:Bind Latitude}"/>
+                <TextBlock Text="{x:Bind Longitude}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <map:FlagRenderer x:Name="FlagRenderer" />
+        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0" 
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                         RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
+                         MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped"
+                         MapServiceToken=""  />
+        <ListView Grid.Column="1" x:Name="ListView"
+                  ItemsSource="{x:Bind _viewModel.Customers, Mode=OneWay}"
+                  ItemTemplate="{StaticResource DataTemplate}" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" /> 
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="World" Click="Cliccche2"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

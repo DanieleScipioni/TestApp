@@ -3,6 +3,7 @@ using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.ColorAnimation;
 using TestAppUWP.ViewModels.Frame;
 using Windows.UI.Xaml.Data;
+using TestAppUWP.Samples.Map;
 
 namespace TestAppUWP
 {
@@ -22,6 +23,8 @@ namespace TestAppUWP
                     return new FramePageViewModel();
                 case ColorAnimation _:
                     return new ColorAnimationViewModel();
+                case MapPage _:
+                    return new MapViewModel();
             }
 
             return null;

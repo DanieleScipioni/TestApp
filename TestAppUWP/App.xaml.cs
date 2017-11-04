@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using TestAppUWP.Samples.Map;
 
 namespace TestAppUWP
 {
@@ -43,7 +44,7 @@ namespace TestAppUWP
             // just ensure that the window is active
             if (rootContent == null)
             {
-                rootContent = CertTutorial.Instance;
+                rootContent = new MapPage();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
