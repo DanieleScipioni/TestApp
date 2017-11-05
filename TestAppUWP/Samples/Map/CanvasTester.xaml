@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="TestAppUWP.Samples.Map.CanvasTester"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestAppUWP.Samples.Map"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="Black">
+        <Canvas Margin="8">
+            <Polygon Canvas.Top="3" Canvas.Left="1"
+                     Points="0,0 35,13 0,26" Stroke="White" StrokeThickness="2" Fill="White" />
+            <Line Canvas.Top="2" Canvas.Left="1"
+                  X1="35.5" Y1="13" X2="-1" Y2="26.5" Stroke="Gray" StrokeThickness="1.5"/>
+            <Polygon Canvas.Top="1.5" Canvas.Left="0.5"
+                     Points="0,0 35,13 0,26" Stroke="White" StrokeThickness="2" Fill="White" />
+            <Line Canvas.Top="0.5" Canvas.Left="0.5"
+                  X1="35.5" Y1="13" X2="-1" Y2="26.5" Stroke="Gray" StrokeThickness="1.5"/>
+            <Polygon Points="0,0 35,13 0,26" FillRule="EvenOdd" Stroke="White" StrokeThickness="2" Fill="LimeGreen"/>
+            <TextBlock Canvas.Left="2" Canvas.Top="2.5" FontSize="14" CharacterSpacing="-50" Text="3"/>
+        </Canvas>
+
+    </Grid>
+</Page>

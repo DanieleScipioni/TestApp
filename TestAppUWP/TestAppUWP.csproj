@@ -93,6 +93,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Map\CanvasTester.xaml.cs">
+      <DependentUpon>CanvasTester.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\RootNavigation\PageClassNameConverter.cs" />
     <Compile Include="Samples\RootNavigation\RootNavigationPage.xaml.cs">
       <DependentUpon>RootNavigationPage.xaml</DependentUpon>
@@ -261,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Frame\SecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Map\CanvasTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
