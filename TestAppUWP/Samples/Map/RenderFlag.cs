@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace TestAppUWP.Samples.Map
 {
-    public class FlagRenderer : Canvas
+    public class RenderFlag : Canvas
     {
         private readonly Polygon _polygon;
         private readonly TextBlock _textBlock;
@@ -29,7 +29,7 @@ namespace TestAppUWP.Samples.Map
 
         private bool _disposed;
 
-        public FlagRenderer()
+        public RenderFlag()
         {
             Unloaded += (sender, args) => Dispose();
 

@@ -121,7 +121,7 @@
     <Compile Include="Samples\InterControlAnimation\Control2.xaml.cs">
       <DependentUpon>Control2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\Map\FlagRenderer.cs" />
+    <Compile Include="Samples\Map\RenderFlag.cs" />
     <Compile Include="Samples\Map\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
