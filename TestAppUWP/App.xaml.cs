@@ -1,11 +1,14 @@
-﻿using TestAppUWP.Samples.RootNavigation;
+﻿using System;
+using TestAppUWP.Samples.RootNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using TestAppUWP.Samples.CertTutorial;
 
 namespace TestAppUWP
 {
     sealed partial class App
     {
+        private RootNavigationViewModel _rootNavigationViewModel;
 
         public App()
         {
@@ -22,13 +25,22 @@ namespace TestAppUWP
 
             UIElement rootContent = Window.Current.Content;
 
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootContent == null)
             {
-                var rootNavigationViewModel = new RootNavigationViewModel(e.PreviousExecutionState);
-                rootContent = new RootNavigationPage { DataContext = rootNavigationViewModel };
+                _rootNavigationViewModel = new RootNavigationViewModel(e.PreviousExecutionState);
+                rootContent = new RootNavigationPage { DataContext = _rootNavigationViewModel };
                 Window.Current.Content = rootContent;
+            }
+
+            Type type = typeof(SamePage);
+            if (e.TileId.StartsWith(type.Name))
+            {
+                Type landingPageType = typeof(CertTutorial);
+                string landingParams = e.Arguments;
+                _rootNavigationViewModel.SetLandingPage(landingPageType, landingParams);
             }
 
             if (e.PrelaunchActivated == false)

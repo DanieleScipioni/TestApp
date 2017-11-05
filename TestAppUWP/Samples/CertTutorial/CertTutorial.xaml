@@ -5,17 +5,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Frame x:Name="Frame"/>
-    <Page.TopAppBar>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <CommandBar>
             <CommandBar.Content>
-                <TextBlock Padding="12" x:Name="TextBlock"
-                           HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                <TextBlock Padding="12" 
+                           HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                    <Run Text="Frame back stack length: "/>
+                    <Run x:Name="TextBlock"/>
+                </TextBlock>
             </CommandBar.Content>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Back" Label="Back" Click="Back_OnClick"  />
                 <AppBarButton Icon="Go" Label="Go" Click="Go_OnClick" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.TopAppBar>
+        <Frame Grid.Row="1" x:Name="CertTutorialFrame"/>
+    </Grid>
 </Page>

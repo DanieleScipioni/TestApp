@@ -53,8 +53,8 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <TextBlock x:Name="TextBlock" />
-        <TextBox x:Name="TextBox"/>
+        <TextBlock><Run Text="Previous param: " /><Run x:Name="TextBlock" /></TextBlock>
+        <TextBox x:Name="TextBox" TextChanged="TextBox_OnTextChanged"/>
         <StackPanel Orientation="Horizontal">
             <Button Click="MinSize_OnClick" Content="MinSize to 200x200"/>
             <Line X1="0" X2="0" Y1="1" Y2="0" Stroke="Black" Stretch="Fill" StrokeThickness="1" Margin="4,0" />
@@ -69,7 +69,10 @@
             <Button Click="RunBackgroudTask" Content="Run background task"/>
             <TextBlock x:Name="BackgroundTextBlock" VerticalAlignment="Center"/>
         </StackPanel>
-        <Button Click="CreateSecondaryTile" Content="CreateSecondaryTile"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="CreateSecondaryTile" Content="CreateSecondaryTile"/>
+            <ListBox x:Name="SecondaryTileListBox" SelectionMode="Single" SelectionChanged="SecondaryTileListBox_OnSelectionChanged" />
+        </StackPanel>
         <Button Click="CreateBadge" Content="Create badge"/>
         <Button Click="CreateToast" Content="Create toast"/>
         <Button Click="ShowShareUi" Content=" Show share UI"/>

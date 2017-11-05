@@ -89,7 +89,7 @@ namespace TestAppUWP.Samples.RootNavigation
             };
         }
 
-        public void SetNavigationState(string navigationState)
+        private void SetNavigationState(string navigationState)
         {
             RootFrame.SetNavigationState(navigationState);
             Type type = RootFrame.SourcePageType;
@@ -98,6 +98,16 @@ namespace TestAppUWP.Samples.RootNavigation
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = RootFrame.CanGoBack
                 ? AppViewBackButtonVisibility.Visible
                 : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        public void SetLandingPage(Type type, object parameter)
+        {
+            int indexOf = Pages.IndexOf(type);
+            if (indexOf == -1) return;
+
+            _selectedPageIndex = indexOf;
+            RootFrame.Navigate(type, parameter);
+            OnPropertyChangedByName(nameof(SelectedPageIndex));
         }
     }
 }

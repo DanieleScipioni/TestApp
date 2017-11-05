@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
+using TestAppBackgroundTask;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources.Core;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
@@ -21,18 +21,14 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using TestAppBackgroundTask;
-using XmlDocument = Windows.Data.Xml.Dom.XmlDocument;
-using XmlElement = Windows.Data.Xml.Dom.XmlElement;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.ApplicationModel.Store;
-using Windows.Storage.AccessCache;
 
 namespace TestAppUWP.Samples.CertTutorial
 {
     public sealed partial class SamePage
     {
         private readonly ApplicationTrigger _applicationTrigger;
+
+        public string Parameter { get; private set; }
 
         public SamePage()
         {
@@ -47,7 +43,7 @@ namespace TestAppUWP.Samples.CertTutorial
             }
 
             ResourceContext resourceContext = ResourceContext.GetForCurrentView();
-            List<string> list = resourceContext.QualifierValues.Keys.ToList();
+            List<string> _ = resourceContext.QualifierValues.Keys.ToList();
 
             Loaded += async (sender, args) =>
             {
@@ -62,7 +58,7 @@ namespace TestAppUWP.Samples.CertTutorial
                             BackgroundTextBlock.Text = eventArgs.Progress.ToString();
                         });
                     };
-                    backgroundTaskRegistration.Completed += delegate (BackgroundTaskRegistration registration, BackgroundTaskCompletedEventArgs eventArgs)
+                    backgroundTaskRegistration.Completed += (registration, eventArgs) =>
                     {
                         // ReSharper disable once UnusedVariable
                         IAsyncAction ignored = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -113,6 +109,18 @@ namespace TestAppUWP.Samples.CertTutorial
                     orientationStateTrigger.Dispose();
                 }
             };
+
+            CtorAsync();
+        }
+
+        private async void CtorAsync()
+        {
+            IReadOnlyList<SecondaryTile> readOnlyList = await SecondaryTile.FindAllAsync();
+            foreach (SecondaryTile secondaryTile in readOnlyList)
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                SecondaryTileListBox.Items.Add(secondaryTile.TileId);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -124,7 +132,7 @@ namespace TestAppUWP.Samples.CertTutorial
 
         private void TextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            CertTutorial.Instance.SetNavigationParam(TextBox.Text);
+            Parameter = TextBox.Text;
         }
 
         private void MinSize_OnClick(object sender, RoutedEventArgs e)
@@ -139,9 +147,7 @@ namespace TestAppUWP.Samples.CertTutorial
 
         private async void RunBackgroudTask(object sender, RoutedEventArgs e)
         {
-            var valueSet = new ValueSet();
-            var cts = new CancellationTokenSource();
-            valueSet.Add("CT", 1);
+            var valueSet = new ValueSet {{"CT", 1}};
             ApplicationTriggerResult applicationTriggerResult = await _applicationTrigger.RequestAsync(valueSet);
             switch (applicationTriggerResult)
             {
@@ -203,23 +209,42 @@ namespace TestAppUWP.Samples.CertTutorial
 
         private async void CreateSecondaryTile(object sender, RoutedEventArgs e)
         {
-            bool exists = SecondaryTile.Exists("1234");
-            if (!exists)
+            string tileId = GetTileId(TextBox.Text);
+            bool exists = SecondaryTile.Exists(tileId);
+            if (exists) return;
+
+            var secondaryTile = new SecondaryTile(tileId)
             {
-                var secondaryTile = new SecondaryTile("1234")
-                {
-                    DisplayName = "Display Name",
-                    Arguments = "Arguments",
-                    //tileData.VisualElements.ShowNameOnSquare150x150Logo = true;
-                };
-                secondaryTile.VisualElements.Square150x150Logo =
-                    new Uri("ms-appx:///assets/Square150x150Logo.scale-200.png");
-                secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
+                DisplayName = $"Display {TextBox.Text}",
+                Arguments = TextBox.Text
+            };
+            secondaryTile.VisualElements.Square150x150Logo =
+                new Uri("ms-appx:///assets/Square150x150Logo.scale-200.png");
+            secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
 
-                GeneralTransform buttonTransform = ((FrameworkElement)sender).TransformToVisual(null);
-                Point point = buttonTransform.TransformPoint(new Point());
+            GeneralTransform buttonTransform = ((FrameworkElement)sender).TransformToVisual(null);
+            Point point = buttonTransform.TransformPoint(new Point());
+            if (await secondaryTile.RequestCreateAsync(point))
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                SecondaryTileListBox.Items.Add(tileId);
+            }
+        }
 
-                await secondaryTile.RequestCreateAsync(point);
+        private string GetTileId(string text)
+        {
+            string trim = text.Trim();
+            return trim == string.Empty ? string.Empty : $"{GetType().Name}_{text.Trim()}";
+        }
+
+        private async void SecondaryTileListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(e.AddedItems.FirstOrDefault() is string tileId)) return;
+
+            if (await new SecondaryTile(tileId).RequestDeleteAsync())
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                SecondaryTileListBox.Items.Remove(tileId);
             }
         }
 
@@ -259,18 +284,20 @@ namespace TestAppUWP.Samples.CertTutorial
 
         private void ShowShareUi(object sender, RoutedEventArgs e)
         {
-
             DataTransferManager.ShowShareUI();
         }
 
         private async void RunAppServiceTask(object sender, RoutedEventArgs e)
         {
-            IReadOnlyList<AppInfo> readOnlyList = await AppServiceCatalog.FindAppServiceProvidersAsync("AppServiceServer_kj4sv7dv9awfe");
+            IReadOnlyList<AppInfo> readOnlyList =
+                (await AppServiceCatalog.FindAppServiceProvidersAsync("AppServiceServer_kj4sv7dv9awfe")).ToList();
+            foreach (AppInfo _ in readOnlyList) {}
 
-            var appServiceConnection = new AppServiceConnection();
-
-            appServiceConnection.AppServiceName = "AppServiceServerBackgroundTaskName";
-            appServiceConnection.PackageFamilyName = "AppServiceServer_kj4sv7dv9awfe";
+            var appServiceConnection = new AppServiceConnection
+            {
+                AppServiceName = "AppServiceServerBackgroundTaskName",
+                PackageFamilyName = "AppServiceServer_kj4sv7dv9awfe"
+            };
 
             AppServiceConnectionStatus status = await appServiceConnection.OpenAsync();
             if (status == AppServiceConnectionStatus.Success)
@@ -290,7 +317,6 @@ namespace TestAppUWP.Samples.CertTutorial
             }
             
             RunAppServiceTextBlock.Text = "Failed to connect";
-            return;
         }
     }
 }
