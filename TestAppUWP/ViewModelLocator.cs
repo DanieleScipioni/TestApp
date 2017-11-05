@@ -1,9 +1,9 @@
 ﻿using System;
 using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.ColorAnimation;
+using TestAppUWP.Samples.Map;
 using TestAppUWP.ViewModels.Frame;
 using Windows.UI.Xaml.Data;
-using TestAppUWP.Samples.Map;
 
 namespace TestAppUWP
 {

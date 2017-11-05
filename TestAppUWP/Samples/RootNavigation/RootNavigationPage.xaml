@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="TestAppUWP.Samples.RootNavigation.RootNavigationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="using:TestAppUWP.Pages"
+    xmlns:system="using:System"
+    xmlns:rootNavigation="using:TestAppUWP.Samples.RootNavigation"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <rootNavigation:PageClassNameConverter x:Key="PageClassNameConverter"/>
+        <DataTemplate x:Key="MenuDataTemplate" x:DataType="system:Type">
+            <StackPanel Orientation="Horizontal" Margin="0" Padding="0">
+                <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}" Width="48" Style="{ThemeResource SubtitleTextBlockStyle}"
+                           TextAlignment="Center" 
+                           Text="{x:Bind Converter={StaticResource PageClassNameConverter}, ConverterParameter=symbol}"/>
+                <TextBlock Text="{x:Bind Converter={StaticResource PageClassNameConverter}}"
+                           Margin="12,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <SplitView Grid.Row="0" Grid.Column="0" x:Name="HamburgerSplitView"
+                   PanePlacement="Left" OpenPaneLength="324" DisplayMode="CompactOverlay" CompactPaneLength="48"
+                   Content="{x:Bind _viewModel.RootFrame}" PaneBackground="Transparent">
+            <SplitView.Pane>
+                <ListView Margin="0,48,0,0" ItemsSource="{x:Bind _viewModel.Pages}" ItemTemplate="{StaticResource MenuDataTemplate}"
+                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
+                          SelectedIndex="{x:Bind _viewModel.SelectedPageIndex, Mode=TwoWay}" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </SplitView.Pane>
+        </SplitView>
+        <Button Grid.Row="0" Width="48" Height="48" VerticalAlignment="Top" Click="HamburgerButton_OnClick">
+            <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE700;"/>
+        </Button>
+    </Grid>
+</Page>

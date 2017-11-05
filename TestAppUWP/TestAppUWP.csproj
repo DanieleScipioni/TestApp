@@ -93,6 +93,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\RootNavigation\PageClassNameConverter.cs" />
+    <Compile Include="Samples\RootNavigation\RootNavigationPage.xaml.cs">
+      <DependentUpon>RootNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\RootNavigation\RootNavigationViewModel.cs" />
     <Compile Include="Samples\Map\Customer.cs" />
     <Compile Include="Samples\Map\CustomerUserControl.xaml.cs">
       <DependentUpon>CustomerUserControl.xaml</DependentUpon>
@@ -130,9 +135,6 @@
     <Compile Include="Pages\Frame\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Grid\GridPage.xaml.cs">
-      <DependentUpon>GridPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\CartAnimation\CartAnimationUserControl.xaml.cs">
       <DependentUpon>CartAnimationUserControl.xaml</DependentUpon>
     </Compile>
@@ -161,9 +163,6 @@
     </Compile>
     <Compile Include="Pages\Frame\SecondPage.xaml.cs">
       <DependentUpon>SecondPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SplitView.xaml.cs">
-      <DependentUpon>SplitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TextButtonPage.xaml.cs">
       <DependentUpon>TextButtonPage.xaml</DependentUpon>
@@ -265,11 +264,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Grid\GridPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SplitView.xaml">
+    <Page Include="Samples\RootNavigation\RootNavigationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
