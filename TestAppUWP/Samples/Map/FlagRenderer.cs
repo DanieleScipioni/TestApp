@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace TestAppUWP.Samples.Map
 {
-    public class FlagRenderer : Canvas, IDisposable
+    public class FlagRenderer : Canvas
     {
         private readonly Polygon _polygon;
         private readonly TextBlock _textBlock;
@@ -27,8 +27,12 @@ namespace TestAppUWP.Samples.Map
         private readonly Dictionary<string, RandomAccessStreamReference> _randomAccessStreamReferenceById =
             new Dictionary<string, RandomAccessStreamReference>();
 
+        private bool _disposed;
+
         public FlagRenderer()
         {
+            Unloaded += (sender, args) => Dispose();
+
             _renderTargetBitmap = new RenderTargetBitmap();
 
             _polygon = new Polygon
@@ -63,6 +67,8 @@ namespace TestAppUWP.Samples.Map
 
         public async Task<RandomAccessStreamReference> GetFlag(Color background, Color foregroud, string text)
         {
+            if (_disposed) return null;
+
             string id = GetId(background, foregroud, text);
             if (_randomAccessStreamReferenceById.ContainsKey(id)) return _randomAccessStreamReferenceById[id];
 
@@ -72,6 +78,7 @@ namespace TestAppUWP.Samples.Map
 
             var inMemoryRandomAccessStream = new InMemoryRandomAccessStream();
             await SaveUiElementToPngStream(inMemoryRandomAccessStream);
+            if (_disposed) return null;
             _inMemoryRandomAccessStreams.Add(inMemoryRandomAccessStream);
 
             return _randomAccessStreamReferenceById[id] =
@@ -83,23 +90,40 @@ namespace TestAppUWP.Samples.Map
 
         private async Task SaveUiElementToPngStream(IRandomAccessStream stream)
         {
-            await _renderTargetBitmap.RenderAsync(this);
+            if (_disposed) return;
+            try
+            {
+                await _renderTargetBitmap.RenderAsync(this);
+            }
+            catch (ArgumentException)
+            {
+                // FlagRendered removed from visual tree.
+                return;
+            }
+            if (_disposed) return;
+
             IBuffer buffer = await _renderTargetBitmap.GetPixelsAsync();
+            if (_disposed) return;
 
             BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+            if (_disposed) return;
+
             encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
                 (uint)_renderTargetBitmap.PixelWidth, (uint)_renderTargetBitmap.PixelHeight,
                 _rawDpiX, _rawDpiY, buffer.ToArray());
             await encoder.FlushAsync();
         }
 
-        public void Dispose()
+        private void Dispose()
         {
+            _disposed = true;
             _displayInformation.DpiChanged -= OnDisplayInformationOnDpiChanged;
             foreach (InMemoryRandomAccessStream inMemoryRandomAccessStream in _inMemoryRandomAccessStreams)
             {
                 inMemoryRandomAccessStream.Dispose();
             }
+            _inMemoryRandomAccessStreams.Clear();
+            _randomAccessStreamReferenceById.Clear();
         }
     }
 }

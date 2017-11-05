@@ -39,10 +39,6 @@ namespace TestAppUWP.Samples.Map
 
                 Bindings.Update();
             };
-            Unloaded += (sender, args) =>
-            {
-                FlagRenderer.Dispose();
-            };
         }
 
         private async void ViewModelOnPropertyChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
