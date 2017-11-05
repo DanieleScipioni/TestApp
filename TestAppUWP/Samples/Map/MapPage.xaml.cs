@@ -62,7 +62,7 @@ namespace TestAppUWP.Samples.Map
             {
                 var mapIcon = new MapIcon
                 {
-                    Image = await FlagRenderer.GetFlag(customer.Backround, customer.Foreground, customer.Number.ToString()),
+                    Image = await RenderFlag.GetFlag(customer.Backround, customer.Foreground, customer.Number.ToString()),
                     Location = new Geopoint(new BasicGeoposition {Latitude = customer.Latitude, Longitude = customer.Longitude}),
                     NormalizedAnchorPoint = new Point(0.1, 0.8)
                 };
