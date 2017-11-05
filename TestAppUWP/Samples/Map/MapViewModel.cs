@@ -77,6 +77,7 @@ namespace TestAppUWP.Samples.Map
                     Foreground = GetForegroudColor(random.Next(2)),
                     Backround = GetColor(random.Next(8)),
                     Number = random.Next(8) + 1,
+                    Multi = random.Next(2) == 1,
                     Latitude = 41.65 + random.NextDouble() / 2,
                     Longitude = 12.05 + random.NextDouble()
                 });

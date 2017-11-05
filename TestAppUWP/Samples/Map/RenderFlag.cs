@@ -19,7 +19,7 @@ namespace TestAppUWP.Samples.Map
         private readonly Polygon _polygon;
         private readonly TextBlock _textBlock;
         private readonly RenderTargetBitmap _renderTargetBitmap;
-        private readonly DisplayInformation _displayInformation;
+        private DisplayInformation _displayInformation;
         private float _rawDpiX;
         private float _rawDpiY;
         private readonly List<InMemoryRandomAccessStream> _inMemoryRandomAccessStreams =
@@ -32,6 +32,13 @@ namespace TestAppUWP.Samples.Map
         public RenderFlag()
         {
             Unloaded += (sender, args) => Dispose();
+            Loaded += (sender, args) =>
+            {
+                _displayInformation = DisplayInformation.GetForCurrentView();
+                _rawDpiX = _displayInformation.RawDpiX;
+                _rawDpiY = _displayInformation.RawDpiY;
+                _displayInformation.DpiChanged += OnDisplayInformationOnDpiChanged;
+            };
 
             _renderTargetBitmap = new RenderTargetBitmap();
 
@@ -52,11 +59,6 @@ namespace TestAppUWP.Samples.Map
 
             Width = _polygon.ActualWidth;
             Height = _polygon.ActualHeight;
-
-            _displayInformation = DisplayInformation.GetForCurrentView();
-            _rawDpiX = _displayInformation.RawDpiX;
-            _rawDpiY = _displayInformation.RawDpiY;
-            _displayInformation.DpiChanged += OnDisplayInformationOnDpiChanged;
         }
 
         private void OnDisplayInformationOnDpiChanged(DisplayInformation displayInformation, object args)
@@ -65,7 +67,7 @@ namespace TestAppUWP.Samples.Map
             _rawDpiY = _displayInformation.RawDpiY;
         }
 
-        public async Task<RandomAccessStreamReference> GetFlag(Color background, Color foregroud, string text)
+        public async Task<RandomAccessStreamReference> GetRandomAccessStreamReference(Color background, Color foregroud, string text, bool multi)
         {
             if (_disposed) return null;
 

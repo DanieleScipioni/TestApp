@@ -7,6 +7,7 @@ namespace TestAppUWP.Samples.Map
         public Color Foreground;
         public Color Backround;
         public int Number;
+        public bool Multi;
         public double Latitude;
         public double Longitude;
     }
