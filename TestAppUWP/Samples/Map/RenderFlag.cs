@@ -28,6 +28,11 @@ namespace TestAppUWP.Samples.Map
             new Dictionary<string, RandomAccessStreamReference>();
 
         private bool _disposed;
+        private Path _path;
+        private Polygon _polygon1;
+        private Polygon _polygon2;
+        private Line _line1;
+        private Line _line2;
 
         public RenderFlag()
         {
@@ -42,6 +47,7 @@ namespace TestAppUWP.Samples.Map
 
             _renderTargetBitmap = new RenderTargetBitmap();
 
+            _path = new Path();
             _polygon = new Polygon
             {
                 Points = new PointCollection {new Point(0, 0), new Point(35, 13), new Point(0, 26)},
@@ -50,15 +56,72 @@ namespace TestAppUWP.Samples.Map
                 StrokeThickness = 2
             };
 
-            _textBlock = new TextBlock {FontSize = 14, CharacterSpacing = -50};
+            //_textBlock = new TextBlock {FontSize = 14, CharacterSpacing = -50};
+            //_textBlock = new TextBlock {FontSize = 15, CharacterSpacing = 0 };
+            _textBlock = new TextBlock {FontSize = 14, CharacterSpacing = 0 };
             SetLeft(_textBlock, 2);
             SetTop(_textBlock, 2.5);
 
             Children.Add(_polygon);
             Children.Add(_textBlock);
 
-            Width = _polygon.ActualWidth;
-            Height = _polygon.ActualHeight;
+            Width = Height = 0;
+
+            CreateMulti();
+        }
+
+        private void CreateMulti()
+        {
+            _polygon1 = new Polygon
+            {
+                Points = new PointCollection { new Point(0, 0), new Point(35, 13), new Point(0, 26) },
+                Stroke = _polygon.Stroke,
+                StrokeThickness = _polygon.StrokeThickness
+            };
+            SetTop(_polygon1, 3); SetLeft(_polygon1, 1);
+
+            _line1 = new Line
+            {
+                X1 = 35.5, Y1 = 13,
+                X2 = -1, Y2 = 26.5,
+                StrokeThickness = 1.5, Stroke = new SolidColorBrush(Colors.Gray)
+            };
+            SetTop(_line1, 2); SetLeft(_line1, 1);
+
+            _polygon2 = new Polygon
+            {
+                Points = new PointCollection { new Point(0, 0), new Point(35, 13), new Point(0, 26) },
+                Stroke = _polygon.Stroke,
+                StrokeThickness = _polygon.StrokeThickness
+            };
+            SetTop(_polygon2, 1.5); SetLeft(_polygon2, 0.5);
+
+            _line2 = new Line
+            {
+                X1 = _line1.X1, Y1 = _line1.Y1,
+                X2 = _line1.X2, Y2 = _line1.Y2,
+                StrokeThickness = _line1.StrokeThickness
+            };
+            SetTop(_line2, 0.5); SetLeft(_line2, 0.5);
+        }
+
+        private void AddMulti()
+        {
+            if (Children.Count == 6) return;
+
+            Children.Insert(0, _polygon1);
+            Children.Insert(0, _line1);
+            Children.Insert(0, _polygon2);
+            Children.Insert(0, _line2);
+        }
+
+        private void RemomveMulti()
+        {
+            if (Children.Count != 6) return;
+            Children.RemoveAt(0);
+            Children.RemoveAt(0);
+            Children.RemoveAt(0);
+            Children.RemoveAt(0);
         }
 
         private void OnDisplayInformationOnDpiChanged(DisplayInformation displayInformation, object args)
@@ -67,16 +130,20 @@ namespace TestAppUWP.Samples.Map
             _rawDpiY = _displayInformation.RawDpiY;
         }
 
-        public async Task<RandomAccessStreamReference> GetRandomAccessStreamReference(Color background, Color foregroud, string text, bool multi)
+        public async Task<RandomAccessStreamReference> GetRandomAccessStreamReference(Color background, Color foregroud,
+            string text, bool multi)
         {
             if (_disposed) return null;
 
-            string id = GetId(background, foregroud, text);
+            if (multi) AddMulti(); else RemomveMulti();
+
+            string id = GetId(background, foregroud, text, multi);
+
             if (_randomAccessStreamReferenceById.ContainsKey(id)) return _randomAccessStreamReferenceById[id];
 
             _polygon.Fill = new SolidColorBrush(background);
             _textBlock.Foreground = new SolidColorBrush(foregroud);
-            _textBlock.Text = text;
+            _textBlock.Text = text + text;
 
             var inMemoryRandomAccessStream = new InMemoryRandomAccessStream();
             await SaveUiElementToPngStream(inMemoryRandomAccessStream);
@@ -87,8 +154,8 @@ namespace TestAppUWP.Samples.Map
                 RandomAccessStreamReference.CreateFromStream(inMemoryRandomAccessStream);
         }
 
-        private static string GetId(Color background, Color foregroud, string text) =>
-            $"{background}_{foregroud}_{text}";
+        private static string GetId(Color background, Color foregroud, string text, bool multi) =>
+            $"{background}_{foregroud}_{text}_{multi}";
 
         private async Task SaveUiElementToPngStream(IRandomAccessStream stream)
         {

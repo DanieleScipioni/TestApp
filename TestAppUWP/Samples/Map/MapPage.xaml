@@ -6,14 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:map="using:TestAppUWP.Samples.Map"
-    xmlns:testAppUwp="using:TestAppUWP"
     mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
     <Page.Resources>
-        <testAppUwp:ViewModelLocator x:Key="ViewModelLocator" />
         <DataTemplate x:Key="DataTemplate" x:DataType="map:Customer">
             <StackPanel Margin="4,0" Padding="0,8" BorderBrush="LightGray" BorderThickness="0,0,0,1">
-                <TextBlock Text="{x:Bind Number}"/>
+                <TextBlock><Run Text="{x:Bind Number}"/> Multi: <Run Text="{x:Bind Multi}" /></TextBlock>
                 <TextBlock Text="{x:Bind Latitude}"/>
                 <TextBlock Text="{x:Bind Longitude}"/>
             </StackPanel>
