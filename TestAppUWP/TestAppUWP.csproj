@@ -93,9 +93,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Map\AsyncManualResetEvent.cs" />
     <Compile Include="Samples\Map\CanvasTester.xaml.cs">
       <DependentUpon>CanvasTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Map\BaseRenderFlag.cs" />
+    <Compile Include="Samples\Map\RenderImageFlag.cs" />
     <Compile Include="Samples\RootNavigation\PageClassNameConverter.cs" />
     <Compile Include="Samples\RootNavigation\RootNavigationPage.xaml.cs">
       <DependentUpon>RootNavigationPage.xaml</DependentUpon>
@@ -124,7 +127,7 @@
     <Compile Include="Samples\InterControlAnimation\Control2.xaml.cs">
       <DependentUpon>Control2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\Map\RenderFlag.cs" />
+    <Compile Include="Samples\Map\RenderPlygonFlag.cs" />
     <Compile Include="Samples\Map\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,21 @@
     <None Include="TestAppUWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\flags\flag_blue_mini.png" />
+    <Content Include="Assets\flags\flag_blue_mini_phone.png" />
+    <Content Include="Assets\flags\flag_green_mini.png" />
+    <Content Include="Assets\flags\flag_green_mini_phone.png" />
+    <Content Include="Assets\flags\flag_grey.png" />
+    <Content Include="Assets\flags\flag_grey_mini.png" />
+    <Content Include="Assets\flags\flag_multi_blue_mini.png" />
+    <Content Include="Assets\flags\flag_multi_green_mini.png" />
+    <Content Include="Assets\flags\flag_multi_red_blue_mini.png" />
+    <Content Include="Assets\flags\flag_multi_red_green_mini.png" />
+    <Content Include="Assets\flags\flag_multi_red_mini.png" />
+    <Content Include="Assets\flags\flag_red_mini.png" />
+    <Content Include="Assets\flags\flag_red_mini_phone.png" />
+    <Content Include="Assets\flags\flag_up_red_mini.png" />
+    <Content Include="Assets\flags\map_circle_mini.png" />
     <Content Include="Assets\Photos\pic00.jpg" />
     <Content Include="Assets\Photos\pic01.jpg" />
     <Content Include="Assets\Photos\pic02.jpg" />

@@ -11,6 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Canvas Margin="8" >
             <Polygon Canvas.Top="4" Canvas.Left="1"
@@ -36,5 +37,9 @@
             <TextBlock Canvas.Left="2" Canvas.Top="5.5" FontSize="14" CharacterSpacing="-50" Text="3"/>
         </Canvas>
 
+        <Canvas Grid.Column="2" Margin="8">
+            <Image Source="../../Assets/flags/flag_green_mini.png"/>
+            <TextBlock Canvas.Left="2.5" Canvas.Top="4" FontSize="12" CharacterSpacing="-50" Text="88"/>
+        </Canvas>
     </Grid>
 </Page>

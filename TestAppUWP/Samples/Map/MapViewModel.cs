@@ -32,11 +32,11 @@ namespace TestAppUWP.Samples.Map
             switch (index)
             {
                 case 0:
-                    return Colors.LawnGreen;
+                    return Colors.Green;
                 case 1:
-                    return Colors.LightBlue;
+                    return Colors.Blue;
                 case 2:
-                    return Colors.LightCoral;
+                    return Colors.Gray;
                 case 3:
                     return Colors.LightSlateGray;
                 case 4:
@@ -69,6 +69,8 @@ namespace TestAppUWP.Samples.Map
 
             var customers = new List<Customer>(200);
 
+            Array values = Enum.GetValues(typeof(AppointmentEnums.AppointmentFlag));
+            
             var random = new Random(DateTime.UtcNow.Millisecond);
             for (var idx = 0; idx < 200; idx++)
             {
@@ -78,6 +80,9 @@ namespace TestAppUWP.Samples.Map
                     Backround = GetColor(random.Next(8)),
                     Number = random.Next(8) + 1,
                     Multi = random.Next(2) == 1,
+                    IsPhoneCall = random.Next(2) == 1,
+                    VisitsCreateRecurringAppointments = random.Next(2),
+                    AppointmentFlag = (AppointmentEnums.AppointmentFlag)values.GetValue(random.Next(values.Length)),
                     Latitude = 41.65 + random.NextDouble() / 2,
                     Longitude = 12.05 + random.NextDouble()
                 });

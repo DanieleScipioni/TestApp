@@ -12,19 +12,25 @@
         <DataTemplate x:Key="DataTemplate" x:DataType="map:Customer">
             <StackPanel Margin="4,0" Padding="0,8" BorderBrush="LightGray" BorderThickness="0,0,0,1">
                 <TextBlock><Run Text="{x:Bind Number}"/> Multi: <Run Text="{x:Bind Multi}" /></TextBlock>
+                <TextBlock>AppointmentFlag: <Run Text="{x:Bind AppointmentFlag}" />,
+                    IsPhoneCall: <Run Text="{x:Bind IsPhoneCall}"/>
+                    , vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}"/></TextBlock>
                 <TextBlock Text="{x:Bind Latitude}"/>
                 <TextBlock Text="{x:Bind Longitude}"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="LightCyan">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <map:RenderFlag x:Name="RenderFlag" />
-        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0"
+        <StackPanel Orientation="Horizontal">
+            <map:RenderImageFlag x:Name="RenderImageFlag" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <map:RenderPlygonFlag x:Name="RenderVectorFlag" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0" Margin="0,50,0,0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
                          MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped"
@@ -34,7 +40,7 @@
                   ItemTemplate="{StaticResource DataTemplate}" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" /> 
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
