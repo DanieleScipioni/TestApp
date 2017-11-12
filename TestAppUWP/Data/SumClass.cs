@@ -1,6 +1,6 @@
 ﻿namespace TestAppUWP.Data
 {
-    public class SumClass
+    internal class SumClass
     {
         public int Add1;
         public int Add2;

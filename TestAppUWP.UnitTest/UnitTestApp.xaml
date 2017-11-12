@@ -1,0 +1,9 @@
+﻿<Application x:Class="TestAppUWP.UnitTest.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:testAppUwp="using:TestAppUWP"
+    RequestedTheme="Light">
+    <Application.Resources>
+        <testAppUwp:ViewModelLocator x:Key="ViewModelLocator"/>
+    </Application.Resources>
+</Application>
