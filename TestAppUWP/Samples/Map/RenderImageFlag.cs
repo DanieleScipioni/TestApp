@@ -13,16 +13,16 @@ namespace TestAppUWP.Samples.Map
     {
         private readonly TextBlock _textBlock;
         private readonly Image _image;
-        private readonly AsyncManualResetEvent _manualResetEvent;
+        private readonly SemaphoreSlim _manualResetEvent;
         private bool _switch;
 
         public RenderImageFlag()
         {
-            _manualResetEvent = new AsyncManualResetEvent(true);
+            _manualResetEvent = new SemaphoreSlim(0,1);
 
             _image = new Image();
-            _image.ImageOpened += (sender, args) => _manualResetEvent.Set();
-            _image.ImageFailed += (sender, args) => _manualResetEvent.Set();
+            _image.ImageOpened += (sender, args) => _manualResetEvent.Release();
+            _image.ImageFailed += (sender, args) => _manualResetEvent.Release();
 
             _textBlock = new TextBlock {FontSize = 11, FontWeight = FontWeights.Bold, CharacterSpacing = -50};
 
@@ -38,7 +38,6 @@ namespace TestAppUWP.Samples.Map
             string text, bool multi, AppointmentEnums.AppointmentFlag appointmentFlag, bool isPhoneCall,
             int visitsCreateRecurringAppointments)
         {
-            _manualResetEvent.Reset();
             string uriString =
                 _switch
                     ? CalculateCustomerFlagIconString(appointmentFlag, isPhoneCall)
@@ -46,12 +45,11 @@ namespace TestAppUWP.Samples.Map
                         isPhoneCall);
             _image.Source = new BitmapImage(new Uri(uriString));
 
-            await _manualResetEvent.Wait();
+            await _manualResetEvent.WaitAsync();
 
-            //_manualResetEvent.Wait();
             if (uriString.EndsWith("map_circle_mini.png"))
             {
-                SetLeft(_textBlock, 7); SetTop(_textBlock, 6);
+                SetLeft(_textBlock, 13 - text.Length * 1.5); SetTop(_textBlock, 6);
             }
             else
             {

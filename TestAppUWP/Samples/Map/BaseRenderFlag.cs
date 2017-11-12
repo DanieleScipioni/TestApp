@@ -50,7 +50,7 @@ namespace TestAppUWP.Samples.Map
         {
             if (_disposed) return null;
 
-            string id = GetId(background, foregroud, text, multi);
+            string id = GetId(background, foregroud, text, multi, appointmentFlag, isPhoneCall, visitsCreateRecurringAppointments);
 
             if (_randomAccessStreamReferenceById.ContainsKey(id)) return _randomAccessStreamReferenceById[id];
 
@@ -76,8 +76,10 @@ namespace TestAppUWP.Samples.Map
 
         protected abstract Task GetRandomAccessStreamReferenceOverride(Color background, Color foregroud, string text, bool multi, AppointmentEnums.AppointmentFlag appointmentFlag, bool isPhoneCall, int visitsCreateRecurringAppointments);
 
-        private static string GetId(Color background, Color foregroud, string text, bool multi) =>
-            $"{background}_{foregroud}_{text}_{multi}";
+        private static string GetId(Color background, Color foregroud, string text, bool multi,
+            AppointmentEnums.AppointmentFlag appointmentFlag, bool isPhoneCall,
+            int visitsCreateRecurringAppointments) =>
+            $"{background}_{foregroud}_{text}_{multi}_{appointmentFlag}_{isPhoneCall}_{visitsCreateRecurringAppointments}";
 
         private async Task SaveUiElementToPngStream(IRandomAccessStream stream)
         {
