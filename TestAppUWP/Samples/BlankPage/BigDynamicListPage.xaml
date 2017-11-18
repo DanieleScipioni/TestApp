@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TestAppUWP.Samples.BlankPage.MustachePage"
+    x:Class="TestAppUWP.Samples.BlankPage.BigDynamicListPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
     <Page.Resources>
         <blankPage:ThisPageConverter x:Key="ThisPageConverter"/>
         <DataTemplate x:Key="Uno" x:DataType="blankPage:PippoCollection">
-            <blankPage:PippoCollectionUserControl MustachePage="{x:Bind Converter={StaticResource ThisPageConverter}}"/>
+            <blankPage:PippoCollectionUserControl BigDynamicListPage="{x:Bind Converter={StaticResource ThisPageConverter}}"/>
         </DataTemplate>
         <!-- ReSharper disable once Xaml.RedundantResource this replace the default gray color bacground for listview placeholder -->
         <SolidColorBrush x:Key="ListViewItemPlaceholderBackground" Color="Transparent" />

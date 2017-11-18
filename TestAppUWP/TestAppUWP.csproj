@@ -158,8 +158,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPageViewModel.cs" />
-    <Compile Include="Samples\BlankPage\MustachePage.xaml.cs">
-      <DependentUpon>MustachePage.xaml</DependentUpon>
+    <Compile Include="Samples\BlankPage\BigDynamicListPage.xaml.cs">
+      <DependentUpon>BigDynamicListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frame\FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>
@@ -268,7 +268,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Samples\BlankPage\MustachePage.xaml">
+    <Page Include="Samples\BlankPage\BigDynamicListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

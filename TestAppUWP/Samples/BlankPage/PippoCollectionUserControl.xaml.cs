@@ -50,15 +50,15 @@ namespace TestAppUWP.Samples.BlankPage
                 if (elements.Count > 0 && elements[0] is TextBlock textBlock)
                 {
                     args.Handled = true;
-                    await MustachePage.DoSomething(textBlock.Text);
+                    await BigDynamicListPage.DoSomething(textBlock.Text);
                 }
             };
             RootGrid.Tapped += async (sender, args) =>
             {
-                await MustachePage.DoSomething("second tap");
+                await BigDynamicListPage.DoSomething("second tap");
             };
         }
 
-        public MustachePage MustachePage { get; set; }
+        public BigDynamicListPage BigDynamicListPage { get; set; }
     }
 }

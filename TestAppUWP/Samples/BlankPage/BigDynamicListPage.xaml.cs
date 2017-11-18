@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -12,14 +12,14 @@ namespace TestAppUWP.Samples.BlankPage
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a MainFrame.
     /// </summary>
-    public sealed partial class MustachePage
+    public sealed partial class BigDynamicListPage
     {
         private PageViewModel _pageViewModel;
 
-        public MustachePage()
+        public BigDynamicListPage()
         {
             InitializeComponent();
-            ((ThisPageConverter) Resources["ThisPageConverter"]).MustachePage = this;
+            ((ThisPageConverter) Resources["ThisPageConverter"]).BigDynamicListPage = this;
             Loaded += (sender, args) =>
             {
                 DataContext = new PageViewModel();
@@ -75,11 +75,11 @@ namespace TestAppUWP.Samples.BlankPage
 
     internal class ThisPageConverter : IValueConverter
     {
-        public MustachePage MustachePage { get; set; }
+        public BigDynamicListPage BigDynamicListPage { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return MustachePage;
+            return BigDynamicListPage;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
