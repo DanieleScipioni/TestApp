@@ -1,7 +1,7 @@
-﻿using TestAppUWP.Data;
+﻿using TestAppUWP.Core;
+using TestAppUWP.Data;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using TestAppUWP.Core;
 
 namespace TestAppUWP.ViewModels.Frame
 {
