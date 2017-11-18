@@ -12,7 +12,10 @@ using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
+using Windows.Graphics.Imaging;
+using Windows.Media.Capture;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
@@ -20,6 +23,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace TestAppUWP.Samples.CertTutorial
@@ -121,6 +125,10 @@ namespace TestAppUWP.Samples.CertTutorial
                 // ReSharper disable once PossibleNullReferenceException
                 SecondaryTileListBox.Items.Add(secondaryTile.TileId);
             }
+
+            IReadOnlyList<StorageFolder> storageFolders = (await Package.Current.InstalledLocation.GetFoldersAsync()).ToList();
+
+            ulong _ = ApplicationData.Current.RoamingStorageQuota;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -317,6 +325,22 @@ namespace TestAppUWP.Samples.CertTutorial
             }
             
             RunAppServiceTextBlock.Text = "Failed to connect";
+        }
+
+        private async void CameraCapture_OnClick(object sender, RoutedEventArgs e)
+        {
+            var cameraCaptureUi = new CameraCaptureUI();
+            StorageFile photoFile = await cameraCaptureUi.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+            using (IRandomAccessStreamWithContentType stream = await photoFile.OpenReadAsync())
+            {
+                BitmapDecoder bitmapDecoder = await BitmapDecoder.CreateAsync(stream);
+                SoftwareBitmap softwareBitmap = await bitmapDecoder.GetSoftwareBitmapAsync();
+                softwareBitmap = SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+                var softwareBitmapSource = new SoftwareBitmapSource();
+                await softwareBitmapSource.SetBitmapAsync(softwareBitmap);
+                CameraCaptureImage.Source = softwareBitmapSource;
+            }
         }
     }
 }

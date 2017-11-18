@@ -81,5 +81,9 @@
             <TextBlock x:Name="RunAppServiceTextBlock" VerticalAlignment="Center"/>
         </StackPanel>
         <TextBlock x:Uid="good"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Camera capture" Click="CameraCapture_OnClick"/>
+            <Image x:Name="CameraCaptureImage"/>
+        </StackPanel>
     </StackPanel>
 </Page>
