@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -24,21 +25,25 @@ namespace TestAppUWP.Samples.BlankPage
                     RootGrid.ColumnDefinitions.Clear();
                     for (var index = 0; index < _pippoCollection.Count; index++)
                     {
-                        Pippo _ = _pippoCollection[index];
                         RootGrid.ColumnDefinitions.Add(new ColumnDefinition
                         {
                             Width = new GridLength(1, GridUnitType.Star)
                         });
-                        var textBlock = new TextBlock();
-                        Grid.SetColumn(textBlock, index);
-                        RootGrid.Children.Add(textBlock);
+                        var border = new Border
+                        {
+                            BorderBrush = new SolidColorBrush(Colors.BlueViolet),
+                            BorderThickness = new Thickness(1),
+                            Child = new TextBlock {VerticalAlignment = VerticalAlignment.Center}
+                        };
+                        Grid.SetColumn(border, index);
+                        RootGrid.Children.Add(border);
                     }
                 }
 
                 for (var index = 0; index < _pippoCollection.Count; index++)
                 {
                     Pippo pippo = _pippoCollection[index];
-                    ((TextBlock)RootGrid.Children[index]).Text = pippo.Intero.ToString();
+                    ((TextBlock)((Border)RootGrid.Children[index]).Child).Text = pippo.Intero.ToString();
                 }
             };
             RootGrid.Tapped += async (sender, args) =>
