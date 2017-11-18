@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 using TestAppUWP.Core;
 
 namespace TestAppUWP.Samples.BlankPage
@@ -14,18 +19,27 @@ namespace TestAppUWP.Samples.BlankPage
         public MustachePage()
         {
             InitializeComponent();
+            ((ThisPageConverter) Resources["ThisPageConverter"]).MustachePage = this;
             Loaded += (sender, args) =>
             {
                 DataContext = new PageViewModel();
             };
             DataContextChanged += (sender, args) =>
             {
-                _pageViewModel = (PageViewModel) DataContext;
+                if (_pageViewModel == args.NewValue) return;
+                _pageViewModel = (PageViewModel)args.NewValue;
+                Bindings.Update();
             };
+        }
+
+        public async Task DoSomething(string textBlockText)
+        {
+            var contentDialog = new ContentDialog {Content = $"Ciao {textBlockText}", Title = "Title", PrimaryButtonText = "Primary"};
+            await contentDialog.ShowAsync();
         }
     }
 
-    class Pippo
+    internal class Pippo 
     {
         public int Intero;
     }
@@ -35,13 +49,13 @@ namespace TestAppUWP.Samples.BlankPage
         public PageViewModel()
         {
             var random = new Random(DateTime.UtcNow.Millisecond);
-            var ints = new List<Pippo[]>();
+            var ints = new List<PippoCollection>();
             for (var i = 0; i < 100000; i++)
             {
-                var a = new Pippo[1000];
-                for (var j = 0; j < 1000; j++)
+                var a = new PippoCollection();
+                for (var j = 0; j < 30; j++)
                 {
-                    a[j] = new Pippo { Intero = random.Next() };
+                    a.Add(new Pippo { Intero = random.Next() });
                 }
                 ints.Add(a);
             }
@@ -49,11 +63,28 @@ namespace TestAppUWP.Samples.BlankPage
 
         }
 
-        private List<Pippo[]> _ints;
-        public List<Pippo[]> Ints
+        private List<PippoCollection> _ints;
+        public List<PippoCollection> Ints
         {
             get => _ints;
             set => SetProperty(ref _ints, value);
+        }
+    }
+
+    internal class PippoCollection : List<Pippo> {}
+
+    internal class ThisPageConverter : IValueConverter
+    {
+        public MustachePage MustachePage { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return MustachePage;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
         }
     }
 }

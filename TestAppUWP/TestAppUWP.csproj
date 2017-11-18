@@ -93,6 +93,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\BlankPage\PippoCollectionUserControl.xaml.cs">
+      <DependentUpon>PippoCollectionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Map\AsyncManualResetEvent.cs" />
     <Compile Include="Samples\Map\CanvasTester.xaml.cs">
       <DependentUpon>CanvasTester.xaml</DependentUpon>
@@ -155,7 +158,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPageViewModel.cs" />
-    <Compile Include="MustachePage.xaml.cs">
+    <Compile Include="Samples\BlankPage\MustachePage.xaml.cs">
       <DependentUpon>MustachePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frame\FirstPage.xaml.cs">
@@ -265,7 +268,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MustachePage.xaml">
+    <Page Include="Samples\BlankPage\MustachePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Frame\SecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\BlankPage\PippoCollectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

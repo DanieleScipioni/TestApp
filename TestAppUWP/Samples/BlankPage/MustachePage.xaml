@@ -9,9 +9,12 @@
     DataContext="{Binding Converter={StaticResource ViewModelLocator}, RelativeSource={RelativeSource Self}}">
 
     <Page.Resources>
-        <DataTemplate x:Key="Uno" x:DataType="blankPage:Pippo">
-            <TextBlock Text="{x:Bind Intero}"/>
+        <blankPage:ThisPageConverter x:Key="ThisPageConverter"/>
+        <DataTemplate x:Key="Uno" x:DataType="blankPage:PippoCollection">
+            <blankPage:PippoCollectionUserControl MustachePage="{x:Bind Converter={StaticResource ThisPageConverter}}"/>
         </DataTemplate>
+        <!-- ReSharper disable once Xaml.RedundantResource this replace the default gray color bacground for listview placeholder -->
+        <SolidColorBrush x:Key="ListViewItemPlaceholderBackground" Color="Transparent" />
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -23,7 +26,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Ciao" Style="{ThemeResource TitleTextBlockStyle}"/>
-        <ListView Grid.Row="1" HorizontalAlignment="Stretch" ItemsSource="{x:Bind _pageViewModel.Ints, Mode=OneWay}"
-                  ItemTemplate="{StaticResource Uno}"/>
+        <ListView Grid.Row="1"
+                  HorizontalAlignment="Stretch" ItemsSource="{x:Bind _pageViewModel.Ints, Mode=OneWay}"
+                  ItemTemplate="{StaticResource Uno}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid> 
 </Page>
