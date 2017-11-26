@@ -85,5 +85,7 @@
             <Button Content="Camera capture" Click="CameraCapture_OnClick"/>
             <Image x:Name="CameraCaptureImage"/>
         </StackPanel>
+        <Button Content="ElementRect" Click="ElementRect_OnClick"/>
+        <Button Content="Email" Click="EmailClick"/>
     </StackPanel>
 </Page>

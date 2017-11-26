@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Data.Xml.Dom;
 using Windows.Foundation;
@@ -15,6 +16,7 @@ using Windows.Foundation.Metadata;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
@@ -341,6 +343,35 @@ namespace TestAppUWP.Samples.CertTutorial
                 await softwareBitmapSource.SetBitmapAsync(softwareBitmap);
                 CameraCaptureImage.Source = softwareBitmapSource;
             }
+        }
+
+        private void ElementRect_OnClick(object sender, RoutedEventArgs e)
+        {
+            var uiElement = (UIElement) sender;
+            Point transformPoint1 = Window.Current.Content.RenderTransform.TransformPoint(uiElement.RenderTransformOrigin);
+            Point transformPoint = uiElement.RenderTransform.TransformPoint(new Point());
+            Point point = uiElement.TransformToVisual(null).TransformPoint(new Point());
+        }
+
+        private async void EmailClick(object sender, RoutedEventArgs e)
+        {
+            var fileOpenPicker = new FileOpenPicker();
+            fileOpenPicker.ViewMode = PickerViewMode.List;
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            fileOpenPicker.CommitButtonText = "?";
+            fileOpenPicker.FileTypeFilter.Add("*");
+            StorageFile storageFile = await fileOpenPicker.PickSingleFileAsync();
+            RandomAccessStreamReference randomAccessStreamReference = RandomAccessStreamReference.CreateFromFile(storageFile);
+            var emailMessage = new EmailMessage
+            {
+                Subject = "my favorate app",
+                Body = "I would like to tell you ..."
+            };
+            var emailAttachment = new EmailAttachment(storageFile.Name, randomAccessStreamReference);
+            emailMessage.Attachments.Add(emailAttachment);
+            var emailRecipient = new EmailRecipient("daniele.scipioni@gmail.com");
+            emailMessage.To.Add(emailRecipient);
+            await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
     }
 }
