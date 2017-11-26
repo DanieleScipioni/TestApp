@@ -6,6 +6,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using TestAppUWP.Samples.BlankPage;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -42,7 +43,8 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(ColorAnimation.ColorAnimation),
                 typeof(CertTutorial.CertTutorial),
                 typeof(InterControlAnimation.InterControlAnimation),
-                typeof(MapPage)
+                typeof(MapPage),
+                typeof(BigDynamicListPage)
             };
 
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
@@ -60,7 +62,10 @@ namespace TestAppUWP.Samples.RootNavigation
 
             SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) =>
             {
-                if (RootFrame.CanGoBack) RootFrame.GoBack();
+                if (!RootFrame.CanGoBack) return;
+
+                RootFrame.GoBack();
+                args.Handled = true;
             };
 
             if (previousExecutionState == ApplicationExecutionState.Terminated)
