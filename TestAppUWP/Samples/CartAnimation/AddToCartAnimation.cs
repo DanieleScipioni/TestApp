@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Composition;
 
-namespace TestAppUWP.UserControls.CartAnimation
+namespace TestAppUWP.Samples.CartAnimation
 {
     public class AddToCartAnimation : IDisposable
     {

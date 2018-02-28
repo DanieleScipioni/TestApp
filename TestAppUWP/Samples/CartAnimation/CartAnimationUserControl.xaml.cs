@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestAppUWP.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using TestAppUWP.Core;
+using TestAppUWP.UserControls.CartAnimation;
 
-namespace TestAppUWP.UserControls.CartAnimation
+namespace TestAppUWP.Samples.CartAnimation
 {
     public sealed partial class CartAnimationUserControl
     {

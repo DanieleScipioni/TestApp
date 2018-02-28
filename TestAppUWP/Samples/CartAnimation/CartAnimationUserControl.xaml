@@ -1,5 +1,5 @@
-﻿<UserControl
-    x:Class="TestAppUWP.UserControls.CartAnimation.CartAnimationUserControl"
+﻿<Page
+    x:Class="TestAppUWP.Samples.CartAnimation.CartAnimationUserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -44,4 +44,4 @@
             </GridView.ItemTemplate>
         </controls:AdaptiveGridView>
     </Grid>
-</UserControl>
+</Page>
