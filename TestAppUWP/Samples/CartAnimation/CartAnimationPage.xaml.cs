@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestAppUWP.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using TestAppUWP.Core;
-using TestAppUWP.UserControls.CartAnimation;
 
 namespace TestAppUWP.Samples.CartAnimation
 {
-    public sealed partial class CartAnimationUserControl
+    public sealed partial class CartAnimationPage
     {
         private readonly CartAnimationViewModel _cartAnimationViewModel;
 
         private Viewbox _viewbox;
         private AddToCartAnimation _addToCartAnimation;
 
-        public CartAnimationUserControl()
+        public CartAnimationPage()
         {
             DataContext = _cartAnimationViewModel = new CartAnimationViewModel();
             InitializeComponent();
