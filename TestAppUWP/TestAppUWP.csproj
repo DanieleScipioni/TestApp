@@ -134,7 +134,7 @@
     <Compile Include="Samples\Map\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CartAnimation\AddToCartAnimation.cs" />
+    <Compile Include="Samples\CartAnimation\AddToCartAnimation.cs" />
     <Compile Include="Core\BindableBase.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\IBufferExtension.cs" />
@@ -144,7 +144,7 @@
     <Compile Include="Pages\Frame\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CartAnimation\CartAnimationUserControl.xaml.cs">
+    <Compile Include="Samples\CartAnimation\CartAnimationUserControl.xaml.cs">
       <DependentUpon>CartAnimationUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\InterControlAnimation\InterControlAnimation.xaml.cs">
@@ -340,7 +340,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\CartAnimation\CartAnimationUserControl.xaml">
+    <Page Include="Samples\CartAnimation\CartAnimationUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
