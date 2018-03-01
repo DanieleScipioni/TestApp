@@ -144,8 +144,8 @@
     <Compile Include="Pages\Frame\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\CartAnimation\CartAnimationUserControl.xaml.cs">
-      <DependentUpon>CartAnimationUserControl.xaml</DependentUpon>
+    <Compile Include="Samples\CartAnimation\CartAnimationPage.xaml.cs">
+      <DependentUpon>CartAnimationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\InterControlAnimation\InterControlAnimation.xaml.cs">
       <DependentUpon>InterControlAnimation.xaml</DependentUpon>
@@ -340,7 +340,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Samples\CartAnimation\CartAnimationUserControl.xaml">
+    <Page Include="Samples\CartAnimation\CartAnimationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
