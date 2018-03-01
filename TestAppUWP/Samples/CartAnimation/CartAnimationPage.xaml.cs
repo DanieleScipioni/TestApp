@@ -11,7 +11,7 @@ namespace TestAppUWP.Samples.CartAnimation
     {
         private readonly CartAnimationViewModel _cartAnimationViewModel;
 
-        private Viewbox _viewbox;
+        private FrameworkElement _animationTarget;
         private AddToCartAnimation _addToCartAnimation;
 
         public CartAnimationPage()
@@ -21,7 +21,7 @@ namespace TestAppUWP.Samples.CartAnimation
             Loaded += (sender, args) =>
             {
                 _addToCartAnimation = new AddToCartAnimation(this);
-                _viewbox = null; //VisualTreeHelper.CartPlaceholder.FindDescendant<Viewbox>();
+                _animationTarget = CartPlaceholder;
             };
             Unloaded += (sender, args) =>
             {
@@ -32,13 +32,12 @@ namespace TestAppUWP.Samples.CartAnimation
 
         public async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var frameworkElement = sender as FrameworkElement;
-            if (frameworkElement == null) return;
+            if (!(sender is FrameworkElement frameworkElement)) return;
 
             DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
             var image = (ContentPresenter)VisualTreeHelper.GetChild(dependencyObject, 0);
 
-            await _addToCartAnimation.StartAnimation2(image, _viewbox);
+            await _addToCartAnimation.StartAnimation2(image, _animationTarget);
             var stringItem = (StringItem) frameworkElement.DataContext;
             stringItem.Add.Execute(null);
         }
