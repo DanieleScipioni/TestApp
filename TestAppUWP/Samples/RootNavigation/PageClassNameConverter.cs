@@ -1,7 +1,8 @@
 ﻿using System;
+using TestAppUWP.Samples.BlankPage;
+using TestAppUWP.Samples.CartAnimation;
 using TestAppUWP.Samples.Map;
 using Windows.UI.Xaml.Data;
-using TestAppUWP.Samples.BlankPage;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -19,6 +20,7 @@ namespace TestAppUWP.Samples.RootNavigation
 
         private static string ConvertSymbol(Type type)
         {
+            if (type == typeof(CartAnimationPage)) return "\xE790";
             if (type == typeof(ColorAnimation.ColorAnimation)) return "\xE790";
             if (type == typeof(CertTutorial.CertTutorial)) return "\xEB95";
             if (type == typeof(InterControlAnimation.InterControlAnimation)) return "\xED5F";

@@ -1,8 +1,8 @@
 ﻿using System;
+using TestAppUWP.Samples.CertTutorial;
 using TestAppUWP.Samples.RootNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
-using TestAppUWP.Samples.CertTutorial;
 
 namespace TestAppUWP
 {

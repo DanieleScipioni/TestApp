@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using TestAppUWP.Core;
+using TestAppUWP.Samples.BlankPage;
+using TestAppUWP.Samples.CartAnimation;
 using TestAppUWP.Samples.Map;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using TestAppUWP.Samples.BlankPage;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -40,6 +41,7 @@ namespace TestAppUWP.Samples.RootNavigation
 
             Pages = new List<Type>
             {
+                typeof(CartAnimationPage),
                 typeof(ColorAnimation.ColorAnimation),
                 typeof(CertTutorial.CertTutorial),
                 typeof(InterControlAnimation.InterControlAnimation),
