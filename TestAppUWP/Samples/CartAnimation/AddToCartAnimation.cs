@@ -98,6 +98,8 @@ namespace TestAppUWP.Samples.CartAnimation
             }
         }
 
+        // This animation has constant duration, speedy changes depending on the distance
+        // between sourceElement and targetElement.
         public async Task StartAnimation2(FrameworkElement sourceElement, FrameworkElement targetElement)
         {
             Point point = sourceElement.TransformToVisual(_rootElement).TransformPoint(new Point(0, 0));
@@ -120,7 +122,6 @@ namespace TestAppUWP.Samples.CartAnimation
             var newHeight = (float)(sourceElement.ActualHeight * 1.3);
             var newX = (float)(point.X - (newWidth - sourceElement.ActualWidth) / 2);
             var newY = (float)(point.Y - (newHeight - sourceElement.ActualHeight) / 2);
-
 
             double sizeDurationInMs = 250;
             double distance = Math.Sqrt(Math.Pow(targetOffset.X - newX, 2) + Math.Pow(targetOffset.Y - newY, 2));

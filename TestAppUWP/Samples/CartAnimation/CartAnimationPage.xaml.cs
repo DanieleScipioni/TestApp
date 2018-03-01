@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.UI;
 using TestAppUWP.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 namespace TestAppUWP.Samples.CartAnimation
@@ -13,11 +15,17 @@ namespace TestAppUWP.Samples.CartAnimation
 
         private FrameworkElement _animationTarget;
         private AddToCartAnimation _addToCartAnimation;
+        private string _selectedAnimation;
+        private readonly Brush _notHighligthedForeground;
 
         public CartAnimationPage()
         {
+            _selectedAnimation = "1";
             DataContext = _cartAnimationViewModel = new CartAnimationViewModel();
             InitializeComponent();
+            AppBarButton appBarButton = (AppBarButton) ((CommandBar)((Grid)Content).Children[0]).PrimaryCommands[0];
+            _notHighligthedForeground = appBarButton.Foreground;
+            appBarButton.Foreground = new SolidColorBrush(Colors.Red);
             Loaded += (sender, args) =>
             {
                 _addToCartAnimation = new AddToCartAnimation(this);
@@ -37,9 +45,27 @@ namespace TestAppUWP.Samples.CartAnimation
             DependencyObject dependencyObject = VisualTreeHelper.GetParent(frameworkElement);
             var image = (ContentPresenter)VisualTreeHelper.GetChild(dependencyObject, 0);
 
-            await _addToCartAnimation.StartAnimation2(image, _animationTarget);
+            switch (_selectedAnimation)
+            {
+                case "1":
+                    await _addToCartAnimation.StartAnimation(image, _animationTarget);
+                    break;
+                case "2":
+                    await _addToCartAnimation.StartAnimation2(image, _animationTarget);
+                    break;
+            }
             var stringItem = (StringItem) frameworkElement.DataContext;
             stringItem.Add.Execute(null);
+        }
+
+        private void AppBarButton_AnimationId_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!(sender is AppBarButton appBarButton)) return;
+            var appBar = (StackPanel) VisualTreeHelper.GetParent(appBarButton);
+            ((AppBarButton)appBar.Children[0]).Foreground = _notHighligthedForeground;
+            ((AppBarButton)appBar.Children[1]).Foreground = _notHighligthedForeground;
+            appBarButton.Foreground = new SolidColorBrush(Colors.Red);
+            _selectedAnimation = appBarButton.Tag as string;
         }
     }
 

@@ -20,6 +20,11 @@
         </Grid.RowDefinitions>
         <CommandBar DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Constant time" Tag="1"
+                              Tapped="AppBarButton_AnimationId_OnTapped" />
+                <AppBarButton Label="Constant speed" Tag="2"
+                              Tapped="AppBarButton_AnimationId_OnTapped"
+                              LabelPosition="Default" />
                 <AppBarButton x:Name="CartPlaceholder" Icon="Placeholder" Label="{x:Bind _cartAnimationViewModel.Count, Mode=OneWay}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -45,3 +50,6 @@
         </controls:AdaptiveGridView>
     </Grid>
 </Page>
+
+
+
