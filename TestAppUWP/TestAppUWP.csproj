@@ -96,6 +96,7 @@
     <Compile Include="Samples\BlankPage\PippoCollectionUserControl.xaml.cs">
       <DependentUpon>PippoCollectionUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\BatchCompletitionAwaiter.cs" />
     <Compile Include="Samples\Map\AsyncManualResetEvent.cs" />
     <Compile Include="Samples\Map\CanvasTester.xaml.cs">
       <DependentUpon>CanvasTester.xaml</DependentUpon>

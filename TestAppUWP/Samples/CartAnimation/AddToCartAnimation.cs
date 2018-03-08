@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Composition;
+using System;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
 using System.Threading.Tasks;
+using TestAppUWP.Core;
 using Windows.Foundation;
 using Windows.Graphics.DirectX;
 using Windows.Graphics.Display;
@@ -13,8 +15,6 @@ using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Composition;
 
 namespace TestAppUWP.Samples.CartAnimation
 {
@@ -38,10 +38,10 @@ namespace TestAppUWP.Samples.CartAnimation
 
         public void Dispose()
         {
-            _compositor.Dispose();
-            _containerVisual.Dispose();
-            _canvasDevice.Dispose();
             _graphicsDevice.Dispose();
+            _canvasDevice.Dispose();
+            _containerVisual.Dispose();
+            //_compositor.Dispose();
         }
 
         public async Task StartAnimation(FrameworkElement sourceElement, FrameworkElement targetElement)
@@ -78,24 +78,19 @@ namespace TestAppUWP.Samples.CartAnimation
             sizeAnimation.InsertKeyFrame(normalizedProgressKey1, targetSize, _compositor.CreateLinearEasingFunction());
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-            using (var manualResetEventSlim = new ManualResetEventSlim(false))
-            {
-                void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
-                {
-                    myScopedBatch.Completed -= BatchCompleted;
-                    myScopedBatch.Dispose();
-                    spriteVisual.Dispose();
-                    surface.Dispose();
-                    offsetAnimation.Dispose();
-                    sizeAnimation.Dispose();
-                    manualResetEventSlim.Set();
-                }
-                myScopedBatch.Completed += BatchCompleted;
-                spriteVisual.StartAnimation("Offset", offsetAnimation);
-                spriteVisual.StartAnimation("Size", sizeAnimation);
-                myScopedBatch.End();
-                await Task.Run(() => manualResetEventSlim.Wait());
-            }
+
+            var batchCompletitionHandler = new BatchCompletitionAwaiter(myScopedBatch);
+
+            spriteVisual.StartAnimation("Offset", offsetAnimation);
+            spriteVisual.StartAnimation("Size", sizeAnimation);
+            myScopedBatch.End();
+            await batchCompletitionHandler.Completed();
+
+            myScopedBatch.Dispose();
+            spriteVisual.Dispose();
+            surface.Dispose();
+            offsetAnimation.Dispose();
+            sizeAnimation.Dispose();
         }
 
         // This animation has constant duration, speedy changes depending on the distance
@@ -143,24 +138,18 @@ namespace TestAppUWP.Samples.CartAnimation
             sizeAnimation.InsertKeyFrame(normalizedProgressKey1, targetSize, _compositor.CreateLinearEasingFunction());
 
             CompositionScopedBatch myScopedBatch = _compositor.CreateScopedBatch(CompositionBatchTypes.Animation);
-            using (var manualResetEventSlim = new ManualResetEventSlim(false))
-            {
-                void BatchCompleted(object source, CompositionBatchCompletedEventArgs args)
-                {
-                    myScopedBatch.Completed -= BatchCompleted;
-                    myScopedBatch.Dispose();
-                    spriteVisual.Dispose();
-                    surface.Dispose();
-                    offsetAnimation.Dispose();
-                    sizeAnimation.Dispose();
-                    manualResetEventSlim.Set();
-                }
-                myScopedBatch.Completed += BatchCompleted;
-                spriteVisual.StartAnimation("Offset", offsetAnimation);
-                spriteVisual.StartAnimation("Size", sizeAnimation);
-                myScopedBatch.End();
-                await Task.Run(() => manualResetEventSlim.Wait());
-            }
+            var batchCompletitionAwaiter = new BatchCompletitionAwaiter(myScopedBatch);
+
+            spriteVisual.StartAnimation("Offset", offsetAnimation);
+            spriteVisual.StartAnimation("Size", sizeAnimation);
+            myScopedBatch.End();
+            await batchCompletitionAwaiter.Completed();
+
+            myScopedBatch.Dispose();
+            spriteVisual.Dispose();
+            surface.Dispose();
+            offsetAnimation.Dispose();
+            sizeAnimation.Dispose();
         }
 
         private async Task<CompositionDrawingSurface> GetCompositionDrawingSurface(FrameworkElement frameworkElement)
