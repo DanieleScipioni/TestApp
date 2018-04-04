@@ -5,11 +5,12 @@ using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
 using TestAppUWP.Samples.CartAnimation;
 using TestAppUWP.Samples.Map;
+using TestAppUWP.Samples.PathButton;
+using TestAppUWP.Samples.Rsa;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using TestAppUWP.Samples.Rsa;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -50,7 +51,8 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(InterControlAnimation.InterControlAnimation),
                 typeof(MapPage),
                 typeof(BigDynamicListPage),
-                typeof(RsaPage)
+                typeof(RsaPage),
+                typeof(PathButtonPage)
             };
 
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
