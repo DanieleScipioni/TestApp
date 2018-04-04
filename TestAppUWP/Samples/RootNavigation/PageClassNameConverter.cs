@@ -1,4 +1,5 @@
 ﻿using System;
+using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
 using TestAppUWP.Samples.CartAnimation;
 using TestAppUWP.Samples.Map;
@@ -20,6 +21,7 @@ namespace TestAppUWP.Samples.RootNavigation
 
         private static string ConvertSymbol(Type type)
         {
+            if (type == typeof(AnimationsOverviewPage)) return "\xE790";
             if (type == typeof(CartAnimationPage)) return "\xE790";
             if (type == typeof(ColorAnimation.ColorAnimation)) return "\xE790";
             if (type == typeof(CertTutorial.CertTutorial)) return "\xEB95";

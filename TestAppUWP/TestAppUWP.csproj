@@ -93,6 +93,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Animations\Animations.xaml.cs">
+      <DependentUpon>Animations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\BlankPage\PippoCollectionUserControl.xaml.cs">
       <DependentUpon>PippoCollectionUserControl.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,9 @@
     </Compile>
     <Compile Include="Samples\InterControlAnimation\InterControlAnimation.xaml.cs">
       <DependentUpon>InterControlAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Rsa\RsaPage.xaml.cs">
+      <DependentUpon>RsaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ListUserControl.xaml.cs">
       <DependentUpon>ListUserControl.xaml</DependentUpon>
@@ -269,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Samples\Animations\Animations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\BlankPage\BigDynamicListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -334,6 +344,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Map\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Rsa\RsaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
