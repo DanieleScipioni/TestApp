@@ -22,8 +22,6 @@ namespace TestAppUWP.Samples.RootNavigation
         private static string ConvertSymbol(Type type)
         {
             if (type == typeof(AnimationsOverviewPage)) return "\xE790";
-            if (type == typeof(CartAnimationPage)) return "\xE790";
-            if (type == typeof(ColorAnimation.ColorAnimation)) return "\xE790";
             if (type == typeof(CertTutorial.CertTutorial)) return "\xEB95";
             if (type == typeof(InterControlAnimation.InterControlAnimation)) return "\xED5F";
             if (type == typeof(MapPage)) return "\xE909";

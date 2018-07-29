@@ -45,8 +45,6 @@ namespace TestAppUWP.Samples.RootNavigation
             Pages = new List<Type>
             {
                 typeof(AnimationsOverviewPage),
-                typeof(CartAnimationPage),
-                typeof(ColorAnimation.ColorAnimation),
                 typeof(CertTutorial.CertTutorial),
                 typeof(InterControlAnimation.InterControlAnimation),
                 typeof(MapPage),
