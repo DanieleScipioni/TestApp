@@ -33,8 +33,7 @@
         <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0" Margin="0,50,0,0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
-                         MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped"
-                         MapServiceToken=""  />
+                         MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped" />
         <ListView Grid.Column="1" x:Name="ListView"
                   ItemsSource="{x:Bind _viewModel.Customers, Mode=OneWay}"
                   ItemTemplate="{StaticResource DataTemplate}" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True">
