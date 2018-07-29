@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Windows.UI;
 using TestAppUWP.Core;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media;
 
 namespace TestAppUWP.Samples.CartAnimation
 {
-    public sealed partial class CartAnimationPage
+    public partial class CartAnimationPage
     {
         private readonly CartAnimationViewModel _cartAnimationViewModel;
 

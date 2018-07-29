@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TestAppUWP.Core;
 using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
-using TestAppUWP.Samples.CartAnimation;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.PathButton;
 using TestAppUWP.Samples.Rsa;
