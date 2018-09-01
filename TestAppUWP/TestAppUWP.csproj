@@ -116,6 +116,7 @@
     <Compile Include="Samples\PathButton\PathButtonPage.xaml.cs">
       <DependentUpon>PathButtonPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\PathButton\StretchPathIcon.cs" />
     <Compile Include="Samples\RootNavigation\PageClassNameConverter.cs" />
     <Compile Include="Samples\RootNavigation\RootNavigationPage.xaml.cs">
       <DependentUpon>RootNavigationPage.xaml</DependentUpon>
