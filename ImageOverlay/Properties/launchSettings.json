@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ImageOverlay": {
+      "commandName": "Project",
+      "commandLineArgs": "a b"
+    },
+    "Help": {
+      "commandName": "Project",
+      "commandLineArgs": "-?"
+    }
+  }
+}
