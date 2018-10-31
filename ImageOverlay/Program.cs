@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 
@@ -39,16 +40,20 @@ namespace ImageOverlay
 
         private static void AddOverlay(string sourcePath, string overlayPath)
         {
-            string tmpSavePath = $"C:\\Repos\\bitbucket\\UWP\\AppW8RT\\Assets\\VisualAssets\\tmp.{Path.GetExtension(sourcePath)}";
-            using (Image image1 = Image.FromFile(sourcePath))
-            using (Image image2 = Image.FromFile(overlayPath))
-            using (Graphics g = Graphics.FromImage(image1))
-            {
-                float x = (image1.Width / image1.HorizontalResolution - image2.Width / image2.HorizontalResolution) *
-                          image1.HorizontalResolution;
-                g.DrawImage(image2, x, 0);
+            string tmpSavePath = Path.Combine(Path.GetDirectoryName(sourcePath), $"tmp{ Path.GetExtension(sourcePath)}");
 
-                image1.Save(tmpSavePath, GetEncoder(image1.RawFormat), GetEncoderParameters());
+            using (Image targetImage = Image.FromFile(sourcePath))
+            using (Image overlayImage = Image.FromFile(overlayPath))
+            using (Graphics g = Graphics.FromImage(targetImage))
+            {
+                double resizePercent = (double) targetImage.Height / overlayImage.Height;
+
+                Bitmap resizeImage = ResizeImage(overlayImage, (int) (overlayImage.Width * resizePercent), (int) (overlayImage.Height * resizePercent));
+                float x = (targetImage.Width / targetImage.HorizontalResolution - resizeImage.Width / resizeImage.HorizontalResolution) *
+                          targetImage.HorizontalResolution;
+                g.DrawImage(resizeImage, x, 0);
+
+                targetImage.Save(tmpSavePath, GetEncoder(targetImage.RawFormat), GetEncoderParameters());
             }
             File.Delete(sourcePath);
             File.Move(tmpSavePath, sourcePath);
@@ -70,6 +75,31 @@ namespace ImageOverlay
                 }
             }
             return null;
+        }
+
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (Graphics graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
     }
 }
