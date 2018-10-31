@@ -13,7 +13,11 @@ namespace ImageOverlay
 
         public static void Main(string[] args)
         {
-            if (args.Length < 2) Console.WriteLine(Usage);
+            if (args.Length < 2)
+            {
+                Console.WriteLine(Usage);
+                return;
+            }
 
             args[0] = "C:\\Repos\\bitbucket\\UWP\\AppW8RT\\Assets\\VisualAssets\\App.Tile.*";
             args[1] = "C:\\Repos\\bitbucket\\UWP\\AppW8RT\\Assets\\VisualAssets\\beta.png";
