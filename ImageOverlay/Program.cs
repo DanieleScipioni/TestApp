@@ -19,8 +19,6 @@ namespace ImageOverlay
                 return;
             }
 
-            args[0] = "C:\\Repos\\bitbucket\\UWP\\AppW8RT\\Assets\\VisualAssets\\App.Tile.*";
-            args[1] = "C:\\Repos\\bitbucket\\UWP\\AppW8RT\\Assets\\VisualAssets\\beta.png";
             if (File.Exists(args[0]))
             {
                 AddOverlay(args[0], args[1]);
