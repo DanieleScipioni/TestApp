@@ -2,7 +2,7 @@
   "profiles": {
     "ImageOverlay": {
       "commandName": "Project",
-      "commandLineArgs": "a b"
+      "commandLineArgs": "c:\\Repos\\bitbucket\\UWP_1\\AppW8RT\\Assets\\VisualAssets\\App.Tile* c:\\Repos\\bitbucket\\UWP_1\\AppW8RT\\Assets\\VisualAssets\\beta.png"
     },
     "Help": {
       "commandName": "Project",
