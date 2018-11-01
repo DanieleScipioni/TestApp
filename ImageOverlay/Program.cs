@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace ImageOverlay
 {
@@ -63,20 +64,15 @@ namespace ImageOverlay
 
         private static EncoderParameters GetEncoderParameters()
         {
-            return new EncoderParameters(1) {Param = {[0] = new EncoderParameter(Encoder.Quality, 100L)}};
+            return new EncoderParameters(1)
+            {
+                Param = {[0] = new EncoderParameter(Encoder.Quality, 99L)}
+            };
         }
 
         private static ImageCodecInfo GetEncoder(ImageFormat format)
         {
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                {
-                    return codec;
-                }
-            }
-            return null;
+            return ImageCodecInfo.GetImageDecoders().FirstOrDefault(codec => codec.FormatID == format.Guid);
         }
 
         public static Bitmap ResizeImage(Image image, int width, int height)
