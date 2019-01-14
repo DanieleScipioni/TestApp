@@ -12,3 +12,4 @@
 /*/AppPackages
 *.props
 /*/BundleArtifacts
+/_ReSharper.Caches
