@@ -58,22 +58,15 @@ namespace TestAppUWP.Samples.Map
         {
             if (_viewModel.Customers == null) return;
 
-            int i = 0;
-            foreach (Customer customer in _viewModel.Customers)
+            foreach (var customer in _viewModel.Customers)
             {
                 var mapIcon = new MapIcon
                 {
-                    //Image = i % 2 == 0
-                    //    ? await RenderVectorFlag.GetRandomAccessStreamReference(customer.Backround, customer.Foreground,
-                    //        customer.Number.ToString(), customer.Multi, customer.AppointmentFlag, customer.IsPhoneCall, customer.VisitsCreateRecurringAppointments)
-                    //    : await RenderImageFlag.GetRandomAccessStreamReference(customer.Backround, customer.Foreground,
-                    //        customer.Number.ToString(), customer.Multi, customer.AppointmentFlag, customer.IsPhoneCall, customer.VisitsCreateRecurringAppointments),
                     Image = await RenderImageFlag.GetRandomAccessStreamReference(customer.Backround, customer.Foreground,
                         customer.Number.ToString(), customer.Multi, customer.AppointmentFlag, customer.IsPhoneCall, customer.VisitsCreateRecurringAppointments),
                     Location = new Geopoint(new BasicGeoposition { Latitude = customer.Latitude, Longitude = customer.Longitude }),
                     NormalizedAnchorPoint = new Point(0.1, 0.8)
                 };
-                i++;
                 RoutePlanMapControl.MapElements.Add(mapIcon);
             }
 

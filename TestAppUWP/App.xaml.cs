@@ -23,8 +23,7 @@ namespace TestAppUWP
             }
 #endif
 
-            UIElement rootContent = Window.Current.Content;
-
+            var rootContent = Window.Current.Content;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -35,10 +34,10 @@ namespace TestAppUWP
                 Window.Current.Content = rootContent;
             }
 
-            Type type = typeof(SamePage);
+            var type = typeof(SamePage);
             if (e.TileId.StartsWith(type.Name))
             {
-                Type landingPageType = typeof(CertTutorial);
+                var landingPageType = typeof(CertTutorial);
                 string landingParams = e.Arguments;
                 _rootNavigationViewModel.SetLandingPage(landingPageType, landingParams);
             }
