@@ -18,7 +18,7 @@ namespace TestAppUWP.Samples.RootNavigation
         private const string NavigationState = "RootNavigationState";
         private const string LastPageType = "LastPage";
 
-        public Windows.UI.Xaml.Controls.Frame RootFrame { get; }
+        public Frame RootFrame { get; }
 
         public List<Type> Pages { get; }
 
@@ -59,7 +59,9 @@ namespace TestAppUWP.Samples.RootNavigation
             {
                 Type pageType = args.SourcePageType;
                 localSettings.Values[LastPageType] = pageType.ToString();
-                SelectedPageIndex = Pages.IndexOf(pageType);
+                _selectedPageIndex = Pages.IndexOf(pageType);
+                OnPropertyChangedByName(nameof(SelectedPageIndex));
+
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = RootFrame.CanGoBack
                     ? AppViewBackButtonVisibility.Visible
                     : AppViewBackButtonVisibility.Collapsed;
