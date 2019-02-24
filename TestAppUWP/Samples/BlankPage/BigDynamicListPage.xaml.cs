@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
+using TestAppUWP.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using TestAppUWP.Core;
 
 namespace TestAppUWP.Samples.BlankPage
 {
