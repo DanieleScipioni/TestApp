@@ -10,6 +10,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -54,7 +56,13 @@ namespace TestAppUWP.Samples.RootNavigation
 
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-            RootFrame = new Windows.UI.Xaml.Controls.Frame();
+            RootFrame = new Frame
+            {
+                ContentTransitions = new TransitionCollection
+                {
+                    new NavigationThemeTransition {DefaultNavigationTransitionInfo = new DrillInNavigationTransitionInfo()}
+                }
+            };
             RootFrame.Navigated += (sender, args) =>
             {
                 Type pageType = args.SourcePageType;
