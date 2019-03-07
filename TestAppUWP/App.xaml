@@ -1,9 +1,9 @@
-﻿<Application
-    x:Class="TestAppUWP.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:TestAppUWP"
-    RequestedTheme="Light">
+﻿<Application x:Class="TestAppUWP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:TestAppUWP"
+             xmlns:converters="using:TestAppUWP.Converters"
+             RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -36,6 +36,7 @@
                 <ResourceDictionary Source="StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:ViewModelLocator x:Key="ViewModelLocator"/>
+            <converters:TrueToCollapsedConverter x:Key="TrueToCollapsedConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

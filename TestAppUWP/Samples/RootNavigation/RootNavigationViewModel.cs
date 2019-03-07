@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TestAppUWP.Core;
 using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
+using TestAppUWP.Samples.Calendar;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.PathButton;
 using TestAppUWP.Samples.Rsa;
@@ -51,7 +52,8 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(MapPage),
                 typeof(BigDynamicListPage),
                 typeof(RsaPage),
-                typeof(PathButtonPage)
+                typeof(PathButtonPage),
+                typeof(CalendarExplorer)
             };
 
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;

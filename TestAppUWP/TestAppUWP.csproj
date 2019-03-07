@@ -100,6 +100,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
@@ -108,6 +109,12 @@
       <DependentUpon>PippoCollectionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\BatchCompletitionAwaiter.cs" />
+    <Compile Include="Samples\Calendar\CalendarExplorer.xaml.cs">
+      <DependentUpon>CalendarExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Calendar\CalendarUc.xaml.cs">
+      <DependentUpon>CalendarUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Map\AsyncManualResetEvent.cs" />
     <Compile Include="Samples\Map\CanvasTester.xaml.cs">
       <DependentUpon>CanvasTester.xaml</DependentUpon>
@@ -314,6 +321,14 @@
     <Page Include="Samples\BlankPage\PippoCollectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Calendar\CalendarExplorer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Calendar\CalendarUc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Map\CanvasTester.xaml">
       <SubType>Designer</SubType>
