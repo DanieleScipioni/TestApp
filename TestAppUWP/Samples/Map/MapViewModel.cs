@@ -69,10 +69,10 @@ namespace TestAppUWP.Samples.Map
 
             var customers = new List<Customer>(200);
 
-            Array values = Enum.GetValues(typeof(AppointmentEnums.AppointmentFlag));
+            var values = Enum.GetValues(typeof(AppointmentEnums.AppointmentFlag));
             
             var random = new Random(DateTime.UtcNow.Millisecond);
-            for (var idx = 0; idx < 200; idx++)
+            for (var idx = 0; idx < 10; idx++)
             {
                 customers.Add(new Customer
                 {
@@ -83,8 +83,9 @@ namespace TestAppUWP.Samples.Map
                     IsPhoneCall = random.Next(2) == 1,
                     VisitsCreateRecurringAppointments = random.Next(2),
                     AppointmentFlag = (AppointmentEnums.AppointmentFlag)values.GetValue(random.Next(values.Length)),
-                    Latitude = 41.65 + random.NextDouble() / 2,
-                    Longitude = 12.05 + random.NextDouble()
+                    Latitude = 41.891345957404056 + (random.NextDouble() - 0.5) / 10,
+                    Longitude = 12.493643416971947 + (random.NextDouble() - 0.5) / 10
+
                 });
             }
             
