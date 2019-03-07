@@ -25,6 +25,8 @@ namespace TestAppUWP
                     return new ColorAnimationViewModel();
                 case MapPage _:
                     return new MapViewModel();
+                case GeoLocationPage _:
+                    return new GeoLocationPageViewModel();
             }
 
             return null;

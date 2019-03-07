@@ -31,7 +31,7 @@
             <map:RenderPlygonFlag x:Name="RenderVectorFlag" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </StackPanel>
         <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0" Margin="0,50,0,0"
-                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MapServiceToken="{x:Bind _viewModel.MapServiceToken}"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
                          MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped" />
         <ListView Grid.Column="1" x:Name="ListView"

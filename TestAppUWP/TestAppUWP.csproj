@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Map\GeoLocationPageViewModel.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
     </Compile>
@@ -123,6 +124,7 @@
     <Compile Include="Samples\Map\GeoLocationPage.xaml.cs">
       <DependentUpon>GeoLocationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Map\MapServiceSettings.cs" />
     <Compile Include="Samples\Map\RenderImageFlag.cs" />
     <Compile Include="Samples\PathButton\PathButtonPage.xaml.cs">
       <DependentUpon>PathButtonPage.xaml</DependentUpon>

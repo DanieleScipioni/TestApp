@@ -33,6 +33,14 @@ namespace TestAppUWP.Samples.Map
                 _viewModel = (MapViewModel) args.NewValue;
                 if (_viewModel != null)
                 {
+                    try
+                    {
+                        RoutePlanMapControl.MapServiceToken = _viewModel.MapServiceToken;
+                    }
+                    catch
+                    {
+                        // ignore
+                    }
                     await AddMapIcons();
                     _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
                 }
