@@ -17,9 +17,12 @@ namespace TestAppUWP.Samples.Map
             set => SetProperty(ref _customers, value);
         }
 
+        public string MapServiceToken { get; set; }
+
         public MapViewModel()
         {
             Init();
+            MapServiceToken = MapServiceSettings.Token;
         }
 
         private async void Init()
