@@ -74,7 +74,7 @@ namespace TestAppUWP.Samples.Map
                 from MapElement m in RoutePlanMapControl.MapElements
                 where m is MapIcon
                 select ((MapIcon) m).Location.Position);
-            await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, null, MapAnimationKind.Linear);
+            await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, new Thickness(8), MapAnimationKind.Linear);
         }
 
         private void RoutePlanMapControl_OnMapTapped(MapControl sender, MapInputEventArgs args)
