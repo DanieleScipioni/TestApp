@@ -1,10 +1,10 @@
 ﻿using System;
+using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
-using TestAppUWP.Samples.CartAnimation;
+using TestAppUWP.Samples.Calendar;
 using TestAppUWP.Samples.Map;
 using Windows.UI.Xaml.Data;
-using TestAppUWP.Samples.Calendar;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -28,6 +28,7 @@ namespace TestAppUWP.Samples.RootNavigation
             if (type == typeof(MapPage)) return "\xE909";
             if (type == typeof(BigDynamicListPage)) return "\xE7BC";
             if (type == typeof(CalendarExplorer)) return "\xE787";
+            if (type == typeof(AccountPage)) return "\xE910";
             return "\xF142";
         }
 

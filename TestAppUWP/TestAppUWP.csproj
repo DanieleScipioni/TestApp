@@ -102,6 +102,9 @@
     </Compile>
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
+    <Compile Include="Samples\Accounts\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
     </Compile>
@@ -293,6 +296,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\Accounts\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Animations\Animations.xaml">
       <SubType>Designer</SubType>
