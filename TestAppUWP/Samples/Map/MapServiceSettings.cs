@@ -2,6 +2,6 @@
 {
     public class MapServiceSettings
     {
-        public static string Token="Pippo";
+        public static string Token = string.Empty;
     }
 }
