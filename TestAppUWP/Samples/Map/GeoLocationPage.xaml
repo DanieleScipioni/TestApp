@@ -6,7 +6,10 @@
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
-    <Grid>
-
-    </Grid>
+    <StackPanel Padding="16">
+        <TextBox Text="{x:Bind _pageViewModel.Address, Mode=OneWay}" TextChanging="TextBox_OnTextChanging"/>
+        <Button Content="GeoLocate" Command="{x:Bind _pageViewModel}" Margin="0,8"/>
+        <TextBlock Text="{x:Bind _pageViewModel.Location, Mode=OneWay}"/>
+        <TextBlock><Run Text="Timer: "/><Run Text="{x:Bind _pageViewModel.Timer, Mode=OneWay}"/></TextBlock>
+    </StackPanel>
 </Page>
