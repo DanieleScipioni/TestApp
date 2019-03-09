@@ -47,7 +47,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="World" Click="Cliccche2"/>
+                <AppBarButton Icon="World" Click="ReloadCustomers"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

@@ -55,7 +55,7 @@ namespace TestAppUWP.Samples.Map
             await AddMapIcons();
         }
 
-        private async void Cliccche2(object sender, RoutedEventArgs e)
+        private async void ReloadCustomers(object sender, RoutedEventArgs e)
         {
             _customerUserControl.Visibility = Visibility.Collapsed;
             RoutePlanMapControl.MapElements.Clear();
