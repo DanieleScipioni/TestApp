@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TestAppUWP.Core;
+using Windows.Devices.Geolocation;
 using Windows.UI;
 
 namespace TestAppUWP.Samples.Map
 {
-    public class MapViewModel : BindableBase
+    public class MapViewModel : BindableBase, ICommand
     {
         private ObservableCollection<Customer> _customers;
 
@@ -17,7 +20,7 @@ namespace TestAppUWP.Samples.Map
             set => SetProperty(ref _customers, value);
         }
 
-        public string MapServiceToken { get; set; }
+        public string MapServiceToken { get; }
 
         public MapViewModel()
         {
@@ -94,5 +97,32 @@ namespace TestAppUWP.Samples.Map
             
             Customers = new ObservableCollection<Customer>(customers);
         }
+
+        #region ICommand
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public async void Execute(object parameter)
+        {
+            var geopositions = new BasicGeoposition[_customers.Count];
+            for (var index = 0; index < _customers.Count; index++)
+            {
+                var customer = _customers[index];
+                var geoposition = new BasicGeoposition {Latitude = customer.Latitude, Longitude = customer.Longitude};
+                geopositions[index] = geoposition;
+            }
+
+            if (_customers.Count <= 1) return;
+
+            var route = await new BingMapsRestClient(MapServiceToken).DistanceMatrix(geopositions[0],
+                geopositions.Skip(1));
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        #endregion
     }
 }

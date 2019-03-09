@@ -47,6 +47,11 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Refresh" Click="ReloadCustomers" Label="Reload customers"/>
+                <AppBarButton Command="{x:Bind _viewModel}" Label="Direction">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE816;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
