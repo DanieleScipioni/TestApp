@@ -1,5 +1,6 @@
 ﻿using System;
 using TestAppUWP.Pages.Frame;
+using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.ColorAnimation;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.ViewModels.Frame;
@@ -25,6 +26,8 @@ namespace TestAppUWP
                     return new ColorAnimationViewModel();
                 case MapPage _:
                     return new MapViewModel();
+                case AccountPage _:
+                    return  new AccountPageViewModel();
             }
 
             return null;

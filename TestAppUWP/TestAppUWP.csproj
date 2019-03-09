@@ -100,11 +100,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ListToCommaSeparatedStringConverter.cs" />
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Samples\Accounts\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Accounts\AccountPageViewModel.cs" />
+    <Compile Include="Samples\Accounts\UserDataAccountAdapter.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
     </Compile>

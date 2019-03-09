@@ -37,6 +37,7 @@
             </ResourceDictionary.MergedDictionaries>
             <local:ViewModelLocator x:Key="ViewModelLocator"/>
             <converters:TrueToCollapsedConverter x:Key="TrueToCollapsedConverter"/>
+            <converters:ListToCommaSeparatedStringConverter x:Key="ListToCommaSeparatedStringConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
