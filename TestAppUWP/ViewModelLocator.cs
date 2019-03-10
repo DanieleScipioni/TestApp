@@ -1,7 +1,7 @@
 ﻿using System;
 using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.Accounts;
-using TestAppUWP.Samples.ColorAnimation;
+using TestAppUWP.Samples.Animations.ColorAnimation;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.ViewModels.Frame;
 using Windows.UI.Xaml.Data;

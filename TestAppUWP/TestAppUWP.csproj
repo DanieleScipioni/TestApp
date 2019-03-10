@@ -154,9 +154,9 @@
     <Compile Include="Samples\CertTutorial\SamePage.xaml.cs">
       <DependentUpon>SamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\ColorAnimation\ColorAnimationHelper.cs" />
-    <Compile Include="Samples\ColorAnimation\ColorAnimationViewModel.cs" />
-    <Compile Include="Samples\ColorAnimation\ColorAnimation.xaml.cs">
+    <Compile Include="Samples\Animations\ColorAnimation\ColorAnimationHelper.cs" />
+    <Compile Include="Samples\Animations\ColorAnimation\ColorAnimationViewModel.cs" />
+    <Compile Include="Samples\Animations\ColorAnimation\ColorAnimation.xaml.cs">
       <DependentUpon>ColorAnimation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\InterControlAnimation\Control1.xaml.cs">
@@ -378,7 +378,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\ColorAnimation\ColorAnimation.xaml">
+    <Page Include="Samples\Animations\ColorAnimation\ColorAnimation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

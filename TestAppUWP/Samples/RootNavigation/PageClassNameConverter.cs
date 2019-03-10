@@ -14,8 +14,7 @@ namespace TestAppUWP.Samples.RootNavigation
         {
             if (value is Type type)
             {
-                if (parameter as string == "symbol") return ConvertSymbol(type);
-                return type.Name;
+                return parameter as string == "symbol" ? ConvertSymbol(type) : type.Name;
             }
             return null;
         }

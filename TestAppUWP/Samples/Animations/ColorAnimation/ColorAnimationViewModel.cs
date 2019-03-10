@@ -1,7 +1,7 @@
 ﻿using System;
 using TestAppUWP.Core;
 
-namespace TestAppUWP.Samples.ColorAnimation
+namespace TestAppUWP.Samples.Animations.ColorAnimation
 {
     public class ColorAnimationViewModel : BindableBase
     {
