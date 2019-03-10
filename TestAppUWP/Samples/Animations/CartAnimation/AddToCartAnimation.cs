@@ -16,7 +16,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestAppUWP.Samples.CartAnimation
+namespace TestAppUWP.Samples.Animations.CartAnimation
 {
     public class AddToCartAnimation : IDisposable
     {

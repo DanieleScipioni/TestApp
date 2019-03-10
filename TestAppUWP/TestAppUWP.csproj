@@ -169,7 +169,7 @@
     <Compile Include="Samples\Map\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\CartAnimation\AddToCartAnimation.cs" />
+    <Compile Include="Samples\Animations\CartAnimation\AddToCartAnimation.cs" />
     <Compile Include="Core\BindableBase.cs" />
     <Compile Include="Core\DelegateCommand.cs" />
     <Compile Include="Core\IBufferExtension.cs" />
@@ -179,7 +179,7 @@
     <Compile Include="Pages\Frame\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\CartAnimation\CartAnimationPage.xaml.cs">
+    <Compile Include="Samples\Animations\CartAnimation\CartAnimationPage.xaml.cs">
       <DependentUpon>CartAnimationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\InterControlAnimation\InterControlAnimation.xaml.cs">
@@ -406,7 +406,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Samples\CartAnimation\CartAnimationPage.xaml">
+    <Page Include="Samples\Animations\CartAnimation\CartAnimationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

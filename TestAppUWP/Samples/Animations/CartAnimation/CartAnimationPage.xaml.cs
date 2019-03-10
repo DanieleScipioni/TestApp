@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
-namespace TestAppUWP.Samples.CartAnimation
+namespace TestAppUWP.Samples.Animations.CartAnimation
 {
     public partial class CartAnimationPage
     {
@@ -38,7 +38,7 @@ namespace TestAppUWP.Samples.CartAnimation
             };
         }
 
-        public async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             if (!(sender is FrameworkElement frameworkElement)) return;
 
@@ -87,7 +87,7 @@ namespace TestAppUWP.Samples.CartAnimation
 
         private void AddExecute(object parameter)
         {
-            _cartAnimationViewModel.Add(this);
+            _cartAnimationViewModel.Add();
         }
 
     }
@@ -100,7 +100,7 @@ namespace TestAppUWP.Samples.CartAnimation
         public string Count
         {
             get => _count;
-            set => SetProperty(ref _count, value);
+            private set => SetProperty(ref _count, value);
         }
 
         public CartAnimationViewModel()
@@ -116,7 +116,7 @@ namespace TestAppUWP.Samples.CartAnimation
             }
         }
 
-        public void Add(StringItem stringItem)
+        public void Add()
         {
             if (int.TryParse(Count, out int count))
             {
