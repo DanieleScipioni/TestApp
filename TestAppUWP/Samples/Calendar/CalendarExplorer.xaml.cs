@@ -215,33 +215,29 @@ namespace TestAppUWP.Samples.Calendar
 
         private async Task AddAppointment()
         {
+            var now = DateTimeOffset.Now;
+
             var appointment = new Appointment
             {
-                Subject = "SaveAppointmentAsync",
-                StartTime = DateTimeOffset.Now.AddHours(-5),
+                Subject = "Appointment",
+                StartTime = now.AddHours(-5),
                 Duration = TimeSpan.FromMinutes(30),
             };
 
             await _appointmentCalendar.SaveAppointmentAsync(appointment);
-            if (appointment.LocalId != string.Empty)
-            {
-                _appointments.Add(appointment);
-            }
+            if (appointment.LocalId != string.Empty) _appointments.Add(appointment);
 
+            var appointmentRecurrence = new AppointmentRecurrence {Unit = AppointmentRecurrenceUnit.Weekly, Interval = 1, DaysOfWeek = (AppointmentDaysOfWeek) (now.DayOfWeek + 1)};
             appointment = new Appointment
             {
-                Subject = "TryCreateOrUpdateAppointmentAsync",
-                StartTime = DateTimeOffset.Now.AddDays(1).AddHours(-5),
+                Subject = "Appointment with recurrence",
+                StartTime = now.AddHours(1),
                 Duration = TimeSpan.FromMinutes(30),
-                Recurrence = new AppointmentRecurrence
-                {
-                    Day = 1, DaysOfWeek = AppointmentDaysOfWeek.Thursday, Unit = AppointmentRecurrenceUnit.Weekly,
-                    Interval = 1, Month = 1, WeekOfMonth = AppointmentWeekOfMonth.First, Occurrences = 25, TimeZone = "Arctic/Longyearbyen"
-                }
+                Recurrence = appointmentRecurrence
             };
             
-            bool b = await _appointmentCalendar.TryCreateOrUpdateAppointmentAsync(appointment, false);
-            if (b) _appointments.Add(appointment);
+            await _appointmentCalendar.SaveAppointmentAsync(appointment);
+            if (appointment.LocalId != string.Empty) _appointments.Add(appointment);
         }
 
         private async void DeleteAppointmentButton_OnClick(object sender, RoutedEventArgs e)
