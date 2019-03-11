@@ -220,7 +220,7 @@ namespace TestAppUWP.Samples.Calendar
             var appointment = new Appointment
             {
                 Subject = "Appointment",
-                StartTime = now.AddHours(-5),
+                StartTime = now,
                 Duration = TimeSpan.FromMinutes(30),
             };
 
