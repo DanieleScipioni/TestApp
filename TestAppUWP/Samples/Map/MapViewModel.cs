@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TestAppUWP.Core;
+using Windows.Devices.Geolocation;
 using Windows.UI;
 
 namespace TestAppUWP.Samples.Map
 {
-    public class MapViewModel : BindableBase
+    public class MapViewModel : BindableBase, ICommand
     {
         private ObservableCollection<Customer> _customers;
 
@@ -17,9 +20,12 @@ namespace TestAppUWP.Samples.Map
             set => SetProperty(ref _customers, value);
         }
 
+        public string MapServiceToken { get; }
+
         public MapViewModel()
         {
             Init();
+            MapServiceToken = MapServiceSettings.Token;
         }
 
         private async void Init()
@@ -69,10 +75,10 @@ namespace TestAppUWP.Samples.Map
 
             var customers = new List<Customer>(200);
 
-            Array values = Enum.GetValues(typeof(AppointmentEnums.AppointmentFlag));
+            var values = Enum.GetValues(typeof(AppointmentEnums.AppointmentFlag));
             
             var random = new Random(DateTime.UtcNow.Millisecond);
-            for (var idx = 0; idx < 200; idx++)
+            for (var idx = 0; idx < 10; idx++)
             {
                 customers.Add(new Customer
                 {
@@ -83,12 +89,40 @@ namespace TestAppUWP.Samples.Map
                     IsPhoneCall = random.Next(2) == 1,
                     VisitsCreateRecurringAppointments = random.Next(2),
                     AppointmentFlag = (AppointmentEnums.AppointmentFlag)values.GetValue(random.Next(values.Length)),
-                    Latitude = 41.65 + random.NextDouble() / 2,
-                    Longitude = 12.05 + random.NextDouble()
+                    Latitude = 41.891345957404056 + (random.NextDouble() - 0.5) / 10,
+                    Longitude = 12.493643416971947 + (random.NextDouble() - 0.5) / 10
+
                 });
             }
             
             Customers = new ObservableCollection<Customer>(customers);
         }
+
+        #region ICommand
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public async void Execute(object parameter)
+        {
+            var geopositions = new BasicGeoposition[_customers.Count];
+            for (var index = 0; index < _customers.Count; index++)
+            {
+                var customer = _customers[index];
+                var geoposition = new BasicGeoposition {Latitude = customer.Latitude, Longitude = customer.Longitude};
+                geopositions[index] = geoposition;
+            }
+
+            if (_customers.Count <= 1) return;
+
+            var route = await new BingMapsRestClient(MapServiceToken).DistanceMatrix(geopositions[0],
+                geopositions.Skip(1));
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        #endregion
     }
 }

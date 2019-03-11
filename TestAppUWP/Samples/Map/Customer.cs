@@ -40,5 +40,4 @@ namespace TestAppUWP.Samples.Map
             MultipleToday = 900
         }
     }
-
 }

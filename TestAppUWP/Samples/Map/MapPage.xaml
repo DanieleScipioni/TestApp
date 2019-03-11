@@ -12,16 +12,15 @@
         <DataTemplate x:Key="DataTemplate" x:DataType="map:Customer">
             <StackPanel Margin="4,0" Padding="0,8" BorderBrush="LightGray" BorderThickness="0,0,0,1">
                 <TextBlock><Run Text="{x:Bind Number}"/> Multi: <Run Text="{x:Bind Multi}" /></TextBlock>
-                <TextBlock>AppointmentFlag: <Run Text="{x:Bind AppointmentFlag}" />,
-                    IsPhoneCall: <Run Text="{x:Bind IsPhoneCall}"/>
-                    , vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}"/></TextBlock>
-                <TextBlock Text="{x:Bind Latitude}"/>
-                <TextBlock Text="{x:Bind Longitude}"/>
+                <TextBlock>AppointmentFlag: <Run Text="{x:Bind AppointmentFlag}" FontWeight="SemiBold"/><LineBreak/>
+IsPhoneCall: <Run Text="{x:Bind IsPhoneCall}" FontWeight="SemiBold"/>,
+vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBold"/></TextBlock>
+                <TextBlock><Run Text="{x:Bind Latitude}"/> / <Run Text="{x:Bind Longitude}"/></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="LightCyan">
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -47,7 +46,12 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="World" Click="Cliccche2"/>
+                <AppBarButton Icon="Refresh" Click="ReloadCustomers" Label="Reload customers"/>
+                <AppBarButton Command="{x:Bind _viewModel}" Label="Direction">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xE816;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

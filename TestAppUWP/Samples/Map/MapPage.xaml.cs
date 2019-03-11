@@ -33,6 +33,14 @@ namespace TestAppUWP.Samples.Map
                 _viewModel = (MapViewModel) args.NewValue;
                 if (_viewModel != null)
                 {
+                    try
+                    {
+                        RoutePlanMapControl.MapServiceToken = _viewModel.MapServiceToken;
+                    }
+                    catch
+                    {
+                        // ignore
+                    }
                     await AddMapIcons();
                     _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
                 }
@@ -47,7 +55,7 @@ namespace TestAppUWP.Samples.Map
             await AddMapIcons();
         }
 
-        private async void Cliccche2(object sender, RoutedEventArgs e)
+        private async void ReloadCustomers(object sender, RoutedEventArgs e)
         {
             _customerUserControl.Visibility = Visibility.Collapsed;
             RoutePlanMapControl.MapElements.Clear();
@@ -74,7 +82,7 @@ namespace TestAppUWP.Samples.Map
                 from MapElement m in RoutePlanMapControl.MapElements
                 where m is MapIcon
                 select ((MapIcon) m).Location.Position);
-            await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, null, MapAnimationKind.Linear);
+            await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, new Thickness(8), MapAnimationKind.Linear);
         }
 
         private void RoutePlanMapControl_OnMapTapped(MapControl sender, MapInputEventArgs args)

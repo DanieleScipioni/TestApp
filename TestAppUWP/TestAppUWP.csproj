@@ -108,6 +108,8 @@
     </Compile>
     <Compile Include="Samples\Accounts\AccountPageViewModel.cs" />
     <Compile Include="Samples\Accounts\UserDataAccountAdapter.cs" />
+    <Compile Include="Samples\Map\BingMapsRestClient.cs" />
+    <Compile Include="Samples\Map\GeoLocationPageViewModel.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
     </Compile>
@@ -126,6 +128,10 @@
       <DependentUpon>CanvasTester.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\Map\BaseRenderFlag.cs" />
+    <Compile Include="Samples\Map\GeoLocationPage.xaml.cs">
+      <DependentUpon>GeoLocationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Map\MapServiceSettings.cs" />
     <Compile Include="Samples\Map\RenderImageFlag.cs" />
     <Compile Include="Samples\PathButton\PathButtonPage.xaml.cs">
       <DependentUpon>PathButtonPage.xaml</DependentUpon>
@@ -341,6 +347,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Map\CanvasTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Map\GeoLocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

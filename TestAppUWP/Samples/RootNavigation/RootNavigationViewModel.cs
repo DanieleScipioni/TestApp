@@ -51,6 +51,7 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(CertTutorial.CertTutorial),
                 typeof(InterControlAnimation.InterControlAnimation),
                 typeof(MapPage),
+                typeof(GeoLocationPage),
                 typeof(BigDynamicListPage),
                 typeof(RsaPage),
                 typeof(PathButtonPage),

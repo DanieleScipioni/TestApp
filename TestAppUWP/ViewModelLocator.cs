@@ -28,6 +28,8 @@ namespace TestAppUWP
                     return new MapViewModel();
                 case AccountPage _:
                     return  new AccountPageViewModel();
+                case GeoLocationPage _:
+                    return new GeoLocationPageViewModel();
             }
 
             return null;
