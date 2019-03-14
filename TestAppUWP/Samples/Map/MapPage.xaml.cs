@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using Windows.Services.Maps;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -51,8 +53,15 @@ namespace TestAppUWP.Samples.Map
 
         private async void ViewModelOnPropertyChanged(object o, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName != nameof(MapViewModel.Customers)) return;
-            await AddMapIcons();
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case nameof(MapViewModel.Customers):
+                    await AddMapIcons();
+                    break;
+                case nameof(MapViewModel.MapRoute):
+                    await AddMapRouteView(_viewModel.MapRoute);
+                    break;
+            }
         }
 
         private async void ReloadCustomers(object sender, RoutedEventArgs e)
@@ -83,6 +92,14 @@ namespace TestAppUWP.Samples.Map
                 where m is MapIcon
                 select ((MapIcon) m).Location.Position);
             await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, new Thickness(8), MapAnimationKind.Linear);
+        }
+
+        private async Task AddMapRouteView(MapRoute mapRoute)
+        {
+            var mapRouteView = new MapRouteView(mapRoute) {RouteColor = Colors.Red, OutlineColor = Colors.BlueViolet};
+            RoutePlanMapControl.Routes.Clear();
+            RoutePlanMapControl.Routes.Add(mapRouteView);
+            await RoutePlanMapControl.TrySetViewBoundsAsync(mapRoute.BoundingBox, new Thickness(16), MapAnimationKind.Linear);
         }
 
         private void RoutePlanMapControl_OnMapTapped(MapControl sender, MapInputEventArgs args)
