@@ -2,21 +2,27 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.ApplicationModel.Core;
 using TestAppUWP.Core;
+using Windows.ApplicationModel.Core;
 using Windows.Services.Maps;
 using Windows.System.Threading;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Controls.Maps;
 
 namespace TestAppUWP.Samples.Map
 {
     public class GeoLocationPageViewModel : BindableBase, ICommand
     {
+        private static MapControl _sessionMapControl;
+
         public GeoLocationPageViewModel()
         {
             try
             {
-                MapService.ServiceToken = MapServiceSettings.Token;
+                if (_sessionMapControl != null)
+                {
+                    _sessionMapControl = new MapControl {MapServiceToken = MapServiceSettings.Token};
+                }
             }
             catch
             {
