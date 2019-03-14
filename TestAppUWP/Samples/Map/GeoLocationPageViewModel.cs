@@ -13,15 +13,15 @@ namespace TestAppUWP.Samples.Map
 {
     public class GeoLocationPageViewModel : BindableBase, ICommand
     {
-        private static MapControl _sessionMapControl;
+        private readonly MapControl _sessionMapControl;
 
         public GeoLocationPageViewModel()
         {
             try
             {
-                if (_sessionMapControl != null)
+                if (_sessionMapControl == null)
                 {
-                    _sessionMapControl = new MapControl {MapServiceToken = MapServiceSettings.Token};
+                    _sessionMapControl = new MapControl {MapServiceToken = MapServiceSettings.SelectedToken};
                 }
             }
             catch
