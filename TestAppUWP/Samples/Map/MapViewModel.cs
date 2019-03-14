@@ -14,7 +14,6 @@ namespace TestAppUWP.Samples.Map
     public class MapViewModel : BindableBase, ICommand
     {
         private ObservableCollection<Customer> _customers;
-
         public ObservableCollection<Customer> Customers
         {
             get => _customers;
@@ -28,12 +27,29 @@ namespace TestAppUWP.Samples.Map
             set => SetProperty(ref _mapRoute, value);
         }
 
-        public string MapServiceToken { get; }
+        private string _mapServiceToken;
+        public string MapServiceToken
+        {
+            get => _mapServiceToken;
+            set
+            {
+                if (SetProperty(ref _mapServiceToken, value))
+                {
+                    MapServiceSettings.SelectedToken = value;
+                }
+            }
+        }
+
+        public List<Tuple<string, string>> BingMapsKeys = new List<Tuple<string, string>>
+        {
+            new Tuple<string, string>(nameof(MapServiceSettings.TokenUwp1), MapServiceSettings.TokenUwp1),
+            new Tuple<string, string>(nameof(MapServiceSettings.TokenUwp2), MapServiceSettings.TokenUwp2)
+        };
 
         public MapViewModel()
         {
+            _mapServiceToken = MapServiceSettings.SelectedToken;
             Init();
-            MapServiceToken = MapServiceSettings.Token;
         }
 
         private async void Init()

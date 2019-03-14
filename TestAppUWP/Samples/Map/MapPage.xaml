@@ -21,19 +21,25 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
     </Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <map:RenderImageFlag x:Name="RenderImageFlag" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <map:RenderPlygonFlag x:Name="RenderVectorFlag" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <map:RenderImageFlag x:Name="RenderImageFlag" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <map:RenderPlygonFlag x:Name="RenderVectorFlag" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <ComboBox ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
+                      SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
-        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Column="0" Margin="0,50,0,0"
+        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Row="1" Grid.Column="0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
                          MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped" />
-        <ListView Grid.Column="1" x:Name="ListView"
+        <ListView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="ListView"
                   ItemsSource="{x:Bind _viewModel.Customers, Mode=OneWay}"
                   ItemTemplate="{StaticResource DataTemplate}" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
