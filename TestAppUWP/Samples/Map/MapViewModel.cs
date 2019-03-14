@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TestAppUWP.Core;
 using Windows.Devices.Geolocation;
+using Windows.Services.Maps;
 using Windows.UI;
 
 namespace TestAppUWP.Samples.Map
@@ -18,6 +19,13 @@ namespace TestAppUWP.Samples.Map
         {
             get => _customers;
             set => SetProperty(ref _customers, value);
+        }
+
+        private MapRoute _mapRoute;
+        public MapRoute MapRoute
+        {
+            get => _mapRoute;
+            set => SetProperty(ref _mapRoute, value);
         }
 
         public string MapServiceToken { get; }
@@ -98,7 +106,48 @@ namespace TestAppUWP.Samples.Map
             Customers = new ObservableCollection<Customer>(customers);
         }
 
+        private async Task ExecuteDistanceMatrix()
+        {
+            var geopositions = new BasicGeoposition[_customers.Count];
+            for (var index = 0; index < _customers.Count; index++)
+            {
+                var customer = _customers[index];
+                var geoposition = new BasicGeoposition { Latitude = customer.Latitude, Longitude = customer.Longitude };
+                geopositions[index] = geoposition;
+            }
+
+            if (_customers.Count <= 1) return;
+
+            var _ = await new BingMapsRestClient(MapServiceToken).DistanceMatrix(geopositions[0],
+                geopositions.Skip(1));
+        }
+
+        private async Task ExecuteRoute()
+        {
+            var geopositions = new Geopoint[_customers.Count];
+            for (var index = 0; index < _customers.Count; index++)
+            {
+                var customer = _customers[index];
+                var geoposition = new Geopoint(new BasicGeoposition { Latitude = customer.Latitude, Longitude = customer.Longitude });
+                geopositions[index] = geoposition;
+            }
+
+            var mapRouteFinderResult = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(geopositions, MapRouteOptimization.Time,
+                MapRouteRestrictions.None);
+            if (mapRouteFinderResult.Status == MapRouteFinderStatus.Success)
+            {
+                MapRoute = mapRouteFinderResult.Route;
+            }
+            else
+            {
+                MapRoute = null;
+            }
+        }
+
         #region ICommand
+
+        public const string DistanceMatrixCommandParameter = "DistanceMatrix";
+        public const string RouteCommandParameter = "Route";
 
         public bool CanExecute(object parameter)
         {
@@ -107,18 +156,22 @@ namespace TestAppUWP.Samples.Map
 
         public async void Execute(object parameter)
         {
-            var geopositions = new BasicGeoposition[_customers.Count];
-            for (var index = 0; index < _customers.Count; index++)
+            switch (parameter)
             {
-                var customer = _customers[index];
-                var geoposition = new BasicGeoposition {Latitude = customer.Latitude, Longitude = customer.Longitude};
-                geopositions[index] = geoposition;
+                case string strinValue:
+                {
+                    switch (strinValue)
+                    {
+                        case DistanceMatrixCommandParameter:
+                            await ExecuteDistanceMatrix();
+                            break;
+                        case RouteCommandParameter:
+                            await ExecuteRoute();
+                            break;
+                    }
+                    break;
+                }
             }
-
-            if (_customers.Count <= 1) return;
-
-            var route = await new BingMapsRestClient(MapServiceToken).DistanceMatrix(geopositions[0],
-                geopositions.Skip(1));
         }
 
         public event EventHandler CanExecuteChanged;
