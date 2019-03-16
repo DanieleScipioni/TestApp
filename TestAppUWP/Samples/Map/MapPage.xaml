@@ -29,10 +29,6 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <ComboBox ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
-                      SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" VerticalAlignment="Center" />
-        </StackPanel>
         <map:RenderPlygonFlag Grid.Row="1" Grid.Column="0" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <map:RenderImageFlag Grid.Row="1" Grid.Column="0" x:Name="RenderImageFlag" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <maps:MapControl x:Name="MapControl" Grid.Row="1" Grid.Column="0"
@@ -51,6 +47,11 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
     </Grid>
     <Page.BottomAppBar>
         <CommandBar>
+            <CommandBar.Content>
+                <ComboBox Margin="12,8,12,0" 
+                          ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
+                          SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" />
+            </CommandBar.Content>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Refresh" Click="ReloadCustomers" Label="Reload customers"/>
                 <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="Route" Label="Route">
