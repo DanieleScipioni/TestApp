@@ -30,11 +30,11 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <map:RenderImageFlag x:Name="RenderImageFlag" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <map:RenderPlygonFlag x:Name="RenderVectorFlag" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <ComboBox ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
                       SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
+        <map:RenderPlygonFlag Grid.Row="1" Grid.Column="0" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <map:RenderImageFlag Grid.Row="1" Grid.Column="0" x:Name="RenderImageFlag" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <maps:MapControl x:Name="MapControl" Grid.Row="1" Grid.Column="0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
