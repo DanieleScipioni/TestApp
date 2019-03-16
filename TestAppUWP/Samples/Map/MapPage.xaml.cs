@@ -24,7 +24,7 @@ namespace TestAppUWP.Samples.Map
             InitializeComponent();
             _customerUserControl = new CustomerUserControl {Visibility = Visibility.Collapsed};
             MapControl.SetNormalizedAnchorPoint(_customerUserControl, new Point(0, 1));
-            RoutePlanMapControl.Children.Add(_customerUserControl);
+            MapControl.Children.Add(_customerUserControl);
 
             DataContextChanged += async (sender, args) =>
             {
@@ -37,7 +37,7 @@ namespace TestAppUWP.Samples.Map
                 {
                     try
                     {
-                        RoutePlanMapControl.MapServiceToken = _viewModel.MapServiceToken;
+                        MapControl.MapServiceToken = _viewModel.MapServiceToken;
                     }
                     catch
                     {
@@ -67,7 +67,7 @@ namespace TestAppUWP.Samples.Map
         private async void ReloadCustomers(object sender, RoutedEventArgs e)
         {
             _customerUserControl.Visibility = Visibility.Collapsed;
-            RoutePlanMapControl.MapElements.Clear();
+            MapControl.MapElements.Clear();
             await _viewModel.ReloadCustmers();
         }
 
@@ -84,22 +84,22 @@ namespace TestAppUWP.Samples.Map
                     Location = new Geopoint(new BasicGeoposition { Latitude = customer.Latitude, Longitude = customer.Longitude }),
                     NormalizedAnchorPoint = new Point(0.1, 0.8)
                 };
-                RoutePlanMapControl.MapElements.Add(mapIcon);
+                MapControl.MapElements.Add(mapIcon);
             }
 
             GeoboundingBox geoboundingBox = GeoboundingBox.TryCompute(
-                from MapElement m in RoutePlanMapControl.MapElements
+                from MapElement m in MapControl.MapElements
                 where m is MapIcon
                 select ((MapIcon) m).Location.Position);
-            await RoutePlanMapControl.TrySetViewBoundsAsync(geoboundingBox, new Thickness(8), MapAnimationKind.Linear);
+            await MapControl.TrySetViewBoundsAsync(geoboundingBox, new Thickness(8), MapAnimationKind.Linear);
         }
 
         private async Task AddMapRouteView(MapRoute mapRoute)
         {
             var mapRouteView = new MapRouteView(mapRoute) {RouteColor = Colors.Red, OutlineColor = Colors.BlueViolet};
-            RoutePlanMapControl.Routes.Clear();
-            RoutePlanMapControl.Routes.Add(mapRouteView);
-            await RoutePlanMapControl.TrySetViewBoundsAsync(mapRoute.BoundingBox, new Thickness(16), MapAnimationKind.Linear);
+            MapControl.Routes.Clear();
+            MapControl.Routes.Add(mapRouteView);
+            await MapControl.TrySetViewBoundsAsync(mapRoute.BoundingBox, new Thickness(16), MapAnimationKind.Linear);
         }
 
         private void RoutePlanMapControl_OnMapTapped(MapControl sender, MapInputEventArgs args)
@@ -145,11 +145,11 @@ namespace TestAppUWP.Samples.Map
         {
             var clickedItem = (Customer) e.ClickedItem;
             int indexOf = _viewModel.Customers.IndexOf(clickedItem);
-            if (!(RoutePlanMapControl.MapElements[indexOf] is MapIcon mapIcon)) return;
+            if (!(MapControl.MapElements[indexOf] is MapIcon mapIcon)) return;
 
             ShowFlyout(mapIcon, clickedItem);
 
-            await RoutePlanMapControl.TrySetViewAsync(mapIcon.Location);
+            await MapControl.TrySetViewAsync(mapIcon.Location);
         }
     }
 }

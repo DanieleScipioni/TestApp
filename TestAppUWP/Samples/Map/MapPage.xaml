@@ -35,7 +35,7 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
             <ComboBox ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
                       SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
-        <maps:MapControl x:Name="RoutePlanMapControl" Grid.Row="1" Grid.Column="0"
+        <maps:MapControl x:Name="MapControl" Grid.Row="1" Grid.Column="0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
                          MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped" />
