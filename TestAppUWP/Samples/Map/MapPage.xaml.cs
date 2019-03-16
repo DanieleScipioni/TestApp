@@ -39,10 +39,7 @@ namespace TestAppUWP.Samples.Map
                     {
                         MapControl.MapServiceToken = _viewModel.MapServiceToken;
                     }
-                    catch
-                    {
-                        // ignore
-                    }
+                    catch {/*ignore*/}
                     await AddMapIcons();
                     _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
                 }
@@ -60,6 +57,13 @@ namespace TestAppUWP.Samples.Map
                     break;
                 case nameof(MapViewModel.MapRoute):
                     await AddMapRouteView(_viewModel.MapRoute);
+                    break;
+                case nameof(MapViewModel.MapServiceToken):
+                    try
+                    {
+                        MapControl.MapServiceToken = _viewModel.MapServiceToken;
+                    }
+                    catch {/*ignore*/}
                     break;
             }
         }
