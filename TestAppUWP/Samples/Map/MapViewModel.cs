@@ -13,6 +13,8 @@ namespace TestAppUWP.Samples.Map
 {
     public class MapViewModel : BindableBase, ICommand
     {
+        private readonly Random _random;
+
         private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers
         {
@@ -46,9 +48,18 @@ namespace TestAppUWP.Samples.Map
             new Tuple<string, string>(nameof(MapServiceSettings.TokenUwp2), MapServiceSettings.TokenUwp2)
         };
 
+        private bool _commandsEnabled;
+        public bool CommandsEnabled
+        {
+            get => _commandsEnabled;
+            set => SetProperty(ref _commandsEnabled, value);
+        }
+
         public MapViewModel()
         {
             _mapServiceToken = MapServiceSettings.SelectedToken;
+            _commandsEnabled = true;
+            _random = new Random();
             Init();
         }
 
@@ -148,16 +159,9 @@ namespace TestAppUWP.Samples.Map
                 geopositions[index] = geoposition;
             }
 
-            var mapRouteFinderResult = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(geopositions, MapRouteOptimization.Time,
-                MapRouteRestrictions.None);
-            if (mapRouteFinderResult.Status == MapRouteFinderStatus.Success)
-            {
-                MapRoute = mapRouteFinderResult.Route;
-            }
-            else
-            {
-                MapRoute = null;
-            }
+            MapRouteFinderResult mapRouteFinderResult = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(
+                geopositions, MapRouteOptimization.Time, MapRouteRestrictions.None);
+            MapRoute = mapRouteFinderResult.Status == MapRouteFinderStatus.Success ? mapRouteFinderResult.Route : null;
         }
 
         public async Task<MapLocationFinderResult> FindLocation(string searchText)
@@ -165,14 +169,37 @@ namespace TestAppUWP.Samples.Map
             return await MapLocationFinder.FindLocationsAsync(searchText, null, 1);
         }
 
+        private async Task UseTransactions()
+        {
+            CommandsEnabled = false;
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
+            for (var mapKeyIndex = 0; mapKeyIndex < 100; mapKeyIndex++)
+            {
+                MapServiceToken = BingMapsKeys[mapKeyIndex % BingMapsKeys.Count].Item2;
+
+                int iterations = _random.Next(10);
+                for (var index = 0; index < iterations; index++)
+                {
+                    await ReloadCustmers();
+                    await ExecuteRoute();
+                    await ExecuteDistanceMatrix();
+                    await Task.Delay(2000);
+                }
+            }
+            CommandsEnabled = true;
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         #region ICommand
 
         public const string DistanceMatrixCommandParameter = "DistanceMatrix";
         public const string RouteCommandParameter = "Route";
+        public const string TransactionsCommandParameter = "Transactions";
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _commandsEnabled;
         }
 
         public async void Execute(object parameter)
@@ -188,6 +215,9 @@ namespace TestAppUWP.Samples.Map
                             break;
                         case RouteCommandParameter:
                             await ExecuteRoute();
+                            break;
+                        case TransactionsCommandParameter:
+                            await UseTransactions();
                             break;
                     }
                     break;
