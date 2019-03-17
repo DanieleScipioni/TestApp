@@ -8,6 +8,7 @@ using TestAppUWP.Core;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.Xaml;
 
 namespace TestAppUWP.Samples.Map
 {
@@ -52,13 +53,34 @@ namespace TestAppUWP.Samples.Map
         public bool CommandsEnabled
         {
             get => _commandsEnabled;
-            set => SetProperty(ref _commandsEnabled, value);
+            set
+            {
+                if (!SetProperty(ref _commandsEnabled, value)) return;
+                ProgressVisibility = value ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        private Visibility _progressVisibility;
+        public Visibility ProgressVisibility
+        {
+            get => _progressVisibility;
+            set => SetProperty(ref _progressVisibility, value);
+        }
+
+        public int IterationCount { get; } = 100;
+
+        private int _iterationPartial;
+        public int IterationPartial
+        {
+            get => _iterationPartial;
+            set => SetProperty(ref _iterationPartial, value);
         }
 
         public MapViewModel()
         {
             _mapServiceToken = MapServiceSettings.SelectedToken;
             _commandsEnabled = true;
+            _progressVisibility = Visibility.Collapsed;
             _random = new Random();
             Init();
         }
@@ -154,7 +176,7 @@ namespace TestAppUWP.Samples.Map
             var geopositions = new Geopoint[_customers.Count];
             for (var index = 0; index < _customers.Count; index++)
             {
-                var customer = _customers[index];
+                Customer customer = _customers[index];
                 var geoposition = new Geopoint(new BasicGeoposition { Latitude = customer.Latitude, Longitude = customer.Longitude });
                 geopositions[index] = geoposition;
             }
@@ -174,9 +196,9 @@ namespace TestAppUWP.Samples.Map
             CommandsEnabled = false;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-            for (var mapKeyIndex = 0; mapKeyIndex < 100; mapKeyIndex++)
+            for (IterationPartial = 0; IterationPartial < IterationCount; IterationPartial++)
             {
-                MapServiceToken = BingMapsKeys[mapKeyIndex % BingMapsKeys.Count].Item2;
+                MapServiceToken = BingMapsKeys[IterationPartial % BingMapsKeys.Count].Item2;
 
                 int iterations = _random.Next(10);
                 for (var index = 0; index < iterations; index++)
@@ -187,6 +209,8 @@ namespace TestAppUWP.Samples.Map
                     await Task.Delay(2000);
                 }
             }
+
+            IterationPartial = 0;
             CommandsEnabled = true;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
