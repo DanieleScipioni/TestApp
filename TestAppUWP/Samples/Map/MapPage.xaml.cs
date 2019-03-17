@@ -73,12 +73,12 @@ namespace TestAppUWP.Samples.Map
         private async void ReloadCustomers(object sender, RoutedEventArgs e)
         {
             _customerUserControl.Visibility = Visibility.Collapsed;
-            MapControl.MapElements.Clear();
             await _viewModel.ReloadCustmers();
         }
 
         private async Task AddMapIcons()
         {
+            MapControl.MapElements.Clear();
             if (_viewModel.Customers == null) return;
 
             foreach (var customer in _viewModel.Customers)
@@ -102,8 +102,9 @@ namespace TestAppUWP.Samples.Map
 
         private async Task AddMapRouteView(MapRoute mapRoute)
         {
-            var mapRouteView = new MapRouteView(mapRoute) {RouteColor = Colors.Red, OutlineColor = Colors.BlueViolet};
             MapControl.Routes.Clear();
+            if (mapRoute == null) return;
+            var mapRouteView = new MapRouteView(mapRoute) {RouteColor = Colors.Red, OutlineColor = Colors.BlueViolet};
             MapControl.Routes.Add(mapRouteView);
             await MapControl.TrySetViewBoundsAsync(mapRoute.BoundingBox, new Thickness(16), MapAnimationKind.Linear);
         }
