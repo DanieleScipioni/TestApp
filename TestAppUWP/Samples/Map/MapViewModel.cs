@@ -205,8 +205,7 @@ namespace TestAppUWP.Samples.Map
                 {
                     await ReloadCustmers();
                     await ExecuteRoute();
-                    await ExecuteDistanceMatrix();
-                    await Task.Delay(2000);
+                   await Task.Delay(1000);
                 }
             }
 
