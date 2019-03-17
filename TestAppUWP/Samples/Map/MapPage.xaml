@@ -35,9 +35,12 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          RotateInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl"
                          MapElementClick="RoutePlanMapControl_OnMapElementClick" MapTapped="RoutePlanMapControl_OnMapTapped" />
-        <ProgressBar Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"
-                     IsIndeterminate="False" Value="{x:Bind _viewModel.IterationPartial, Mode=OneWay}"
-                     Maximum="{x:Bind _viewModel.IterationCount}" Visibility="{x:Bind _viewModel.ProgressVisibility, Mode=OneWay}"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom">
+            <ProgressBar IsIndeterminate="False" Value="{x:Bind _viewModel.InnerIterationPartial, Mode=OneWay}"
+                         Maximum="{x:Bind _viewModel.InnerIterationCount, Mode=OneWay}" Visibility="{x:Bind _viewModel.ProgressVisibility, Mode=OneWay}"/>
+            <ProgressBar IsIndeterminate="False" Value="{x:Bind _viewModel.IterationPartial, Mode=OneWay}"
+                         Maximum="{x:Bind _viewModel.IterationCount}" Visibility="{x:Bind _viewModel.ProgressVisibility, Mode=OneWay}"/>
+        </StackPanel>
         <ListView Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="ListView"
                   ItemsSource="{x:Bind _viewModel.Customers, Mode=OneWay}"
                   ItemTemplate="{StaticResource DataTemplate}" ItemClick="ListViewBase_OnItemClick" IsItemClickEnabled="True">
@@ -72,8 +75,10 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
                         <FontIcon Glyph="&#xF0E2;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="Transactions" Label="Transactions"
+                <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="TransactionsPlay" Label="Transactions"
                               Icon="Play"/>
+                <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="TransactionsStop" Label="Transactions"
+                              Icon="Stop"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

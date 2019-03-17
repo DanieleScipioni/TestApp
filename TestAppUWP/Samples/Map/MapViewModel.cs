@@ -15,6 +15,7 @@ namespace TestAppUWP.Samples.Map
     public class MapViewModel : BindableBase, ICommand
     {
         private readonly Random _random;
+        private bool _stop;
 
         private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers
@@ -76,11 +77,26 @@ namespace TestAppUWP.Samples.Map
             set => SetProperty(ref _iterationPartial, value);
         }
 
+        private int _innerIterationCount;
+        public int InnerIterationCount
+        {
+            get => _innerIterationCount;
+            set => SetProperty(ref _innerIterationCount, value);
+        }
+
+        private int _innerIterationPartial;
+        public int InnerIterationPartial
+        {
+            get => _innerIterationPartial;
+            set => SetProperty(ref _innerIterationPartial, value);
+        }
+
         public MapViewModel()
         {
             _mapServiceToken = MapServiceSettings.SelectedToken;
             _commandsEnabled = true;
             _progressVisibility = Visibility.Collapsed;
+            _stop = false;
             _random = new Random();
             Init();
         }
@@ -191,7 +207,7 @@ namespace TestAppUWP.Samples.Map
             return await MapLocationFinder.FindLocationsAsync(searchText, null, 1);
         }
 
-        private async Task UseTransactions()
+        private async Task PlayTransactions()
         {
             CommandsEnabled = false;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
@@ -200,28 +216,52 @@ namespace TestAppUWP.Samples.Map
             {
                 MapServiceToken = BingMapsKeys[IterationPartial % BingMapsKeys.Count].Item2;
 
-                int iterations = _random.Next(10);
-                for (var index = 0; index < iterations; index++)
+                InnerIterationCount = _random.Next(10);
+                for (InnerIterationPartial = 0; InnerIterationPartial < InnerIterationCount; InnerIterationPartial++)
                 {
+                    if (_stop) break;
                     await ReloadCustmers();
                     await ExecuteRoute();
-                   await Task.Delay(1000);
+                    await Task.Delay(1000);
                 }
+                if (_stop) break;
+                await Task.Delay(1);
             }
-
+            if (_stop) _stop = false;
+            InnerIterationCount = 0;
+            InnerIterationPartial = 0;
             IterationPartial = 0;
             CommandsEnabled = true;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void StopTransactions()
+        {
+            _stop = true;
         }
 
         #region ICommand
 
         public const string DistanceMatrixCommandParameter = "DistanceMatrix";
         public const string RouteCommandParameter = "Route";
-        public const string TransactionsCommandParameter = "Transactions";
+        public const string TransactionsPlayCommandParameter = "TransactionsPlay";
+        public const string TransactionsStopCommandParameter = "TransactionsStop";
 
         public bool CanExecute(object parameter)
         {
+            switch (parameter)
+            {
+                case string strinValue:
+                {
+                    switch (strinValue)
+                    {
+                        case TransactionsStopCommandParameter:
+                            return !_commandsEnabled;
+                        default:
+                            return _commandsEnabled;
+                    }
+                }
+            }
             return _commandsEnabled;
         }
 
@@ -239,8 +279,11 @@ namespace TestAppUWP.Samples.Map
                         case RouteCommandParameter:
                             await ExecuteRoute();
                             break;
-                        case TransactionsCommandParameter:
-                            await UseTransactions();
+                        case TransactionsPlayCommandParameter:
+                            await PlayTransactions();
+                            break;
+                        case TransactionsStopCommandParameter:
+                            StopTransactions();
                             break;
                     }
                     break;
