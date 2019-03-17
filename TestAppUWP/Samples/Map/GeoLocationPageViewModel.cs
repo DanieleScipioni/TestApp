@@ -28,7 +28,7 @@ namespace TestAppUWP.Samples.Map
             {
                 // ignore
             }
-            var stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             ThreadPoolTimer.CreatePeriodicTimer(timer =>
             {
                 var stopwatchElapsed = stopwatch.Elapsed;
