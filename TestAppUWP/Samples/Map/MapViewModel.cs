@@ -160,6 +160,11 @@ namespace TestAppUWP.Samples.Map
             }
         }
 
+        public async Task<MapLocationFinderResult> FindLocation(string searchText)
+        {
+            return await MapLocationFinder.FindLocationsAsync(searchText, null, 1);
+        }
+
         #region ICommand
 
         public const string DistanceMatrixCommandParameter = "DistanceMatrix";

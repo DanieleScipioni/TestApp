@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Input;
 
 namespace TestAppUWP.Samples.Map
 {
@@ -154,6 +156,26 @@ namespace TestAppUWP.Samples.Map
             ShowFlyout(mapIcon, clickedItem);
 
             await MapControl.TrySetViewAsync(mapIcon.Location);
+        }
+
+        private async void UIElement_OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key != VirtualKey.Enter) return;
+            e.Handled = true;
+
+            var textBox = (TextBox) sender;
+            MapLocationFinderResult mapLocationFinderResult = await _viewModel.FindLocation(textBox.Text);
+            MapControl.MapElements.Clear();
+            if (mapLocationFinderResult.Status != MapLocationFinderStatus.Success) return;
+            if (mapLocationFinderResult.Locations.Count <= 0) return;
+            MapLocation mapLocation = mapLocationFinderResult.Locations[0];
+            var mapIcon = new MapIcon
+            {
+                Location = mapLocation.Point,
+                Title = mapLocation.DisplayName,
+            };
+            MapControl.MapElements.Add(mapIcon);
+            await MapControl.TrySetViewAsync(mapLocation.Point);
         }
     }
 }
