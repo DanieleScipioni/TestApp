@@ -50,12 +50,15 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
             <CommandBar.Content>
                 <StackPanel Margin="12,8,12,0" Orientation="Horizontal">
                     <ComboBox ItemsSource="{x:Bind _viewModel.BingMapsKeys}" DisplayMemberPath="Item1" SelectedValuePath="Item2" 
-                              SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}" />
-                    <TextBox Margin="12,0" MinWidth="200" KeyDown="UIElement_OnKeyDown" PlaceholderText="search place"/>
+                              SelectedValue="{x:Bind _viewModel.MapServiceToken, Mode=TwoWay}"
+                              IsEnabled="{x:Bind _viewModel.CommandsEnabled, Mode=OneWay}"/>
+                    <TextBox Margin="12,0" MinWidth="200" KeyDown="UIElement_OnKeyDown" PlaceholderText="search place"
+                             IsEnabled="{x:Bind _viewModel.CommandsEnabled, Mode=OneWay}"/>
                 </StackPanel>
             </CommandBar.Content>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Refresh" Click="ReloadCustomers" Label="Reload customers"/>
+                <AppBarButton Icon="Refresh" Click="ReloadCustomers" Label="Reload customers"
+                              Command="{x:Bind _viewModel}"/>
                 <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="Route" Label="Route">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE816;"/>
@@ -66,6 +69,8 @@ vcra: <Run Text="{x:Bind VisitsCreateRecurringAppointments}" FontWeight="SemiBol
                         <FontIcon Glyph="&#xF0E2;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
+                <AppBarButton Command="{x:Bind _viewModel}" CommandParameter="Transactions" Label="Transactions"
+                              Icon="Play"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
