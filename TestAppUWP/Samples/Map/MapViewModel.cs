@@ -212,20 +212,23 @@ namespace TestAppUWP.Samples.Map
             CommandsEnabled = false;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-            for (IterationPartial = 0; IterationPartial < IterationCount; IterationPartial++)
+            while (!_stop)
             {
-                MapServiceToken = BingMapsKeys[IterationPartial % BingMapsKeys.Count].Item2;
-
-                InnerIterationCount = _random.Next(10);
-                for (InnerIterationPartial = 0; InnerIterationPartial < InnerIterationCount; InnerIterationPartial++)
+                for (IterationPartial = 0; IterationPartial < IterationCount; IterationPartial++)
                 {
+                    MapServiceToken = BingMapsKeys[IterationPartial % BingMapsKeys.Count].Item2;
+
+                    InnerIterationCount = _random.Next(10);
+                    for (InnerIterationPartial = 0; InnerIterationPartial < InnerIterationCount; InnerIterationPartial++)
+                    {
+                        if (_stop) break;
+                        await ReloadCustmers();
+                        await ExecuteRoute();
+                        await Task.Delay(1000);
+                    }
                     if (_stop) break;
-                    await ReloadCustmers();
-                    await ExecuteRoute();
-                    await Task.Delay(1000);
+                    await Task.Delay(1);
                 }
-                if (_stop) break;
-                await Task.Delay(1);
             }
             if (_stop) _stop = false;
             InnerIterationCount = 0;
