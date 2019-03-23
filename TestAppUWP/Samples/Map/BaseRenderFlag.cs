@@ -93,6 +93,7 @@ namespace TestAppUWP.Samples.Map
                 // FlagRendered removed from visual tree.
                 return;
             }
+            if (_renderTargetBitmap.PixelHeight == 0 || _renderTargetBitmap.PixelWidth == 0) return;
             if (_disposed) return;
 
             IBuffer buffer = await _renderTargetBitmap.GetPixelsAsync();
