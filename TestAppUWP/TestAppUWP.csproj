@@ -424,10 +424,10 @@
       <Version>6.2.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
-      <Version>1.5.1</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>1.5.1</Version>
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Mustache.NETStandard">
       <Version>1.0.0</Version>
