@@ -185,6 +185,9 @@
     <Compile Include="Samples\InterControlAnimation\InterControlAnimation.xaml.cs">
       <DependentUpon>InterControlAnimation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Rsa\HttpAuthUc.xaml.cs">
+      <DependentUpon>HttpAuthUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Rsa\RsaPage.xaml.cs">
       <DependentUpon>RsaPage.xaml</DependentUpon>
     </Compile>
@@ -398,6 +401,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Map\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Rsa\HttpAuthUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

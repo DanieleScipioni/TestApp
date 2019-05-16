@@ -9,6 +9,7 @@
     <Grid>
         <Pivot>
             <PivotItem Header="Auth">
+                <rsa:HttpAuthUc/>
             </PivotItem>
             <PivotItem Header="Rsa">
                 <rsa:RsaPage/>
