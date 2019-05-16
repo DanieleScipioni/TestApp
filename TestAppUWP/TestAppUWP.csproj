@@ -188,6 +188,9 @@
     <Compile Include="Samples\Rsa\RsaPage.xaml.cs">
       <DependentUpon>RsaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Rsa\WebPage.xaml.cs">
+      <DependentUpon>WebPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ListUserControl.xaml.cs">
       <DependentUpon>ListUserControl.xaml</DependentUpon>
     </Compile>
@@ -399,6 +402,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Rsa\RsaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Rsa\WebPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

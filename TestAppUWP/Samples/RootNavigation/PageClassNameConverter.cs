@@ -4,6 +4,7 @@ using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.BlankPage;
 using TestAppUWP.Samples.Calendar;
 using TestAppUWP.Samples.Map;
+using TestAppUWP.Samples.Rsa;
 using Windows.UI.Xaml.Data;
 
 namespace TestAppUWP.Samples.RootNavigation
@@ -29,6 +30,7 @@ namespace TestAppUWP.Samples.RootNavigation
             if (type == typeof(BigDynamicListPage)) return "\xE7BC";
             if (type == typeof(CalendarExplorer)) return "\xE787";
             if (type == typeof(AccountPage)) return "\xE910";
+            if (type == typeof(WebPage)) return "\xE701";
             return "\xF142";
         }
 

@@ -53,7 +53,7 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(MapPage),
                 typeof(GeoLocationPage),
                 typeof(BigDynamicListPage),
-                typeof(RsaPage),
+                typeof(WebPage),
                 typeof(PathButtonPage),
                 typeof(CalendarExplorer),
                 typeof(AccountPage)
