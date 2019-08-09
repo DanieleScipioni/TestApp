@@ -113,7 +113,7 @@
     <Compile Include="Samples\Animations\Animations.xaml.cs">
       <DependentUpon>Animations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\BlankPage\PippoCollectionUserControl.xaml.cs">
+    <Compile Include="Samples\Controls\PippoCollectionUserControl.xaml.cs">
       <DependentUpon>PippoCollectionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\BatchCompletitionAwaiter.cs" />
@@ -202,7 +202,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPageViewModel.cs" />
-    <Compile Include="Samples\BlankPage\BigDynamicListPage.xaml.cs">
+    <Compile Include="Samples\Controls\BigDynamicListPage.xaml.cs">
       <DependentUpon>BigDynamicListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frame\FirstPage.xaml.cs">
@@ -320,7 +320,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\BlankPage\BigDynamicListPage.xaml">
+    <Page Include="Samples\Controls\BigDynamicListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -340,7 +340,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\BlankPage\PippoCollectionUserControl.xaml">
+    <Page Include="Samples\Controls\PippoCollectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -452,6 +452,9 @@
       <Project>{e5b2f002-2ba4-4e86-8a9a-5e35c47a37cc}</Project>
       <Name>BackgroudTask</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Samples\BlankPage\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestAppUWP.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using TestAppUWP.Core;
 
-namespace TestAppUWP.Samples.BlankPage
+namespace TestAppUWP.Samples.Controls
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a MainFrame.

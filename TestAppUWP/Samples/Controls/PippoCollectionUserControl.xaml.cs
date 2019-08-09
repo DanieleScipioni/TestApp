@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace TestAppUWP.Samples.BlankPage
+namespace TestAppUWP.Samples.Controls
 {
     public sealed partial class PippoCollectionUserControl
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations;
-using TestAppUWP.Samples.BlankPage;
 using TestAppUWP.Samples.Calendar;
+using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.Rsa;
 using Windows.UI.Xaml.Data;
