@@ -17,15 +17,12 @@
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Ciao" Style="{ThemeResource TitleTextBlockStyle}"/>
-        <ListView Grid.Row="1"
+        <ListView Grid.Row="0"
                   HorizontalAlignment="Stretch" ItemsSource="{x:Bind _pageViewModel.Ints, Mode=OneWay}"
                   ItemTemplate="{StaticResource Uno}">
             <ListView.ItemContainerStyle>

@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Samples\Accounts\AccountPageViewModel.cs" />
     <Compile Include="Samples\Accounts\UserDataAccountAdapter.cs" />
+    <Compile Include="Samples\Controls\ControlsPage.xaml.cs">
+      <DependentUpon>ControlsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Map\BingMapsRestClient.cs" />
     <Compile Include="Samples\Map\GeoLocationPageViewModel.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
@@ -337,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Frame\SecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Controls\ControlsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

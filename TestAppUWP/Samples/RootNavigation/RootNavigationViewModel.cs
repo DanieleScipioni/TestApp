@@ -52,7 +52,7 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(InterControlAnimation.InterControlAnimation),
                 typeof(MapPage),
                 typeof(GeoLocationPage),
-                typeof(BigDynamicListPage),
+                typeof(ControlsPage),
                 typeof(WebPage),
                 typeof(PathButtonPage),
                 typeof(CalendarExplorer),

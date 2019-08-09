@@ -27,7 +27,7 @@ namespace TestAppUWP.Samples.RootNavigation
             if (type == typeof(InterControlAnimation.InterControlAnimation)) return "\xED5F";
             if (type == typeof(MapPage)) return "\xE909";
             if (type == typeof(GeoLocationPage)) return "\xE707";
-            if (type == typeof(BigDynamicListPage)) return "\xE7BC";
+            if (type == typeof(ControlsPage)) return "\xE7BC";
             if (type == typeof(CalendarExplorer)) return "\xE787";
             if (type == typeof(AccountPage)) return "\xE910";
             if (type == typeof(WebPage)) return "\xE701";
