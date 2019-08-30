@@ -3,7 +3,9 @@ using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations.ColorAnimation;
 using TestAppUWP.Samples.Map;
+using TestAppUWP.Samples.Ocr;
 using TestAppUWP.ViewModels.Frame;
+using TestAppUWP.ViewModels.Ocr;
 using Windows.UI.Xaml.Data;
 
 namespace TestAppUWP
@@ -30,6 +32,8 @@ namespace TestAppUWP
                     return  new AccountPageViewModel();
                 case GeoLocationPage _:
                     return new GeoLocationPageViewModel();
+                case OcrPage _:
+                    return new OcrPageViewModel();
             }
 
             return null;
