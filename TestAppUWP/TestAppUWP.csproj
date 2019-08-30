@@ -111,6 +111,9 @@
     <Compile Include="Samples\Controls\ControlsPage.xaml.cs">
       <DependentUpon>ControlsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Controls\GroupedListWithDeD.xaml.cs">
+      <DependentUpon>GroupedListWithDeD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Map\BingMapsRestClient.cs" />
     <Compile Include="Samples\Map\GeoLocationPageViewModel.cs" />
     <Compile Include="Samples\Animations\Animations.xaml.cs">
@@ -344,6 +347,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Controls\ControlsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Controls\GroupedListWithDeD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
