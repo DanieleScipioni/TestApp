@@ -141,6 +141,9 @@
     </Compile>
     <Compile Include="Samples\Map\MapServiceSettings.cs" />
     <Compile Include="Samples\Map\RenderImageFlag.cs" />
+    <Compile Include="Samples\Ocr\OcrPage.xaml.cs">
+      <DependentUpon>OcrPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\PathButton\PathButtonPage.xaml.cs">
       <DependentUpon>PathButtonPage.xaml</DependentUpon>
     </Compile>
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Map\GeoLocationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Ocr\OcrPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,7 @@ using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.Rsa;
 using Windows.UI.Xaml.Data;
+using TestAppUWP.Samples.Ocr;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -31,6 +32,7 @@ namespace TestAppUWP.Samples.RootNavigation
             if (type == typeof(CalendarExplorer)) return "\xE787";
             if (type == typeof(AccountPage)) return "\xE910";
             if (type == typeof(WebPage)) return "\xE701";
+            if (type == typeof(OcrPage)) return "\xE8C1";
             return "\xF142";
         }
 

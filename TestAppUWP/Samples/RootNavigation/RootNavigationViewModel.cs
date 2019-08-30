@@ -14,6 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+using TestAppUWP.Samples.Ocr;
 
 namespace TestAppUWP.Samples.RootNavigation
 {
@@ -56,7 +57,8 @@ namespace TestAppUWP.Samples.RootNavigation
                 typeof(WebPage),
                 typeof(PathButtonPage),
                 typeof(CalendarExplorer),
-                typeof(AccountPage)
+                typeof(AccountPage),
+                typeof(OcrPage)
             };
 
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
