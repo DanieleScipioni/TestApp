@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppUWP", "TestAppUWP\TestAppUWP.csproj", "{B58CA64B-4F76-4907-9A12-5DD92B62F2E9}"
 EndProject
@@ -73,7 +73,6 @@ Global
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|ARM.Deploy.0 = Debug|ARM
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x64.ActiveCfg = Debug|x64
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x64.Build.0 = Debug|x64
-		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x64.Deploy.0 = Debug|x64
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x86.ActiveCfg = Debug|x86
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x86.Build.0 = Debug|x86
 		{8CA764AC-B9BD-44D3-BFB2-1F85059FB840}.Debug|x86.Deploy.0 = Debug|x86
@@ -111,7 +110,6 @@ Global
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|ARM.Deploy.0 = Debug|ARM
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x64.ActiveCfg = Debug|x64
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x64.Build.0 = Debug|x64
-		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x64.Deploy.0 = Debug|x64
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x86.ActiveCfg = Debug|x86
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x86.Build.0 = Debug|x86
 		{019EB51E-929A-4212-B9BB-1E1132BB350B}.Debug|x86.Deploy.0 = Debug|x86
