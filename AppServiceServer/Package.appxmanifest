@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="AppServiceServer" Publisher="CN=pr00081" Version="1.0.0.0" />
+  <Identity Name="AppServiceServer" Publisher="CN=Daniele" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="905d881a-b00b-4a42-9829-74d640b454a7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>AppServiceServer</DisplayName>
-    <PublisherDisplayName>pr00081</PublisherDisplayName>
+    <PublisherDisplayName>Daniele</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

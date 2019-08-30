@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="6c38ef62-10a2-4564-b5c5-39210cca39ab" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>TestAppUWP.UnitTest</DisplayName>
-    <PublisherDisplayName>pr00081</PublisherDisplayName>
+    <PublisherDisplayName>Daniele</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
