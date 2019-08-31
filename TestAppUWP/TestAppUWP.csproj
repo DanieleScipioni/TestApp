@@ -475,6 +475,10 @@
       <Project>{e5b2f002-2ba4-4e86-8a9a-5e35c47a37cc}</Project>
       <Name>BackgroudTask</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestAppUWP.View\TestAppUWP.View.csproj">
+      <Project>{b6ba5ee2-b2fd-4b11-b57f-e06c0238c190}</Project>
+      <Name>TestAppUWP.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Samples\BlankPage\" />
