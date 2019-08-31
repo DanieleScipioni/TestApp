@@ -101,6 +101,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CanvasDraw\DrawRectangleOnCanvas.cs" />
     <Compile Include="Converters\OcrLineToStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\TestAppUWP.View.rd.xml" />
