@@ -74,7 +74,7 @@ namespace TestAppUWP.View.CanvasDraw
             {
                 double currentX = Canvas.GetLeft(_rectangle);
                 double nextWidth = _rectangle.Width - (point.X - currentX);
-                if (nextWidth > 10)
+                if (nextWidth > 10 && point.X > 0)
                 {
                     Canvas.SetLeft(_rectangle, point.X);
                     Canvas.SetLeft(_topLeftThumb, point.X - _topLeftAdjustment);
@@ -83,7 +83,7 @@ namespace TestAppUWP.View.CanvasDraw
 
                 double currentY = Canvas.GetTop(_rectangle);
                 double nextHeight = _rectangle.Height - (point.Y - currentY);
-                if (nextHeight > 10)
+                if (nextHeight > 10 && point.Y > 0)
                 {
                     Canvas.SetTop(_rectangle, point.Y);
                     Canvas.SetTop(_topLeftThumb, point.Y - _topLeftAdjustment);
@@ -94,7 +94,7 @@ namespace TestAppUWP.View.CanvasDraw
             {
                 double currentX = Canvas.GetLeft(_rectangle) + _rectangle.Width;
                 double nextWidth = _rectangle.Width + (point.X - currentX);
-                if (nextWidth > 10)
+                if (nextWidth > 10 && point.X < _canvas.ActualWidth)
                 {
                     _rectangle.Width = nextWidth;
                     Canvas.SetLeft(_bottomRightThumb, Canvas.GetLeft(_rectangle) + _rectangle.Width - _bottomRightAdjustment);
@@ -102,7 +102,7 @@ namespace TestAppUWP.View.CanvasDraw
 
                 double currentY = Canvas.GetTop(_rectangle) + _rectangle.Height;
                 double nextHeight = _rectangle.Height + (point.Y - currentY);
-                if (nextHeight > 10)
+                if (nextHeight > 10 && point.Y < _canvas.ActualHeight)
                 {
                     _rectangle.Height = nextHeight;
                     Canvas.SetTop(_bottomRightThumb, Canvas.GetTop(_rectangle) + _rectangle.Height - _bottomRightAdjustment);
