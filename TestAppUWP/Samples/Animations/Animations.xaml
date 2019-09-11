@@ -3,17 +3,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:cartAnimation1="using:TestAppUWP.Samples.Animations.CartAnimation"
-      xmlns:colorAnimation1="using:TestAppUWP.Samples.Animations.ColorAnimation"
+      xmlns:cartAnimation="using:TestAppUWP.Samples.Animations.CartAnimation"
+      xmlns:colorAnimation="using:TestAppUWP.Samples.Animations.ColorAnimation"
+      xmlns:dropShadow="using:TestAppUWP.Samples.Animations.DropShadow"
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot >
+            <PivotItem Header="Drop shadow">
+                <dropShadow:DropShadowPage/>
+            </PivotItem>
             <PivotItem Header="Add to cart">
-                <cartAnimation1:CartAnimationPage/>
+                <cartAnimation:CartAnimationPage/>
             </PivotItem>
             <PivotItem Header="Color animation">
-                <colorAnimation1:ColorAnimation/>
+                <colorAnimation:ColorAnimation/>
             </PivotItem>
         </Pivot>
     </Grid>
