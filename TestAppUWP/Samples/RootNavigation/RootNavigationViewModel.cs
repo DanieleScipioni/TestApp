@@ -37,6 +37,13 @@ namespace TestAppUWP.Samples.RootNavigation
                 if (!SetProperty(ref _selectedPageIndex, value)) return;
                 Type sourcePageType = Pages[_selectedPageIndex];
                 RootFrame.Navigate(sourcePageType);
+#if DEBUG
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+#endif
             }
         }
 
@@ -88,6 +95,13 @@ namespace TestAppUWP.Samples.RootNavigation
 
                 RootFrame.GoBack();
                 args.Handled = true;
+#if DEBUG
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+#endif
             };
 
             if (previousExecutionState == ApplicationExecutionState.Terminated)
