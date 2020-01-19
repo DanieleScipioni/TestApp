@@ -1,4 +1,5 @@
-﻿using TestAppUWP.Samples.CertTutorial;
+﻿using System;
+using TestAppUWP.Samples.CertTutorial;
 using TestAppUWP.Samples.RootNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -33,10 +34,10 @@ namespace TestAppUWP
                 Window.Current.Content = rootContent;
             }
 
-            var type = typeof(SamePage);
+            Type type = typeof(SamePage);
             if (e.TileId.StartsWith(type.Name))
             {
-                var landingPageType = typeof(CertTutorial);
+                Type landingPageType = typeof(CertTutorial);
                 string landingParams = e.Arguments;
                 _rootNavigationViewModel.SetLandingPage(landingPageType, landingParams);
             }

@@ -131,12 +131,6 @@
       <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AppServiceServerBgTask\AppServiceServerBgTask.csproj">
-      <Project>{2208313e-2b34-4e6f-8ec9-e940f2ee5c56}</Project>
-      <Name>AppServiceServerBgTask</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
