@@ -104,7 +104,7 @@
     <Compile Include="Converters\ListToCommaSeparatedStringConverter.cs" />
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
-    <Compile Include="Samples\Animations\DropShadow\DropShadowPage.xaml.cs">
+    <Compile Include="Samples\Animations\DropShadowStuff\DropShadowPage.xaml.cs">
       <DependentUpon>DropShadowPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Ocr\OcrPageViewModel.cs" />
@@ -333,7 +333,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\Animations\DropShadow\DropShadowPage.xaml">
+    <Page Include="Samples\Animations\DropShadowStuff\DropShadowPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -486,6 +486,7 @@
       <Name>TestAppUWP.View</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

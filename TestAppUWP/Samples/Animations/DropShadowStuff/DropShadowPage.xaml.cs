@@ -14,7 +14,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestAppUWP.Samples.Animations.DropShadow
+namespace TestAppUWP.Samples.Animations.DropShadowStuff
 {
     public sealed partial class DropShadowPage
     {
@@ -34,7 +34,7 @@ namespace TestAppUWP.Samples.Animations.DropShadow
             // Compare cart animation code with
             // https://stackoverflow.com/questions/38361081/uwp-composition-apply-opacity-mask-to-top-30px-of-a-listview
 
-            Windows.UI.Composition.DropShadow dropShadow = compositor.CreateDropShadow();
+            DropShadow dropShadow = compositor.CreateDropShadow();
             dropShadow.BlurRadius = 10f;
             dropShadow.Color = Colors.Black;
             dropShadow.Offset = new Vector3(10f, 10f, 0f);

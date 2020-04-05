@@ -5,13 +5,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:cartAnimation="using:TestAppUWP.Samples.Animations.CartAnimation"
       xmlns:colorAnimation="using:TestAppUWP.Samples.Animations.ColorAnimation"
-      xmlns:dropShadow="using:TestAppUWP.Samples.Animations.DropShadow"
+      xmlns:dropShadowStuff="using:TestAppUWP.Samples.Animations.DropShadowStuff"
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot >
             <PivotItem Header="Drop shadow">
-                <dropShadow:DropShadowPage/>
+                <dropShadowStuff:DropShadowPage/>
             </PivotItem>
             <PivotItem Header="Add to cart">
                 <cartAnimation:CartAnimationPage/>
