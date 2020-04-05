@@ -1,20 +1,11 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Composition;
-using System;
+﻿using System;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using TestAppUWP.Core;
 using Windows.Foundation;
-using Windows.Graphics.DirectX;
-using Windows.Graphics.Display;
-using Windows.Graphics.Imaging;
-using Windows.Storage.Streams;
-using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace TestAppUWP.Samples.Animations.CartAnimation
 {
@@ -23,23 +14,17 @@ namespace TestAppUWP.Samples.Animations.CartAnimation
         private readonly FrameworkElement _rootElement;
         private readonly Compositor _compositor;
         private readonly ContainerVisual _containerVisual;
-        private readonly CanvasDevice _canvasDevice;
-        private readonly CompositionGraphicsDevice _graphicsDevice;
 
         public AddToCartAnimation(FrameworkElement rootElement)
         {
             _rootElement = rootElement;
             _compositor = ElementCompositionPreview.GetElementVisual(_rootElement).Compositor;
             _containerVisual = _compositor.CreateContainerVisual();
-            _canvasDevice = new CanvasDevice();
-            _graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(_compositor, _canvasDevice);
             ElementCompositionPreview.SetElementChildVisual(_rootElement, _containerVisual);
         }
 
         public void Dispose()
         {
-            _graphicsDevice.Dispose();
-            _canvasDevice.Dispose();
             _containerVisual.Dispose();
             //_compositor.Dispose();
         }
@@ -48,7 +33,7 @@ namespace TestAppUWP.Samples.Animations.CartAnimation
         {
             Point point = sourceElement.TransformToVisual(_rootElement).TransformPoint(new Point(0, 0));
 
-            CompositionDrawingSurface surface = await GetCompositionDrawingSurface(sourceElement);
+            CompositionDrawingSurface surface = await CompositionDrawingSurfaceFacade1.GetCompositionDrawingSurface(sourceElement, _compositor);
 
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
@@ -99,7 +84,7 @@ namespace TestAppUWP.Samples.Animations.CartAnimation
         {
             Point point = sourceElement.TransformToVisual(_rootElement).TransformPoint(new Point(0, 0));
 
-            CompositionDrawingSurface surface = await GetCompositionDrawingSurface(sourceElement);
+            CompositionDrawingSurface surface = await CompositionDrawingSurfaceFacade1.GetCompositionDrawingSurface(sourceElement, _compositor);
 
             SpriteVisual spriteVisual = _compositor.CreateSpriteVisual();
             spriteVisual.Brush = _compositor.CreateSurfaceBrush(surface);
@@ -152,53 +137,6 @@ namespace TestAppUWP.Samples.Animations.CartAnimation
             sizeAnimation.Dispose();
         }
 
-        private async Task<CompositionDrawingSurface> GetCompositionDrawingSurface(FrameworkElement frameworkElement)
-        {
-            var renderTargetBitmap = new RenderTargetBitmap();
-            await renderTargetBitmap.RenderAsync(frameworkElement);
-
-            CanvasBitmap canvasBitmap = await GetCanvasBitmap(renderTargetBitmap);
-
-            using (canvasBitmap)
-            {
-                return GetCompositionDrawingSurface(canvasBitmap);
-            }
-        }
-
-        private CompositionDrawingSurface GetCompositionDrawingSurface(CanvasBitmap canvasBitmap)
-        {
-            CompositionDrawingSurface surface = _graphicsDevice.CreateDrawingSurface(
-                new Size(canvasBitmap.Size.Width, canvasBitmap.Size.Height),
-                DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Ignore);
-            using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(surface))
-            {
-                session.Clear(Color.FromArgb(0, 0, 0, 0));
-                session.DrawImage(canvasBitmap,
-                    new Rect(0, 0, surface.Size.Width, surface.Size.Height),
-                    new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
-            }
-            return surface;
-        }
-
-        private async Task<CanvasBitmap> GetCanvasBitmap(RenderTargetBitmap renderTargetBitmap)
-        {
-            CanvasBitmap canvasBitmap;
-            using (var stream = new InMemoryRandomAccessStream())
-            {
-                IBuffer buffer = await renderTargetBitmap.GetPixelsAsync();
-                DisplayInformation displayInformation = DisplayInformation.GetForCurrentView();
-
-                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.BmpEncoderId, stream);
-                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore,
-                    (uint)renderTargetBitmap.PixelWidth,
-                    (uint)renderTargetBitmap.PixelHeight, displayInformation.LogicalDpi, displayInformation.LogicalDpi,
-                    buffer.ToArray());
-                await encoder.FlushAsync();
-                canvasBitmap = await CanvasBitmap.LoadAsync(_canvasDevice, stream);
-            }
-            return canvasBitmap;
-        }
-
         private Vector3 GetTargetOffset(FrameworkElement frameworkElement)
         {
             Point targetPoint = frameworkElement.TransformToVisual(_rootElement)
@@ -216,6 +154,5 @@ namespace TestAppUWP.Samples.Animations.CartAnimation
             animation.IterationBehavior = AnimationIterationBehavior.Count;
             animation.IterationCount = 1;
         }
-
     }
 }
