@@ -3,16 +3,39 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-        <Button x:Name="Button" Style="{StaticResource TextBlockButtonStyle}">
-            <Border x:Name="Border" CornerRadius="20" Width="100" Height="200"
-                    BorderBrush="DarkRed" BorderThickness="2">
-                <TextBlock Text="A" Style="{StaticResource TitleTextBlockStyle}"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"/>
-            </Border>
-        </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border x:Name="BorderExternal"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    BorderThickness="0" Background="Transparent"/>
+            <Button Grid.Column="0" x:Name="Button" Style="{StaticResource TextBlockButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border x:Name="Border" CornerRadius="20" Width="100" Height="200"
+                        BorderBrush="DarkRed" BorderThickness="2" Background="AntiqueWhite">
+                    <TextBlock Text="A" Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                    </Border>
+            </Button>
+        </Grid>
+        <controls:DropShadowPanel Grid.Column="1"
+                                  OffsetX="10" OffsetY="10" OffsetZ="00"
+                                  BlurRadius="10"
+                                  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Style="{StaticResource TextBlockButtonStyle}">
+                <Border CornerRadius="20" Width="100" Height="200"
+                        BorderBrush="DarkRed" BorderThickness="2" Background="AntiqueWhite">
+                    <TextBlock Text="A" Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
+            </Button>
+        </controls:DropShadowPanel>
     </Grid>
 </Page>
