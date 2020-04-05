@@ -1,18 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Composition;
-using System;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System.Numerics;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Graphics.DirectX;
-using Windows.Graphics.Display;
-using Windows.Storage.Streams;
+using TestAppUWP.Core;
 using Windows.UI;
 using Windows.UI.Composition;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace TestAppUWP.Samples.Animations.DropShadowStuff
 {
@@ -38,7 +29,7 @@ namespace TestAppUWP.Samples.Animations.DropShadowStuff
             dropShadow.BlurRadius = 10f;
             dropShadow.Color = Colors.Black;
             dropShadow.Offset = new Vector3(10f, 10f, 0f);
-            dropShadow.Mask = await A(Button, compositor);
+            dropShadow.Mask = await CompositionDrawingSurfaceFacade2.GetCompositionSurfaceBrush(Button, compositor);
             //dropShadow.SourcePolicy = CompositionDropShadowSourcePolicy.InheritFromVisualContent;
 
             LayerVisual layerVisual = compositor.CreateLayerVisual();
@@ -55,38 +46,6 @@ namespace TestAppUWP.Samples.Animations.DropShadowStuff
             {
                 spriteVisual.Size = new Vector2((float) Button.ActualWidth, (float) Button.ActualHeight);
             };
-        }
-
-        private async Task<CompositionSurfaceBrush> A(UIElement uiElement, Compositor compositor)
-        {
-            var bitmap = new RenderTargetBitmap();
-            await bitmap.RenderAsync(uiElement);
-            IBuffer pixels = await bitmap.GetPixelsAsync();
-
-            float dpi = DisplayInformation.GetForCurrentView().LogicalDpi;
-
-            var canvasDevice = new CanvasDevice();
-            CompositionGraphicsDevice compositionDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, canvasDevice);
-
-            CompositionDrawingSurface drawingSurface;
-            using (CanvasBitmap canvasBitmap = CanvasBitmap.CreateFromBytes(
-                    canvasDevice, pixels.ToArray(),
-                    bitmap.PixelWidth, bitmap.PixelHeight,
-                    DirectXPixelFormat.B8G8R8A8UIntNormalized, dpi))
-            {
-                drawingSurface =
-                    compositionDevice.CreateDrawingSurface(
-                        new Size(bitmap.PixelWidth, bitmap.PixelHeight),
-                        DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
-                using (CanvasDrawingSession session = CanvasComposition.CreateDrawingSession(drawingSurface))
-                {
-                    // here we draw just the part of the background image we wish to use to overlay
-                    session.DrawImage(canvasBitmap, 0, 0,
-                        new Rect(0, 0, canvasBitmap.Size.Width, canvasBitmap.Size.Height));
-                }
-            }
-
-            return compositor.CreateSurfaceBrush(drawingSurface);
         }
     }
 }

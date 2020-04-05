@@ -105,6 +105,7 @@
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Core\CompositionDrawingSurfaceFacade1.cs" />
+    <Compile Include="Core\CompositionDrawingSurfaceFacade2.cs" />
     <Compile Include="Samples\Animations\DropShadowStuff\DropShadowPage.xaml.cs">
       <DependentUpon>DropShadowPage.xaml</DependentUpon>
     </Compile>
