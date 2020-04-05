@@ -106,9 +106,13 @@
     <Compile Include="Converters\UriToImageSourceConvertere.cs" />
     <Compile Include="Core\CompositionDrawingSurfaceFacade1.cs" />
     <Compile Include="Core\CompositionDrawingSurfaceFacade2.cs" />
+    <Compile Include="Samples\Animations\DropShadowStuff\DropShadowPage2.xaml.cs">
+      <DependentUpon>DropShadowPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Animations\DropShadowStuff\DropShadowPage.xaml.cs">
       <DependentUpon>DropShadowPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Animations\DropShadowStuff\Sun.cs" />
     <Compile Include="ViewModels\Ocr\OcrPageViewModel.cs" />
     <Compile Include="Samples\Accounts\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
@@ -334,6 +338,10 @@
     <Page Include="Samples\Animations\Animations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Animations\DropShadowStuff\DropShadowPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Animations\DropShadowStuff\DropShadowPage.xaml">
       <SubType>Designer</SubType>
