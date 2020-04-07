@@ -13,6 +13,9 @@
             <PivotItem Header="Drop shadow">
                 <dropShadowStuff:DropShadowPage/>
             </PivotItem>
+            <PivotItem Header="Drop shadow 2">
+                <dropShadowStuff:DropShadowPage2/>
+            </PivotItem>
             <PivotItem Header="Add to cart">
                 <cartAnimation:CartAnimationPage/>
             </PivotItem>
