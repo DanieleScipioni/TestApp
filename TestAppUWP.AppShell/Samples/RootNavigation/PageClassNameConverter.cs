@@ -1,14 +1,14 @@
 ﻿using System;
+using TestAppUWP.AppShell.Samples.Calendar;
 using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations;
-using TestAppUWP.Samples.Calendar;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
+using TestAppUWP.Samples.Ocr;
 using TestAppUWP.Samples.Rsa;
 using Windows.UI.Xaml.Data;
-using TestAppUWP.Samples.Ocr;
 
-namespace TestAppUWP.Samples.RootNavigation
+namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
     public class PageClassNameConverter : IValueConverter
     {
@@ -24,8 +24,8 @@ namespace TestAppUWP.Samples.RootNavigation
         private static string ConvertSymbol(Type type)
         {
             if (type == typeof(AnimationsOverviewPage)) return "\xE790";
-            if (type == typeof(CertTutorial.CertTutorial)) return "\xEB95";
-            if (type == typeof(InterControlAnimation.InterControlAnimation)) return "\xED5F";
+            if (type == typeof(TestAppUWP.Samples.CertTutorial.CertTutorial)) return "\xEB95";
+            if (type == typeof(TestAppUWP.Samples.InterControlAnimation.InterControlAnimation)) return "\xED5F";
             if (type == typeof(MapPage)) return "\xE909";
             if (type == typeof(GeoLocationPage)) return "\xE707";
             if (type == typeof(ControlsPage)) return "\xE7BC";

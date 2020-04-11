@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 
-namespace TestAppUWP.Samples.RootNavigation
+namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
     public sealed partial class RootNavigationPage
     {

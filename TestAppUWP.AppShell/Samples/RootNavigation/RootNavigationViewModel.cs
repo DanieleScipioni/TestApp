@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestAppUWP.AppShell.Samples.Calendar;
 using TestAppUWP.Core;
 using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations;
-using TestAppUWP.Samples.Calendar;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
+using TestAppUWP.Samples.Ocr;
 using TestAppUWP.Samples.PathButton;
 using TestAppUWP.Samples.Rsa;
 using Windows.ApplicationModel.Activation;
@@ -14,9 +15,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using TestAppUWP.Samples.Ocr;
 
-namespace TestAppUWP.Samples.RootNavigation
+namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
     internal class RootNavigationViewModel : BindableBase
     {
@@ -56,8 +56,8 @@ namespace TestAppUWP.Samples.RootNavigation
             Pages = new List<Type>
             {
                 typeof(AnimationsOverviewPage),
-                typeof(CertTutorial.CertTutorial),
-                typeof(InterControlAnimation.InterControlAnimation),
+                typeof(TestAppUWP.Samples.CertTutorial.CertTutorial),
+                typeof(TestAppUWP.Samples.InterControlAnimation.InterControlAnimation),
                 typeof(MapPage),
                 typeof(GeoLocationPage),
                 typeof(ControlsPage),

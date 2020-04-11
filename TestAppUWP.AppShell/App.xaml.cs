@@ -1,10 +1,10 @@
 ﻿using System;
+using TestAppUWP.AppShell.Samples.RootNavigation;
 using TestAppUWP.Samples.CertTutorial;
-using TestAppUWP.Samples.RootNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 
-namespace TestAppUWP
+namespace TestAppUWP.AppShell
 {
     sealed partial class App
     {

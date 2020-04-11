@@ -3,7 +3,7 @@ using Windows.ApplicationModel.Appointments;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace TestAppUWP.Samples.Calendar
+namespace TestAppUWP.AppShell.Samples.Calendar
 {
     public sealed partial class CalendarUc
     {
