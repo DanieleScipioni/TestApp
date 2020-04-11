@@ -41,7 +41,7 @@
                 <DataTemplate x:DataType="userControls:StringWrapper">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Content "/>
-                        <TextBlock Text="{x:Bind String, Mode=OneWay}"/>
+                        <TextBlock Text="{x:Bind String}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
