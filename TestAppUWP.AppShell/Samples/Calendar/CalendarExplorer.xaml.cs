@@ -71,7 +71,7 @@ namespace TestAppUWP.AppShell.Samples.Calendar
             await DeleteAppointmentCalendar(appointmentCalendarAdapter);
         }
 
-        internal async Task DeleteAppointmentCalendar(AppointmentCalendarAdapter appointmentCalendarAdapter)
+        private async Task DeleteAppointmentCalendar(AppointmentCalendarAdapter appointmentCalendarAdapter)
         {
             if (await appointmentCalendarAdapter.DeleteAsync())
             {
@@ -170,7 +170,7 @@ namespace TestAppUWP.AppShell.Samples.Calendar
             await ResetError(appointmentCalendarAdapter);
         }
 
-        internal async Task ResetError(AppointmentCalendarAdapter appointmentCalendarAdapter)
+        private async Task ResetError(AppointmentCalendarAdapter appointmentCalendarAdapter)
         {
             AppointmentCalendar appointmentCalendar = appointmentCalendarAdapter.AppointmentCalendar;
             int indexOf = _appointmentCalendarAdapters.IndexOf(appointmentCalendarAdapter);
