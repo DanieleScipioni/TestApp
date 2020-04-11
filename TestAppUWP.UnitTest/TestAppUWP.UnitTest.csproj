@@ -136,7 +136,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestAppUWP\TestAppUWP.csproj">
+    <ProjectReference Include="..\TestAppUWP.AppShell\TestAppUWP.csproj">
       <Project>{b58ca64b-4f76-4907-9a12-5dd92b62f2e9}</Project>
       <Name>TestAppUWP</Name>
     </ProjectReference>
