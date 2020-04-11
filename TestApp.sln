@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppUWP", "TestAppUWP.AppShell\TestAppUWP.csproj", "{B58CA64B-4F76-4907-9A12-5DD92B62F2E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppUWP.AppShell", "TestAppUWP.AppShell\TestAppUWP.AppShell.csproj", "{B58CA64B-4F76-4907-9A12-5DD92B62F2E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroudTask", "BackgroudTask\BackgroudTask.csproj", "{E5B2F002-2BA4-4E86-8A9A-5E35C47A37CC}"
 EndProject
