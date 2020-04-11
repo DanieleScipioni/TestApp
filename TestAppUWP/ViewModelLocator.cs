@@ -16,8 +16,6 @@ namespace TestAppUWP
         {
             switch (value)
             {
-                case MainPage _:
-                    return new MainPageViewModel();
                 case FirstPage _:
                     return new FirstPageViewModel();
                 case SecondPage _:
