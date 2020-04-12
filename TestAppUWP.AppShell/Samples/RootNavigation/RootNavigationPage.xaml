@@ -23,7 +23,7 @@
                    PanePlacement="Left" OpenPaneLength="324" DisplayMode="CompactOverlay" CompactPaneLength="48"
                    Content="{x:Bind _viewModel.RootFrame}" PaneBackground="Transparent">
             <SplitView.Pane>
-                <ListView Margin="0,48,0,0" ItemsSource="{x:Bind _viewModel.Pages}" ItemTemplate="{StaticResource MenuDataTemplate}"
+                <ListView Margin="0,40,0,0" ItemsSource="{x:Bind _viewModel.Pages}" ItemTemplate="{StaticResource MenuDataTemplate}"
                           Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
                           SelectedIndex="{x:Bind _viewModel.SelectedPageIndex, Mode=TwoWay}" >
                     <ListView.ItemContainerStyle>
@@ -34,7 +34,7 @@
                 </ListView>
             </SplitView.Pane>
         </SplitView>
-        <Button Grid.Row="0" Width="48" Height="48" VerticalAlignment="Top" Click="HamburgerButton_OnClick">
+        <Button Grid.Row="0" Width="48" Height="40" VerticalAlignment="Top" Click="HamburgerButton_OnClick">
             <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE700;"/>
         </Button>
     </Grid>

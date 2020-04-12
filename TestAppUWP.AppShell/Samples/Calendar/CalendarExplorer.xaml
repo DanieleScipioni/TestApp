@@ -29,11 +29,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <CommandBar DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+        <CommandBar DefaultLabelPosition="Right" Style="{StaticResource TestAppCommandBarStyle}">
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal" Margin="12,0">
                     <TextBlock Text="AppointmentStoreAccessType:" VerticalAlignment="Center"/>
-                    <ComboBox ItemsSource="{x:Bind _appointmentStoreAccessType}" SelectedIndex="{x:Bind SelectedAppointmentStoreAccessTypeIndex, Mode=TwoWay}" Margin="12,0"/>
+                    <ComboBox ItemsSource="{x:Bind _appointmentStoreAccessType}" Margin="12,0"
+                              SelectedIndex="{x:Bind SelectedAppointmentStoreAccessTypeIndex, Mode=TwoWay}"/>
                 </StackPanel>
             </CommandBar.Content>
             <AppBarButton x:Name="BackButton" Icon="Back" Label="Back" Click="BackButton_OnClick" Visibility="Collapsed"/>

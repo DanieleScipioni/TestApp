@@ -38,6 +38,9 @@
             <local:ViewModelLocator x:Key="ViewModelLocator"/>
             <converters:TrueToCollapsedConverter x:Key="TrueToCollapsedConverter"/>
             <converters:ListToCommaSeparatedStringConverter x:Key="ListToCommaSeparatedStringConverter"/>
+            <Style x:Key="TestAppCommandBarStyle" TargetType="CommandBar" BasedOn="{StaticResource CommandBarWithoutRevealStyle}">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
