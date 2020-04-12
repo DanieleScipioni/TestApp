@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:calendar="using:TestAppUWP.AppShell.Samples.Calendar"
       xmlns:appointments="using:Windows.ApplicationModel.Appointments"
+      xmlns:controls="using:TestAppUWP.View.UI.Controls"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
@@ -57,7 +58,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Grid Grid.Row="1" x:Name="AppointmentSection" Visibility="Collapsed">
-            <GridView x:Name="AppointmentListView">
+            <controls:AdaptiveGridView x:Name="AppointmentListView" DesiredMeasure="300">
                 <GridView.ItemContainerStyle>
                     <Style TargetType="GridViewItem">
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -87,7 +88,7 @@
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>
-            </GridView>
+            </controls:AdaptiveGridView>
         </Grid>
     </Grid>
 </Page>
