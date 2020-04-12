@@ -32,9 +32,6 @@
                     <SolidColorBrush x:Key="JumpListDefaultEnabledBackground" Color="{ThemeResource SystemAccentColor}" />-->
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="StandardStyles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
             <local:ViewModelLocator x:Key="ViewModelLocator"/>
             <converters:TrueToCollapsedConverter x:Key="TrueToCollapsedConverter"/>
             <converters:ListToCommaSeparatedStringConverter x:Key="ListToCommaSeparatedStringConverter"/>
