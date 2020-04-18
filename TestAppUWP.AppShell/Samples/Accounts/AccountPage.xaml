@@ -4,6 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:accounts="using:TestAppUWP.Samples.Accounts"
+      xmlns:controls="using:TestAppUWP.View.UI.Controls"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
@@ -22,7 +23,8 @@
                 </StackPanel>
             </CommandBar.Content>
         </CommandBar>
-        <GridView Grid.Row="1" ItemsSource="{x:Bind _accountPageViewModel.UserDataAccounts, Mode=OneWay}">
+        <controls:AdaptiveGridView Grid.Row="1" DesiredMeasure="450"
+                                   ItemsSource="{x:Bind _accountPageViewModel.UserDataAccounts, Mode=OneWay}">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -35,7 +37,7 @@
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="accounts:UserDataAccountAdapter">
-                    <Grid Width="600">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -61,6 +63,6 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-        </GridView>
+        </controls:AdaptiveGridView>
     </Grid>
 </Page>
