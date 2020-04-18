@@ -8,7 +8,7 @@ namespace TestAppUWP.AppShell.Samples.Calendar
     public sealed partial class CalendarUc
     {
         private readonly AppointmentCalendarOtherAppWriteAccess[] _appointmentStoreAccessType =
-            (AppointmentCalendarOtherAppWriteAccess[]) Enum.GetValues(typeof(AppointmentCalendarOtherAppWriteAccess));
+            (AppointmentCalendarOtherAppWriteAccess[])Enum.GetValues(typeof(AppointmentCalendarOtherAppWriteAccess));
         private AppointmentCalendarAdapter _appointmentCalendarAdapter;
         private AppointmentCalendar _appointmentCalendar;
 
@@ -36,8 +36,16 @@ namespace TestAppUWP.AppShell.Samples.Calendar
             ErrorClick?.Invoke(this, _appointmentCalendarAdapter);
         }
 
-        private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
+        private async void DeleteButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (await new ContentDialog
+            {
+                Title = "Confirm",
+                Content = "Are you sure?",
+                PrimaryButtonText = "Yes",
+                CloseButtonText = "No",
+                DefaultButton = ContentDialogButton.Close
+            }.ShowAsync() != ContentDialogResult.Primary) return;
             DeleteClick?.Invoke(this, _appointmentCalendarAdapter);
         }
 
@@ -48,7 +56,7 @@ namespace TestAppUWP.AppShell.Samples.Calendar
             {
                 // ReSharper disable once PossibleNullReferenceException
                 _appointmentCalendarAdapter.OtherAppWriteAccess =
-                    (AppointmentCalendarOtherAppWriteAccess) comboBox.SelectedItem;
+                    (AppointmentCalendarOtherAppWriteAccess)comboBox.SelectedItem;
             }
         }
 
