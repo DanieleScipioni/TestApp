@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TestAppUWP.Core;
-using TestAppUWP.Samples.Accounts;
 using Windows.ApplicationModel.UserDataAccounts;
 
 namespace TestAppUWP.AppShell.Samples.Accounts

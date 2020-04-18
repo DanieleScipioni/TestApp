@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestAppUWP.AppShell.Samples.Accounts;
 using TestAppUWP.AppShell.Samples.Calendar;
 using TestAppUWP.AppShell.Samples.PathButton;
 using TestAppUWP.Core;
-using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;

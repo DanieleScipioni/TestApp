@@ -1,9 +1,10 @@
 ﻿using System;
-using Windows.ApplicationModel.UserDataAccounts;
-using Windows.UI.Xaml.Media.Imaging;
 using TestAppUWP.Core;
+using Windows.ApplicationModel.UserDataAccounts;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestAppUWP.Samples.Accounts
+namespace TestAppUWP.AppShell.Samples.Accounts
 {
     public class UserDataAccountAdapter : BindableBase
     {
@@ -29,15 +30,15 @@ namespace TestAppUWP.Samples.Accounts
         public bool AccountIconVisibile
         {
             get => _accountIconVisibile;
-            set => SetProperty(ref _accountIconVisibile, value);
+            private set => SetProperty(ref _accountIconVisibile, value);
         }
 
         private async void LoadIconFromAccount(UserDataAccount userDataAccount)
         {
-            var randomAccessStreamReference = userDataAccount.Icon;
+            IRandomAccessStreamReference randomAccessStreamReference = userDataAccount.Icon;
             if (randomAccessStreamReference == null) return;
             var bitmapImage = new BitmapImage();
-            using (var openReadAsync = await randomAccessStreamReference.OpenReadAsync())
+            using (IRandomAccessStreamWithContentType openReadAsync = await randomAccessStreamReference.OpenReadAsync())
             {
                 bitmapImage.SetSource(openReadAsync);
             }

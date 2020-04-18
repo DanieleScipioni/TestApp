@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestAppUWP.AppShell.Samples.Accounts;
 using Windows.ApplicationModel.UserDataAccounts;
 
-namespace TestAppUWP.Samples.Accounts
+namespace TestAppUWP.AppShell.Samples.Accounts
 {
     public sealed partial class AccountPage
     {
