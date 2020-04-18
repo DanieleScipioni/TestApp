@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace TestAppUWP.Converters
+namespace TestAppUWP.AppShell.Converters
 {
     public class TrueToCollapsedConverter : IValueConverter
     {
