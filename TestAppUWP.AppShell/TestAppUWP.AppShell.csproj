@@ -237,7 +237,6 @@
     <Compile Include="Pages\TextButtonPage.xaml.cs">
       <DependentUpon>TextButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PathIcon\ExtendedPathIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs" />
   </ItemGroup>
