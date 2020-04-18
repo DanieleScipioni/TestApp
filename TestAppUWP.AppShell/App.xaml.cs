@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using TestAppUWP.AppShell.Samples.RootNavigation;
 using TestAppUWP.Samples.CertTutorial;
 using Windows.ApplicationModel.Activation;
@@ -15,43 +16,40 @@ namespace TestAppUWP.AppShell
             InitializeComponent();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs e) {
+        protected override void OnLaunched(LaunchActivatedEventArgs args) {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 //DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
 
-            var rootContent = Window.Current.Content;
+            UIElement rootContent = Window.Current.Content;
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
             if (rootContent == null)
             {
-                _rootNavigationViewModel = new RootNavigationViewModel(e.PreviousExecutionState);
+                _rootNavigationViewModel = new RootNavigationViewModel(args.PreviousExecutionState);
                 rootContent = new RootNavigationPage { DataContext = _rootNavigationViewModel };
                 Window.Current.Content = rootContent;
             }
 
             Type type = typeof(SamePage);
-            if (e.TileId.StartsWith(type.Name))
+            if (args.TileId.StartsWith(type.Name))
             {
                 Type landingPageType = typeof(CertTutorial);
-                string landingParams = e.Arguments;
+                string landingParams = args.Arguments;
                 _rootNavigationViewModel.SetLandingPage(landingPageType, landingParams);
             }
 
-            if (e.PrelaunchActivated == false)
-            {
-                // Ensure the current window is active
-                Window.Current.Activate();
-            }
+            if (args.PrelaunchActivated) return;
+
+            // Ensure the current window is active
+            Window.Current.Activate();
         }
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            ActivationKind activationKind = args.Kind;
+            Debugger.Break();
         }
     }
 }
