@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI.Xaml.Data;
+using TestAppUWP.AppShell.Samples.Accounts;
 using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.Accounts;
 using TestAppUWP.Samples.Animations.ColorAnimation;
@@ -6,9 +8,8 @@ using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.Ocr;
 using TestAppUWP.ViewModels.Frame;
 using TestAppUWP.ViewModels.Ocr;
-using Windows.UI.Xaml.Data;
 
-namespace TestAppUWP
+namespace TestAppUWP.AppShell
 {
     public class ViewModelLocator : IValueConverter
     {
