@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-namespace TestAppUWP.Samples.PathButton
+namespace TestAppUWP.AppShell.Samples.PathButton
 {
     public sealed partial class PathButtonPage
     {

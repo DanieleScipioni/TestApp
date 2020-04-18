@@ -1,12 +1,10 @@
-﻿<Page
-    x:Class="TestAppUWP.Samples.PathButton.PathButtonPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pathButton="using:TestAppUWP.Samples.PathButton"
-    xmlns:system="using:System"
-    mc:Ignorable="d">
+﻿<Page x:Class="TestAppUWP.AppShell.Samples.PathButton.PathButtonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:pathButton="using:TestAppUWP.AppShell.Samples.PathButton"
+      mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="ButtonStyle" TargetType="ButtonBase">
             <Setter Property="Template">
@@ -81,14 +79,16 @@
                     <ResourceDictionary>
                         <ResourceDictionary.ThemeDictionaries>
                             <ResourceDictionary x:Key="Light">
+                                <!-- ReSharper disable Xaml.RedundantResource -->
                                 <SolidColorBrush x:Key="AppBarToggleButtonForegroundChecked" Color="Red"/>
                                 <SolidColorBrush x:Key="AppBarToggleButtonForegroundCheckedPointerOver" Color="Red"/>
+                                <!-- ReSharper restore Xaml.RedundantResource -->
                             </ResourceDictionary>
                         </ResourceDictionary.ThemeDictionaries>
                     </ResourceDictionary>
                 </AppBarToggleButton.Resources>
                 <AppBarToggleButton.Icon>
-                    <pathButton:StretchPathIcon Stretch="Uniform" x:Name="Uniform"
+                    <pathButton:StretchPathIcon Stretch="Uniform"
                                                 Data="M27,28H1c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h26c0.6,0,1,0.4,1,1v26C28,27.6,27.6,28,27,28z M2,26h24V2H2V26z M59,28H33 c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h26c0.6,0,1,0.4,1,1v26C60,27.6,59.6,28,59,28z M34,26h24V2H34V26z M27,60H1c-0.6,0-1-0.4-1-1 V33c0-0.6,0.4-1,1-1h26c0.6,0,1,0.4,1,1v26C28,59.6,27.6,60,27,60z M2,58h24V34H2V58z M59,60H33c-0.6,0-1-0.4-1-1V33 c0-0.6,0.4-1,1-1h26c0.6,0,1,0.4,1,1v26C60,59.6,59.6,60,59,60z M34,58h24V34H34V58z" />
                 </AppBarToggleButton.Icon>
             </AppBarToggleButton>
