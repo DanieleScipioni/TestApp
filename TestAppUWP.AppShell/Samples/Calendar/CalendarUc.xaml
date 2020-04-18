@@ -33,32 +33,19 @@
             <TextBlock VerticalAlignment="Center">SourceDisplayName: <Run Text="{x:Bind _appointmentCalendarAdapter.SourceDisplayName, Mode=OneWay}" FontWeight="SemiBold"/>
                 <LineBreak/>UserDataAccountId: <Run Text="{x:Bind _appointmentCalendarAdapter.AppointmentCalendar.UserDataAccountId}" FontWeight="SemiBold"/>
                 <LineBreak/>AppointmentCalendar.LocalId: <Run Text="{x:Bind _appointmentCalendarAdapter.AppointmentCalendar.LocalId}" FontWeight="SemiBold"/>
-            </TextBlock>
-            <ToggleSwitch x:Name="ShowDetailToggle" OnContent="Details" OffContent="Details"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="12,0">
-            <TextBlock Text="AppointmentCalendar.DisplayName"/>
-            <TextBox Text="{x:Bind _appointmentCalendarAdapter.DisplayName, Mode=TwoWay}" VerticalAlignment="Center"/>
-            <CheckBox IsChecked="{x:Bind _appointmentCalendarAdapter.IsHidden, Mode=TwoWay}" VerticalAlignment="Center" Content="IsHidden"/>
-        </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{x:Bind ShowDetailToggle.IsOn, Mode=OneWay}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.RowSpan="2">
-                <Run Text="CanCreateOrUpdateAppointments"/> <Run Text="{x:Bind _appointmentCalendar.CanCreateOrUpdateAppointments}" FontWeight="SemiBold"/><LineBreak/>
+                <LineBreak/><Run Text="CanCreateOrUpdateAppointments"/> <Run Text="{x:Bind _appointmentCalendar.CanCreateOrUpdateAppointments}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="DisplayColor"/> <Run Text="{x:Bind _appointmentCalendar.DisplayColor}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="OtherAppReadAccess"/> <Run Text="{x:Bind _appointmentCalendar.OtherAppReadAccess}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="SyncManager"/> <Run Text="{x:Bind _appointmentCalendarAdapter.SyncManager, Mode=OneWay}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="SummaryCardView"/> <Run Text="{x:Bind _appointmentCalendar.SummaryCardView}" FontWeight="SemiBold"/>
             </TextBlock>
-            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{x:Bind _appointmentStoreAccessType}"
-                      SelectedItem="{x:Bind _appointmentCalendarAdapter.OtherAppWriteAccess}"
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="12,0,0,0">
+            <TextBlock Text="AppointmentCalendar.DisplayName"/>
+            <TextBox Text="{x:Bind _appointmentCalendarAdapter.DisplayName, Mode=TwoWay}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{x:Bind _appointmentCalendarAdapter.IsHidden, Mode=TwoWay}" VerticalAlignment="Center" Content="IsHidden"/>
+            <ComboBox SelectedItem="{x:Bind _appointmentCalendarAdapter.OtherAppWriteAccess, Mode=OneWay}"
+                      ItemsSource="{x:Bind _appointmentStoreAccessType}"
                       SelectionChangedTrigger="Committed"
                       SelectionChanged="OtherAppWriteAccess_OnSelectionChanged">
                 <ComboBox.HeaderTemplate>
@@ -71,6 +58,6 @@
             </ComboBox>
             <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockButtonStyle}" Content="RegisterSyncManagerAsync"
                     Click="RegisterSyncManagerAsync_OnClick"/>
-        </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>
