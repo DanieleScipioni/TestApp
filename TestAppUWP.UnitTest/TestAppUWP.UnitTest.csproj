@@ -7,8 +7,8 @@
     <ProjectGuid>{019EB51E-929A-4212-B9BB-1E1132BB350B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestAppUWP.UnitTest</RootNamespace>
-    <AssemblyName>TestAppUWP.UnitTest</AssemblyName>
+    <RootNamespace>TestAppUWP.AppShell</RootNamespace>
+    <AssemblyName>TestAppUWP.AppShell.Test</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>

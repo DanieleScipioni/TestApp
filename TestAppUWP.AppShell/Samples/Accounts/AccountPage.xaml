@@ -17,7 +17,8 @@
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal" Margin="12,0">
                     <TextBlock Text="UserDataAccountStoreAccessType:" VerticalAlignment="Center"/>
-                    <ComboBox ItemsSource="{x:Bind _appointmentStoreAccessType}" SelectedItem="{x:Bind _accountPageViewModel.SelectedStoreType, Mode=TwoWay}" Margin="12,0"/>
+                    <ComboBox ItemsSource="{x:Bind _appointmentStoreAccessType}"
+                              SelectedItem="{x:Bind _accountPageViewModel.SelectedStoreType, Mode=TwoWay}" Margin="12,0"/>
                 </StackPanel>
             </CommandBar.Content>
         </CommandBar>

@@ -35,5 +35,6 @@
     <uap:Capability Name="appointments" />
     <rescap:Capability Name="appointmentsSystem" />
     <rescap:Capability Name="userDataAccountsProvider" />
+    <rescap:Capability Name="userDataSystem" />
   </Capabilities>
 </Package>

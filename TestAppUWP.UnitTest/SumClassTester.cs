@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestAppUWP.Data;
 
-namespace TestAppUWP.UnitTest
+namespace TestAppUWP.AppShell
 {
     [TestClass]
     public class SumClassTester
