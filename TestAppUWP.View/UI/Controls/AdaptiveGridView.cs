@@ -116,7 +116,7 @@ namespace TestAppUWP.View.UI.Controls
                 padding = Padding.Top + Padding.Bottom;
                 border = BorderThickness.Top + BorderThickness.Bottom;
             }
-            return (availableSpace - padding - panelMargin - border) / rowsOrColumns;
+            return Math.Floor((availableSpace - padding - panelMargin - border) / rowsOrColumns);
         }
 
         private static int CalculateRowsOrColumns(double containerSpace, double itemMeasure)
