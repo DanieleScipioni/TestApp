@@ -4,6 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:colorAnimation="using:TestAppUWP.AppShell.Samples.Animations.ColorAnimation"
+      xmlns:implicit="using:TestAppUWP.AppShell.Samples.Animations.Implicit"
       xmlns:cartAnimation="using:TestAppUWP.Samples.Animations.CartAnimation"
       xmlns:dropShadowStuff="using:TestAppUWP.Samples.Animations.DropShadowStuff"
       mc:Ignorable="d">
@@ -21,6 +22,9 @@
             </PivotItem>
             <PivotItem Header="Color animation">
                 <colorAnimation:ColorAnimation/>
+            </PivotItem>
+            <PivotItem Header="Implicit visual animation">
+                <implicit:ImplicitVisualAnimations/>
             </PivotItem>
         </Pivot>
     </Grid>
