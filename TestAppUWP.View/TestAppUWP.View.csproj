@@ -107,6 +107,7 @@
     <Compile Include="CanvasDraw\RectangleSelector.cs" />
     <Compile Include="Converters\OcrLineToStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VIsualTreeHelperUtils.cs" />
     <EmbeddedResource Include="Properties\TestAppUWP.View.rd.xml" />
   </ItemGroup>
   <ItemGroup>
