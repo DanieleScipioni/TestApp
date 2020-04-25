@@ -35,7 +35,7 @@
             </SplitView.Pane>
         </SplitView>
         <Button Grid.Row="0" Width="48" Height="40" VerticalAlignment="Top" Click="HamburgerButton_OnClick">
-            <TextBlock FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE700;"/>
+            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;"/>
         </Button>
     </Grid>
 </Page>
