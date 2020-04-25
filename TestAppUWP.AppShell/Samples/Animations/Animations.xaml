@@ -3,8 +3,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:colorAnimation="using:TestAppUWP.AppShell.Samples.Animations.ColorAnimation"
       xmlns:cartAnimation="using:TestAppUWP.Samples.Animations.CartAnimation"
-      xmlns:colorAnimation="using:TestAppUWP.Samples.Animations.ColorAnimation"
       xmlns:dropShadowStuff="using:TestAppUWP.Samples.Animations.DropShadowStuff"
       mc:Ignorable="d">
 

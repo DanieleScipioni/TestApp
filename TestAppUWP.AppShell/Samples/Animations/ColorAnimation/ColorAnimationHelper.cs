@@ -3,7 +3,7 @@ using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace TestAppUWP.Samples.Animations.ColorAnimation
+namespace TestAppUWP.AppShell.Samples.Animations.ColorAnimation
 {
     public static class ColorAnimationHelper
     {

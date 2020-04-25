@@ -1,5 +1,6 @@
 ﻿using System;
 using TestAppUWP.AppShell.Samples.Accounts;
+using TestAppUWP.AppShell.Samples.Animations.ColorAnimation;
 using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.Animations.ColorAnimation;
 using TestAppUWP.Samples.Map;

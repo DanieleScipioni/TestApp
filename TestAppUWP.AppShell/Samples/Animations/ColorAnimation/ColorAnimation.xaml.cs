@@ -1,9 +1,10 @@
-﻿using Windows.UI.Xaml;
+﻿using TestAppUWP.Samples.Animations.ColorAnimation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace TestAppUWP.Samples.Animations.ColorAnimation
+namespace TestAppUWP.AppShell.Samples.Animations.ColorAnimation
 {
     public sealed partial class ColorAnimation
     {
