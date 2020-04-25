@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 
-namespace TestAppUWP.Samples.Animations.DropShadowStuff
+namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 {
     public class Sun
     {

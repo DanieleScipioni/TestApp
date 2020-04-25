@@ -1,7 +1,7 @@
 ﻿using System;
 using TestAppUWP.AppShell.Samples.Accounts;
+using TestAppUWP.AppShell.Samples.Animations;
 using TestAppUWP.AppShell.Samples.Calendar;
-using TestAppUWP.Samples.Animations;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.Ocr;

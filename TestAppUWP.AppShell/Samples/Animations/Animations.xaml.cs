@@ -1,4 +1,4 @@
-﻿namespace TestAppUWP.Samples.Animations
+﻿namespace TestAppUWP.AppShell.Samples.Animations
 {
     public sealed partial class AnimationsOverviewPage 
     {

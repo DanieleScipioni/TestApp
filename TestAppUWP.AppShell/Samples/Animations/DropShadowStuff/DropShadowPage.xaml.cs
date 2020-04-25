@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TestAppUWP.Samples.Animations.DropShadowStuff
+namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 {
     public sealed partial class DropShadowPage
     {
