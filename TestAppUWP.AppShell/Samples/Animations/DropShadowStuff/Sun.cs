@@ -15,11 +15,13 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 {
     public class Sun
     {
+        private readonly Color _color;
         private readonly Dictionary<FrameworkElement, SpriteVisual> _visualByUiElement;
         private readonly Dictionary<FrameworkElement, List<FrameworkElement>> _shadowSourceByShadowHost;
 
-        public Sun()
+        public Sun(Color color)
         {
+            _color = color;
             _visualByUiElement = new Dictionary<FrameworkElement, SpriteVisual>();
             _shadowSourceByShadowHost = new Dictionary<FrameworkElement, List<FrameworkElement>>();
         }
@@ -35,7 +37,12 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             }
         }
 
-        public async Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost)
+        public Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost)
+        {
+            return DrawShadow(shadowSource, shadowHost, _color);
+        }
+
+        public async Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost, Color color)
         {
             Compositor compositor = ElementCompositionPreview.GetElementVisual(shadowHost).Compositor;
 
@@ -62,7 +69,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             DropShadow dropShadow = compositor.CreateDropShadow();
             dropShadow.BlurRadius = 5;
             dropShadow.Offset = new Vector3(10, 10, 0);
-            dropShadow.Color = Colors.DarkSlateGray;
+            dropShadow.Color = color;
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
             dropShadow.SourcePolicy = CompositionDropShadowSourcePolicy.Default;
 

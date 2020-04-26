@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Windows.UI;
 
 namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 {
@@ -15,8 +16,8 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 
         private async Task DropShadowMethod1()
         {
-            var sun = new Sun();
-            await sun.DrawShadow(ButtonsShadowHost, CentralGridShadowHost);
+            var sun = new Sun(Colors.DarkSlateGray);
+            await sun.DrawShadow(ButtonsShadowHost, CentralGridShadowHost, Colors.BurlyWood);
             await sun.DrawShadow(Button1, ButtonsShadowHost);
             await sun.DrawShadow(Button2, ButtonsShadowHost);
         }
