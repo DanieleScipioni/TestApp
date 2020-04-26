@@ -5,8 +5,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace TestAppUWP.AppShell.Core
 {
-    // ReSharper disable once InconsistentNaming
-    public static class IBufferExtension
+    public static class BufferExtension
     {
         public static async Task<InMemoryRandomAccessStream> ToInMemoryRandomAccessStream(this IBuffer buffer)
         {
