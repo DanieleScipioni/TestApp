@@ -52,6 +52,9 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
         {
             Compositor compositor = ElementCompositionPreview.GetElementVisual(shadowHost).Compositor;
 
+            SpriteVisual spriteVisual = compositor.CreateSpriteVisual();
+            _spriteVisualByUiElement.Add(shadowSource, spriteVisual);
+
             List<FrameworkElement> frameworkElements;
             ContainerVisual shadowHostContainerVisual;
             if (_shadowSourceByShadowHost.ContainsKey(shadowHost))
@@ -79,14 +82,11 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
             dropShadow.SourcePolicy = CompositionDropShadowSourcePolicy.Default;
 
-            SpriteVisual spriteVisual = compositor.CreateSpriteVisual();
             spriteVisual.Size = new Vector2((float)shadowSource.ActualWidth, (float)shadowSource.ActualHeight);
             spriteVisual.Shadow = dropShadow;
             spriteVisual.Offset = VisualOffset(shadowSource, shadowHost);
 
             shadowHostContainerVisual.Children.InsertAtTop(spriteVisual);
-
-            _spriteVisualByUiElement.Add(shadowSource, spriteVisual);
         }
 
         private async void ShadowSourceOnSizeChanged(object sender, SizeChangedEventArgs e)
