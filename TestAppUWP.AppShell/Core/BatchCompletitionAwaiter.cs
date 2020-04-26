@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Windows.UI.Composition;
 
-namespace TestAppUWP.Core
+namespace TestAppUWP.AppShell.Core
 {
     public class BatchCompletitionAwaiter
     {

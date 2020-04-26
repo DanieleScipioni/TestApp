@@ -7,7 +7,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestAppUWP.Core
+namespace TestAppUWP.AppShell.Core
 {
     // ReSharper disable once InconsistentNaming
     public static class UIElementExtension

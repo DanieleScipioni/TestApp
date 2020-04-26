@@ -13,7 +13,7 @@ using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestAppUWP.Core
+namespace TestAppUWP.AppShell.Core
 {
     public static class CompositionDrawingSurfaceFacade1
     {

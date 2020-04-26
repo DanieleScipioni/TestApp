@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using TestAppUWP.Core;
+using TestAppUWP.AppShell.Core;
 using Windows.Foundation;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
