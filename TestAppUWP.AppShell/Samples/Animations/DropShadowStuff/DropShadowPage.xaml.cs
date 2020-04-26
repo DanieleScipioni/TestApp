@@ -16,8 +16,8 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 
         private async Task DropShadowMethod1()
         {
-            var sun = new Sun(Colors.DarkSlateGray);
-            await sun.DrawShadow(ButtonsShadowHost, CentralGridShadowHost, Colors.BurlyWood);
+            var sun = new Sun(Colors.DarkSlateGray, 10, 10);
+            await sun.DrawShadow(ButtonsShadowHost, CentralGridShadowHost, Colors.BurlyWood, 20f, 20f);
             await sun.DrawShadow(Button1, ButtonsShadowHost);
             await sun.DrawShadow(Button2, ButtonsShadowHost);
         }

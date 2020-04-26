@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
-using TestAppUWP.Core;
+using TestAppUWP.AppShell.Core;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Composition;
@@ -16,12 +16,16 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
     public class Sun
     {
         private readonly Color _color;
+        private readonly float _offsetX;
+        private readonly float _offsetY;
         private readonly Dictionary<FrameworkElement, SpriteVisual> _visualByUiElement;
         private readonly Dictionary<FrameworkElement, List<FrameworkElement>> _shadowSourceByShadowHost;
 
-        public Sun(Color color)
+        public Sun(Color color, float offsetX, float offsetY)
         {
             _color = color;
+            _offsetX = offsetX;
+            _offsetY = offsetY;
             _visualByUiElement = new Dictionary<FrameworkElement, SpriteVisual>();
             _shadowSourceByShadowHost = new Dictionary<FrameworkElement, List<FrameworkElement>>();
         }
@@ -37,12 +41,14 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             }
         }
 
-        public Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost)
+        public Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost,
+            float? offsetX = null, float? offsetY = null)
         {
-            return DrawShadow(shadowSource, shadowHost, _color);
+            return DrawShadow(shadowSource, shadowHost, _color, offsetX, offsetY);
         }
 
-        public async Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost, Color color)
+        public async Task DrawShadow(FrameworkElement shadowSource, FrameworkElement shadowHost,
+            Color color, float? offsetX = null, float? offsetY = null)
         {
             Compositor compositor = ElementCompositionPreview.GetElementVisual(shadowHost).Compositor;
 
@@ -68,7 +74,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 
             DropShadow dropShadow = compositor.CreateDropShadow();
             dropShadow.BlurRadius = 5;
-            dropShadow.Offset = new Vector3(10, 10, 0);
+            dropShadow.Offset = new Vector3(offsetX ?? _offsetX, offsetY ?? _offsetY, 0);
             dropShadow.Color = color;
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
             dropShadow.SourcePolicy = CompositionDropShadowSourcePolicy.Default;
