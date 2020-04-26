@@ -18,7 +18,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
         private readonly Color _color;
         private readonly float _offsetX;
         private readonly float _offsetY;
-        private readonly Dictionary<FrameworkElement, SpriteVisual> _visualByUiElement;
+        private readonly Dictionary<FrameworkElement, SpriteVisual> _spriteVisualByUiElement;
         private readonly Dictionary<FrameworkElement, List<FrameworkElement>> _shadowSourceByShadowHost;
 
         public Sun(Color color, float offsetX, float offsetY)
@@ -26,7 +26,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             _color = color;
             _offsetX = offsetX;
             _offsetY = offsetY;
-            _visualByUiElement = new Dictionary<FrameworkElement, SpriteVisual>();
+            _spriteVisualByUiElement = new Dictionary<FrameworkElement, SpriteVisual>();
             _shadowSourceByShadowHost = new Dictionary<FrameworkElement, List<FrameworkElement>>();
         }
 
@@ -36,7 +36,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             List<FrameworkElement> shadowSources = _shadowSourceByShadowHost[shadowHost];
             foreach (FrameworkElement shadowSource in shadowSources)
             {
-                SpriteVisual spriteVisual = _visualByUiElement[shadowSource];
+                SpriteVisual spriteVisual = _spriteVisualByUiElement[shadowSource];
                 spriteVisual.Offset = VisualOffset(shadowSource, shadowHost);
             }
         }
@@ -79,21 +79,21 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
             dropShadow.SourcePolicy = CompositionDropShadowSourcePolicy.Default;
 
-            SpriteVisual visual = compositor.CreateSpriteVisual();
-            visual.Size = new Vector2((float)shadowSource.ActualWidth, (float)shadowSource.ActualHeight);
-            visual.Shadow = dropShadow;
-            visual.Offset = VisualOffset(shadowSource, shadowHost);
+            SpriteVisual spriteVisual = compositor.CreateSpriteVisual();
+            spriteVisual.Size = new Vector2((float)shadowSource.ActualWidth, (float)shadowSource.ActualHeight);
+            spriteVisual.Shadow = dropShadow;
+            spriteVisual.Offset = VisualOffset(shadowSource, shadowHost);
 
-            shadowHostContainerVisual.Children.InsertAtTop(visual);
+            shadowHostContainerVisual.Children.InsertAtTop(spriteVisual);
 
-            _visualByUiElement.Add(shadowSource, visual);
+            _spriteVisualByUiElement.Add(shadowSource, spriteVisual);
         }
 
         private async void ShadowSourceOnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var shadowSource = (FrameworkElement) sender;
             Compositor compositor = ElementCompositionPreview.GetElementVisual(shadowSource).Compositor;
-            SpriteVisual visual = _visualByUiElement[shadowSource];
+            SpriteVisual visual = _spriteVisualByUiElement[shadowSource];
             visual.Size = new Vector2((float)shadowSource.ActualWidth, (float)shadowSource.ActualHeight);
             var dropShadow = (DropShadow) visual.Shadow;
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
