@@ -6,26 +6,28 @@ using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 {
     public class Sun
     {
         private readonly Dictionary<FrameworkElement, SpriteVisual> _visualByUiElement;
-        private readonly Dictionary<FrameworkElement, List<FrameworkElement>> _shadowSourceByShadowhost;
+        private readonly Dictionary<FrameworkElement, List<FrameworkElement>> _shadowSourceByShadowHost;
 
         public Sun()
         {
             _visualByUiElement = new Dictionary<FrameworkElement, SpriteVisual>();
-            _shadowSourceByShadowhost = new Dictionary<FrameworkElement, List<FrameworkElement>>();
+            _shadowSourceByShadowHost = new Dictionary<FrameworkElement, List<FrameworkElement>>();
         }
 
         private void ShadowHostOnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var shadowHost = (FrameworkElement) sender;
-            List<FrameworkElement> shadowSources = _shadowSourceByShadowhost[shadowHost];
+            List<FrameworkElement> shadowSources = _shadowSourceByShadowHost[shadowHost];
             foreach (FrameworkElement shadowSource in shadowSources)
             {
                 SpriteVisual spriteVisual = _visualByUiElement[shadowSource];
@@ -39,15 +41,15 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
 
             List<FrameworkElement> frameworkElements;
             ContainerVisual shadowHostContainerVisual;
-            if (_shadowSourceByShadowhost.ContainsKey(shadowHost))
+            if (_shadowSourceByShadowHost.ContainsKey(shadowHost))
             {
-                frameworkElements = _shadowSourceByShadowhost[shadowHost];
+                frameworkElements = _shadowSourceByShadowHost[shadowHost];
                 shadowHostContainerVisual = (ContainerVisual) ElementCompositionPreview.GetElementChildVisual(shadowHost);
             }
             else
             {
                 frameworkElements = new List<FrameworkElement>();
-                _shadowSourceByShadowhost.Add(shadowHost, frameworkElements);
+                _shadowSourceByShadowHost.Add(shadowHost, frameworkElements);
                 shadowHostContainerVisual = compositor.CreateContainerVisual();
                 ElementCompositionPreview.SetElementChildVisual(shadowHost, shadowHostContainerVisual);
                 shadowHost.SizeChanged += ShadowHostOnSizeChanged;
@@ -84,13 +86,30 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
             dropShadow.Mask = await ShadowMask(shadowSource, compositor);
         }
 
-        private async Task<CompositionSurfaceBrush> ShadowMask(UIElement uiElement, Compositor compositor)
+        private async Task<CompositionBrush> ShadowMask(UIElement uiElement, Compositor compositor)
         {
-            CompositionDrawingSurface drawingSurface = await CompositionDrawingSurfaceFacade2.GetCompositionDrawingSurface(uiElement, compositor);
-            return compositor.CreateSurfaceBrush(drawingSurface);
+            CompositionBrush compositionBrush;
+            switch (uiElement)
+            {
+                case Shape shape:
+                    compositionBrush = shape.GetAlphaMask();
+                    break;
+                case TextBlock textBlock:
+                    compositionBrush = textBlock.GetAlphaMask();
+                    break;
+                case Image image:
+                    compositionBrush = image.GetAlphaMask();
+                    break;
+                default:
+                    CompositionDrawingSurface drawingSurface =
+                        await CompositionDrawingSurfaceFacade2.GetCompositionDrawingSurface(uiElement, compositor);
+                    compositionBrush = compositor.CreateSurfaceBrush(drawingSurface);
+                    break;
+            }
+            return compositionBrush;
         }
 
-        private Vector3 VisualOffset(UIElement shadowSource, FrameworkElement shoadowHost)
+        private static Vector3 VisualOffset(UIElement shadowSource, FrameworkElement shoadowHost)
         {
             GeneralTransform transformToVisual = shadowSource.TransformToVisual(shoadowHost);
             Point transformPoint = transformToVisual.TransformPoint(new Point(0, 0));

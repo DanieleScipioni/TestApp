@@ -20,17 +20,15 @@
         <TextBlock Text="With Sun"/>
         <Rectangle x:Name="CentralGridShadowHost"
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                   Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
-        <Grid Background="White" Grid.Row="2" Grid.Column="1" CornerRadius="10"
-              BorderBrush="LightGray" BorderThickness="1"
-              x:Name="CentralGrid">
+                   Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"/>
+        <Grid Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Rectangle x:Name="ButtonsShadowHost" 
+            <Rectangle x:Name="ButtonsShadowHost" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" RadiusX="10" RadiusY="10"
                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                       Grid.ColumnSpan="2" />
+                       Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" Stroke="LightGray" StrokeThickness="1"/>
             <Button Grid.Column="0" x:Name="Button1" Style="{StaticResource TextBlockButtonStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Padding="0">

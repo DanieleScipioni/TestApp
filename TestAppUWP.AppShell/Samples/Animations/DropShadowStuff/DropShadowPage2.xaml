@@ -19,17 +19,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="With DropShadowPanel"/>
-        <controls:DropShadowPanel Grid.Row="2" Grid.Column="1"  IsMasked="True"
+        <controls:DropShadowPanel Grid.Row="2" Grid.Column="1"  IsMasked="True" Color="DarkSlateGray"
                                   BlurRadius="5" OffsetX="10" OffsetY="10"
                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                   HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-            <Grid Background="White" CornerRadius="10"
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="10"
                   BorderBrush="LightGray" BorderThickness="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <controls:DropShadowPanel Grid.Column="0" IsMasked="True"
+                <controls:DropShadowPanel Grid.Column="0" IsMasked="True" Color="DarkSlateGray"
                                           BlurRadius="5" OffsetX="10" OffsetY="10"
                                           HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Style="{StaticResource TextBlockButtonStyle}"
@@ -43,7 +43,7 @@
                         </Border>
                     </Button>
                 </controls:DropShadowPanel>
-                <controls:DropShadowPanel Grid.Column="1" IsMasked="True"
+                <controls:DropShadowPanel Grid.Column="1" IsMasked="True" Color="DarkSlateGray"
                                           BlurRadius="5" OffsetX="10" OffsetY="10"
                                           HorizontalAlignment="Center" VerticalAlignment="Center"
                                           HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">

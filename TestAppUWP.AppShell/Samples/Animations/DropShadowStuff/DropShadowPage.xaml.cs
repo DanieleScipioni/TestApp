@@ -16,7 +16,7 @@ namespace TestAppUWP.AppShell.Samples.Animations.DropShadowStuff
         private async Task DropShadowMethod1()
         {
             var sun = new Sun();
-            await sun.DrawShadow(CentralGrid, CentralGridShadowHost);
+            await sun.DrawShadow(ButtonsShadowHost, CentralGridShadowHost);
             await sun.DrawShadow(Button1, ButtonsShadowHost);
             await sun.DrawShadow(Button2, ButtonsShadowHost);
         }
