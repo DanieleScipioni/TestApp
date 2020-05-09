@@ -1,433 +1,98 @@
-﻿using System.Collections.Generic;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
-namespace TestAppUWP.Samples.Controls
+namespace TestAppUWP.AppShell.Samples.Controls
 {
     public sealed partial class GroupedListWithDeD
     {
-        private readonly List<List<string>> _list;
-        private int _dragOverCounter;
-        private ItemsStackPanel _listViewItemsPanel;
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+        // ReSharper disable once CollectionNeverQueried.Local
+        private readonly ObservableCollection<Group> _availableGroups;
+        private readonly ObservableCollection<Group> _choosenGroups;
 
         public GroupedListWithDeD()
         {
-            _list = new List<List<string>>
+            _availableGroups = new ObservableCollection<Group>
             {
-                new List<string>
+                new Group("a")
                 {
                     "aa", "ab", "ac"
                 },
-                new List<string>
+                new Group("b")
                 {
                     "ba", "bb", "bc"
                 },
-                new List<string>
+                new Group("c")
                 {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
+                    "ca", "cb", "Cc"
                 },
-                new List<string>
+                new Group("d")
                 {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
-                },
-                new List<string>
-                {
-                    "ba", "bb", "bc"
+                    "da", "db", "dc"
                 },
-                new List<string>
+                new Group("e")
                 {
-                    "ba", "bb", "bc"
+                    "ea", "eb", "ec"
                 }
             };
-
+            _choosenGroups = new ObservableCollection<Group>();
             InitializeComponent();
 
-            ListView.Loaded += (sender, args) =>
+            AvailableDropAction = AvailableDropDelegate;
+            ChoosenDropAction = ChoosenDropDelegate;
+        }
+
+        public Action<List<string>> AvailableDropAction { get; set; }
+        private void AvailableDropDelegate(List<string> items)
+        {
+            foreach (string item in items)
             {
-                _listViewItemsPanel = (ItemsStackPanel) ListView.ItemsPanelRoot;
-            };
-            
-            ListView.DragItemsStarting += ListViewBase_OnDragItemsStarting;
-            ListView.DragItemsCompleted += ListViewBase_OnDragItemsCompleted;
-            ListView.DragOver += UIElement_OnDragOver;
-            ListView.DragLeave += UIElement_OnDragLeave;
+                RemoveFromGroup(item, _choosenGroups);
+            }
         }
 
-        private void ListViewBase_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        public Action<List<string>> ChoosenDropAction { get; set; }
+        public void ChoosenDropDelegate(List<string> items)
         {
-            _dragOverCounter = 0;
-            _listViewItemsPanel.AreStickyGroupHeadersEnabled = false;
-            //ListView.DragItemsCompleted += ListViewBase_OnDragItemsCompleted;
-            //ListView.DragOver += UIElement_OnDragOver;
-            //ListView.DragLeave += UIElement_OnDragLeave;
+            foreach (string item in items)
+            {
+                AddToGroup(item, _choosenGroups);
+            }
         }
 
-        private void ListViewBase_OnDragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
+        private void AddToGroup(string item, ObservableCollection<Group> groups)
         {
-            _dragOverCounter = 0;
-            _listViewItemsPanel.AreStickyGroupHeadersEnabled = true;
-            //ListView.DragItemsCompleted -= ListViewBase_OnDragItemsCompleted;
-            //ListView.DragOver -= UIElement_OnDragOver;
-            //ListView.DragLeave -= UIElement_OnDragLeave;
+            char groupKey = item[0];
+            Group group = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
+            if (group != null)
+            {
+                group.Add(item);
+            }
+            else
+            {
+                _choosenGroups.Add(new Group(groupKey.ToString()) {item});
+            }
         }
 
-        private void UIElement_OnDragOver(object sender, DragEventArgs e)
+        private void RemoveFromGroup(string item, ObservableCollection<Group> groups)
         {
-            _dragOverCounter++;
+            char groupKey = item[0];
+            Group group = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
+            if (group == null) return;
+            group.Remove(item);
+            if (group.Count == 0) groups.Remove(group);
         }
+    }
 
-        private void UIElement_OnDragLeave(object sender, DragEventArgs e)
-        {
-            
-        }
+    public class Group : ObservableCollection<string>
+    {
+        public readonly string Key;
 
-        private void ListViewBase_OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        public Group(string key)
         {
-            
+            Key = key;
         }
     }
 }

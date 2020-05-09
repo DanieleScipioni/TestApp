@@ -4,13 +4,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:controls="using:TestAppUWP.Samples.Controls"
+      xmlns:controls1="using:TestAppUWP.AppShell.Samples.Controls"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Pivot>
             <PivotItem Header="Grouped List with D&amp;D">
-                <controls:GroupedListWithDeD/>
+                <controls1:GroupedListWithDeD/>
             </PivotItem>
             <PivotItem Header="Big Dynamic List">
                 <controls:BigDynamicListPage/>

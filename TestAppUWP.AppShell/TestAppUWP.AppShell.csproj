@@ -117,6 +117,7 @@
     <Compile Include="Samples\Animations\Implicit\ImplicitVisualAnimations.xaml.cs">
       <DependentUpon>ImplicitVisualAnimations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
     <Compile Include="ViewModels\Ocr\OcrPageViewModel.cs" />
     <Compile Include="Samples\Accounts\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
