@@ -101,6 +101,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Interactivity\Interaction.cs" />
     <Compile Include="UI\Controls\AdaptiveGridView.cs" />
     <Compile Include="UI\Controls\AdaptiveGridView.Properties.cs" />
     <Compile Include="CanvasDraw\DrawRectangleOnCanvas.cs" />
