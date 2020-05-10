@@ -31,6 +31,9 @@
                     <SolidColorBrush x:Key="JumpListDefaultEnabledBackground" Color="{ThemeResource SystemAccentColor}" />-->
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
             <appShell:ViewModelLocator x:Key="ViewModelLocator"/>
             <converters:TrueToCollapsedConverter x:Key="TrueToCollapsedConverter"/>
             <converters:ListToCommaSeparatedStringConverter x:Key="ListToCommaSeparatedStringConverter"/>
