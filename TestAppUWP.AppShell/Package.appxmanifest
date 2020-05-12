@@ -26,6 +26,13 @@
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="file_association">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.txt</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>
@@ -33,6 +40,7 @@
     <Capability Name="internetClient" />
     <Capability Name="privateNetworkClientServer" />
     <uap:Capability Name="appointments" />
+    <rescap:Capability Name="removableStorage" />
     <rescap:Capability Name="appointmentsSystem" />
     <rescap:Capability Name="userDataAccountsProvider" />
     <rescap:Capability Name="userDataSystem" />

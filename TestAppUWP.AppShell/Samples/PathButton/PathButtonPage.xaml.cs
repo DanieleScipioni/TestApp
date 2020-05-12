@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using System.Linq;
+using Windows.Storage;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
@@ -10,6 +13,21 @@ namespace TestAppUWP.AppShell.Samples.PathButton
         public PathButtonPage()
         {
             InitializeComponent();
+
+            Loaded += async (sender, args) =>
+            {
+                StorageFolder externalDevices = KnownFolders.RemovableDevices;
+                var externalDeviceRoots = await externalDevices.GetFoldersAsync();
+                foreach (StorageFolder folder in externalDeviceRoots)
+                {
+                }
+
+                StorageFolder e = externalDeviceRoots.FirstOrDefault(ed => ed.Name == "E:\\");
+                if (e != null)
+                {
+                    IStorageItem storageFile = await externalDevices.TryGetItemAsync(@"E:\log\my item.txt");
+                }
+            };
 
             SetupPath(IconFitWindow);
             SetupPath(IconOpen);
