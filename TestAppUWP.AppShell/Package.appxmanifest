@@ -44,5 +44,6 @@
     <rescap:Capability Name="appointmentsSystem" />
     <rescap:Capability Name="userDataAccountsProvider" />
     <rescap:Capability Name="userDataSystem" />
+    <rescap:Capability Name="broadFileSystemAccess" />
   </Capabilities>
 </Package>
