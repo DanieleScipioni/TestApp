@@ -3,8 +3,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:interactivity="using:TestAppUWP.View.Interactivity"
       xmlns:controls="using:TestAppUWP.AppShell.Samples.Controls"
+      xmlns:interactivity="using:TestAppUWP.View.Interactivity"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
@@ -21,16 +21,22 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Available"/>
-        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{x:Bind CollectionViewSource.View}" x:Name="ListView"
+        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{x:Bind CollectionViewSource.View}" x:Name="IncrementalGroupedListView"
                   ShowsScrollingPlaceholders="False" SelectionMode="Multiple"
                   CanDragItems="True" CanReorderItems="False" AllowDrop="True">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel GroupHeaderPlacement="Top" GroupPadding="10"
+                                     AreStickyGroupHeadersEnabled="True" Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <interactivity:Interaction.Behaviors>
                 <controls:ListViewDdBehavior Drop="{x:Bind AvailableDropAction}"/>
             </interactivity:Interaction.Behaviors>
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="False">
                     <GroupStyle.HeaderTemplate>
-                        <DataTemplate x:DataType="controls:Group">
+                        <DataTemplate x:DataType="controls:StringGroup">
                             <TextBlock FontWeight="Bold" FontSize="14" Text="{x:Bind Key}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
@@ -47,7 +53,7 @@
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="False">
                     <GroupStyle.HeaderTemplate>
-                        <DataTemplate x:DataType="controls:Group">
+                        <DataTemplate x:DataType="controls:StringGroup">
                             <TextBlock FontWeight="Bold" FontSize="14" Text="{x:Bind Key}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>

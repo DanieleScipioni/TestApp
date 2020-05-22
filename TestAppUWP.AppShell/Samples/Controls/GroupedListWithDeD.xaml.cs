@@ -7,41 +7,19 @@ namespace TestAppUWP.AppShell.Samples.Controls
 {
     public sealed partial class GroupedListWithDeD
     {
-        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        // ReSharper disable once CollectionNeverQueried.Local
-        private readonly ObservableCollection<Group> _availableGroups;
-        private readonly ObservableCollection<Group> _choosenGroups;
+        private readonly IncremetalStringGroups _availableGroups;
+        private readonly ObservableCollection<StringGroup> _choosenGroups;
 
         public GroupedListWithDeD()
         {
-            _availableGroups = new ObservableCollection<Group>
-            {
-                new Group("a")
-                {
-                    "aa", "ab", "ac"
-                },
-                new Group("b")
-                {
-                    "ba", "bb", "bc"
-                },
-                new Group("c")
-                {
-                    "ca", "cb", "Cc"
-                },
-                new Group("d")
-                {
-                    "da", "db", "dc"
-                },
-                new Group("e")
-                {
-                    "ea", "eb", "ec"
-                }
-            };
-            _choosenGroups = new ObservableCollection<Group>();
+            _availableGroups = new IncremetalStringGroups();
+            _choosenGroups = new ObservableCollection<StringGroup>();
             InitializeComponent();
 
             AvailableDropAction = AvailableDropDelegate;
             ChoosenDropAction = ChoosenDropDelegate;
+
+             _ = new IncrementalGroupedListViewHelper(IncrementalGroupedListView, _availableGroups);
         }
 
         public Action<List<string>> AvailableDropAction { get; set; }
@@ -62,35 +40,35 @@ namespace TestAppUWP.AppShell.Samples.Controls
             }
         }
 
-        private void AddToGroup(string item, ObservableCollection<Group> groups)
+        private void AddToGroup(string item, ObservableCollection<StringGroup> groups)
         {
             char groupKey = item[0];
-            Group group = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
-            if (group != null)
+            StringGroup stringGroup = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
+            if (stringGroup != null)
             {
-                group.Add(item);
+                stringGroup.Add(item);
             }
             else
             {
-                _choosenGroups.Add(new Group(groupKey.ToString()) {item});
+                _choosenGroups.Add(new StringGroup(groupKey.ToString()) { item });
             }
         }
 
-        private void RemoveFromGroup(string item, ObservableCollection<Group> groups)
+        private void RemoveFromGroup(string item, ObservableCollection<StringGroup> groups)
         {
             char groupKey = item[0];
-            Group group = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
-            if (group == null) return;
-            group.Remove(item);
-            if (group.Count == 0) groups.Remove(group);
+            StringGroup stringGroup = groups.FirstOrDefault(l => l.Count > 0 && l[0][0] == groupKey);
+            if (stringGroup == null) return;
+            stringGroup.Remove(item);
+            if (stringGroup.Count == 0) groups.Remove(stringGroup);
         }
     }
 
-    public class Group : ObservableCollection<string>
+    public class StringGroup : ObservableCollection<string>
     {
         public readonly string Key;
 
-        public Group(string key)
+        public StringGroup(string key)
         {
             Key = key;
         }

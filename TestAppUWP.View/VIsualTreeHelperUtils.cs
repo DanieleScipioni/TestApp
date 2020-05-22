@@ -28,5 +28,24 @@ namespace TestAppUWP.View
                 }
             }
         }
+
+        public static T Child<T>(DependencyObject dependencyObject)
+        {
+            int childrenCount = VisualTreeHelper.GetChildrenCount(dependencyObject);
+            for (int index = 0; index < childrenCount; index++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(dependencyObject, index);
+                if (child is T typed) return typed;
+            }
+
+            for (int index = 0; index < childrenCount; index++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(dependencyObject, index);
+                var childChild = Child<T>(child);
+                if (childChild != null) return childChild;
+            }
+
+            return default(T);
+        }
     }
 }
