@@ -19,7 +19,7 @@ namespace TestAppUWP.AppShell.Samples.Controls
             AvailableDropAction = AvailableDropDelegate;
             ChoosenDropAction = ChoosenDropDelegate;
 
-             _ = new IncrementalGroupedListViewHelper(IncrementalGroupedListView, _availableGroups);
+             //_ = new IncrementalGroupedListViewHelper(IncrementalGroupedListView, _availableGroups);
         }
 
         public Action<List<string>> AvailableDropAction { get; set; }

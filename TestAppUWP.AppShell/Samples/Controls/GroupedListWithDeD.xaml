@@ -21,7 +21,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Available"/>
-        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{x:Bind CollectionViewSource.View}" x:Name="IncrementalGroupedListView"
+        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{x:Bind CollectionViewSource.View}"
                   ShowsScrollingPlaceholders="False" SelectionMode="Multiple"
                   CanDragItems="True" CanReorderItems="False" AllowDrop="True">
             <ListView.ItemsPanel>
@@ -31,6 +31,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <interactivity:Interaction.Behaviors>
+                <controls:IncrementalGroupedListViewHelper SupportIncrementalLoading="{x:Bind _availableGroups}"/>
                 <controls:ListViewDdBehavior Drop="{x:Bind AvailableDropAction}"/>
             </interactivity:Interaction.Behaviors>
             <ListView.GroupStyle>
@@ -44,7 +45,7 @@
             </ListView.GroupStyle>
         </ListView>
         <TextBlock Grid.Column="1" Grid.Row="0" Text="Choices"/>
-        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind CollectionViewSourceChoices.View}" x:Name="ListViewChoices"
+        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind CollectionViewSourceChoices.View}"
                   ShowsScrollingPlaceholders="False" SelectionMode="Multiple"
                   CanDragItems="True" CanReorderItems="False" AllowDrop="True" Background="Transparent">
             <interactivity:Interaction.Behaviors>
