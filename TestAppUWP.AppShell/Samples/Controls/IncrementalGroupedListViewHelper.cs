@@ -34,27 +34,27 @@ namespace TestAppUWP.AppShell.Samples.Controls
             _scrollViewer.ViewChanged += async (o, eventArgs) =>
             {
                 if (eventArgs.IsIntermediate) return;
-                await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer, 60);
+                await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer);
             };
 
             itemsStackPanel.SizeChanged += async (o, eventArgs) =>
             {
                 if (itemsStackPanel.ActualHeight <= _scrollViewer.ActualHeight)
                 {
-                    await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer, 60);
+                    await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer);
                 }
             };
 
             itemsStackPanel.LayoutUpdated += OnLayoutUpdated;
 
-            await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer, 60);
+            await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer);
         }
 
         private async void OnLayoutUpdated(object sender, object e)
         {
             if (_itemsStackPanel.DesiredSize.Height <= _scrollViewer.ActualHeight)
             {
-                await LoadMoreItemsAsync(_itemsStackPanel, _scrollViewer, 60);
+                await LoadMoreItemsAsync(_itemsStackPanel, _scrollViewer);
             }
             else
             {
@@ -62,13 +62,13 @@ namespace TestAppUWP.AppShell.Samples.Controls
             }
         }
 
-        private async Task LoadMoreItemsAsync(ItemsStackPanel itemsStackPanel, ScrollViewer scrollViewer, uint count)
+        private async Task LoadMoreItemsAsync(ItemsStackPanel itemsStackPanel, ScrollViewer scrollViewer)
         {
             if (!_supportIncrementalLoading.HasMoreItems) return;
             double distanceFromBottom = itemsStackPanel.ActualHeight - scrollViewer.VerticalOffset - scrollViewer.ActualHeight;
             if (distanceFromBottom < 10)
             {
-                await _supportIncrementalLoading.LoadMoreItemsAsync(count);
+                await _supportIncrementalLoading.LoadMoreItemsAsync(5);
             }
         }
     }
