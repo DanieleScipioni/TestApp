@@ -45,16 +45,21 @@ namespace TestAppUWP.AppShell.Samples.Controls
                 }
             };
 
-            itemsStackPanel.LayoutUpdated += OnLayoutUpdated;
-
             await LoadMoreItemsAsync(itemsStackPanel, _scrollViewer);
+        }
+
+        private async Task LoadMoreItemsAsync(ItemsStackPanel itemsStackPanel, ScrollViewer scrollViewer)
+        {
+            if (!_supportIncrementalLoading.HasMoreItems) return;
+            itemsStackPanel.LayoutUpdated += OnLayoutUpdated;
+            await InternalLoadMoreItemsAsync(itemsStackPanel, scrollViewer);
         }
 
         private async void OnLayoutUpdated(object sender, object e)
         {
             if (_itemsStackPanel.DesiredSize.Height <= _scrollViewer.ActualHeight)
             {
-                await LoadMoreItemsAsync(_itemsStackPanel, _scrollViewer);
+                await InternalLoadMoreItemsAsync(_itemsStackPanel, _scrollViewer);
             }
             else
             {
@@ -62,9 +67,8 @@ namespace TestAppUWP.AppShell.Samples.Controls
             }
         }
 
-        private async Task LoadMoreItemsAsync(ItemsStackPanel itemsStackPanel, ScrollViewer scrollViewer)
+        private async Task InternalLoadMoreItemsAsync(ItemsStackPanel itemsStackPanel, ScrollViewer scrollViewer)
         {
-            if (!_supportIncrementalLoading.HasMoreItems) return;
             double distanceFromBottom = itemsStackPanel.ActualHeight - scrollViewer.VerticalOffset - scrollViewer.ActualHeight;
             if (distanceFromBottom < 10)
             {
