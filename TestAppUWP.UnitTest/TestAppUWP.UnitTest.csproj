@@ -143,6 +143,10 @@
       <Project>{b58ca64b-4f76-4907-9a12-5dd92b62f2e9}</Project>
       <Name>TestAppUWP.AppShell</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestAppUWP.View\TestAppUWP.View.csproj">
+      <Project>{b6ba5ee2-b2fd-4b11-b57f-e06c0238c190}</Project>
+      <Name>TestAppUWP.View</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
