@@ -120,6 +120,9 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
+    <Compile Include="Samples\Test\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Ocr\OcrPageViewModel.cs" />
     <Compile Include="Samples\Accounts\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
@@ -462,6 +465,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\InterControlAnimation\InterControlAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
