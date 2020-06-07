@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using TestAppUWP.AppShell.Samples.RootNavigation;
+using TestAppUWP.Logic.Logs;
 using TestAppUWP.Samples.CertTutorial;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace TestAppUWP.AppShell
@@ -14,9 +18,16 @@ namespace TestAppUWP.AppShell
         public App()
         {
             InitializeComponent();
+            Suspending += OnSuspending;
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args) {
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        {
+            LogFactory.Init(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Logs"));
+
+            Logger logger = LogFactory.GetLogger(nameof(OnLaunched));
+            logger.Log($"OnLaunched {args.PreviousExecutionState}");
+
 #if DEBUG
             if (Debugger.IsAttached)
             {
@@ -50,6 +61,11 @@ namespace TestAppUWP.AppShell
         protected override void OnActivated(IActivatedEventArgs args)
         {
             Debugger.Break();
+        }
+
+        private void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            LogFactory.GetLogger(nameof(OnSuspending)).Flush();
         }
     }
 }
