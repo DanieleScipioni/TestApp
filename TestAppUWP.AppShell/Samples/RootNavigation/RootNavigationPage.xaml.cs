@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.Storage;
+using Windows.System;
+using Windows.UI.Xaml;
 
 namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
@@ -21,6 +24,11 @@ namespace TestAppUWP.AppShell.Samples.RootNavigation
         private void HamburgerButton_OnClick(object sender, RoutedEventArgs e)
         {
             HamburgerSplitView.IsPaneOpen = !HamburgerSplitView.IsPaneOpen;
+        }
+
+        private async void OpenLocalState_OnClick(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchFolderAsync(ApplicationData.Current.LocalFolder);
         }
     }
 }

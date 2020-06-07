@@ -19,11 +19,15 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
-        <SplitView Grid.Row="0" Grid.Column="0" x:Name="HamburgerSplitView"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <SplitView Grid.Row="1" Grid.Column="0" x:Name="HamburgerSplitView"
                    PanePlacement="Left" OpenPaneLength="324" DisplayMode="CompactOverlay" CompactPaneLength="48"
                    Content="{x:Bind _viewModel.RootFrame}" PaneBackground="Transparent">
             <SplitView.Pane>
-                <ListView Margin="0,40,0,0" ItemsSource="{x:Bind _viewModel.Pages}" ItemTemplate="{StaticResource MenuDataTemplate}"
+                <ListView ItemsSource="{x:Bind _viewModel.Pages}" ItemTemplate="{StaticResource MenuDataTemplate}"
                           Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
                           SelectedIndex="{x:Bind _viewModel.SelectedPageIndex, Mode=TwoWay}" >
                     <ListView.ItemContainerStyle>
@@ -34,8 +38,12 @@
                 </ListView>
             </SplitView.Pane>
         </SplitView>
-        <Button Grid.Row="0" Width="48" Height="40" VerticalAlignment="Top" Click="HamburgerButton_OnClick">
-            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;"/>
-        </Button>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Width="48" Click="HamburgerButton_OnClick" VerticalAlignment="Stretch">
+                <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;"/>
+            </Button>
+            <Button Content="Open LocalState"  VerticalAlignment="Stretch"
+                    Click="OpenLocalState_OnClick"/>
+        </StackPanel>
     </Grid>
 </Page>
