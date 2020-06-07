@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="TestAppUWP.AppShell.Samples.Test.TabViewToolkit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:TestAppUWP.AppShell.Samples.Test"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
+    <controls:TabView TabWidthBehavior="Actual"
+                      CanCloseTabs="False"
+                      IsCloseButtonOverlay="False"
+                      CanDragItems="False"
+                      CanReorderItems="False"
+                      AllowDrop="False"
+                      SelectedTabWidth="200">
+        <controls:TabViewItem Header="Header 1">
+            <ListView Padding="16"
+                      IsItemClickEnabled="True" ItemsSource="{x:Bind listItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Book">
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Title}"
+                                       Style="{StaticResource TitleTextBlockStyle}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </controls:TabViewItem>
+        <controls:TabViewItem Header="Header 1">
+            <TextBlock Padding="16">You can enable drag-and-drop and reorder the tabs too.</TextBlock>
+        </controls:TabViewItem>
+    </controls:TabView>
+</UserControl>
