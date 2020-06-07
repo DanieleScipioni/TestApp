@@ -13,5 +13,8 @@
         <PivotItem Header="ScrollBar" Margin="0">
             <test:ScrollBar/>
         </PivotItem>
+        <PivotItem Header="InkCanvas" Margin="0">
+            <test:InkCanvasUc/>
+        </PivotItem>
     </Pivot>
 </Page>

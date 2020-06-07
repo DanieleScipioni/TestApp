@@ -1,14 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Navigation;
 
-namespace TestAppUWP.AppShell.Samples.PathButton
+namespace TestAppUWP.AppShell.Samples.Test
 {
-    public sealed partial class PathButtonPage : INotifyPropertyChanged
+    public sealed partial class InkCanvasUc
     {
         private bool lassoSelectionButtonIsChecked;
         private bool touchInkingButtonIsChecked = true;
@@ -29,7 +27,7 @@ namespace TestAppUWP.AppShell.Samples.PathButton
         //private InkFileService fileService;
         //private InkZoomService zoomService;
 
-        public PathButtonPage()
+        public InkCanvasUc()
         {
             InitializeComponent();
             SetNavigationViewHeaderContext();
@@ -234,11 +232,6 @@ namespace TestAppUWP.AppShell.Samples.PathButton
             //}
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Visibility visibility = this.Frame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
-        }
-
         private async void SaveInkFile_Click(object sender, RoutedEventArgs e)
         {
             ClearSelection();
@@ -307,5 +300,6 @@ namespace TestAppUWP.AppShell.Samples.PathButton
         }
 
         private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
     }
 }

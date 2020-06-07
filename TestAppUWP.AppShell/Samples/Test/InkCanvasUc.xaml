@@ -1,15 +1,15 @@
-﻿<Page x:Class="TestAppUWP.AppShell.Samples.PathButton.PathButtonPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d">
-    <Page.Resources>
+﻿<UserControl x:Class="TestAppUWP.AppShell.Samples.Test.InkCanvasUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
         <x:String x:Key="Placeholder">Ciccio</x:String>
         <DataTemplate x:Key="BigHeaderTemplate">
             <RelativePanel>
                 <TextBlock x:Uid="InkDrawHeader" Margin="4" MaxLines="1" TextTrimming="CharacterEllipsis" RelativePanel.LeftOf="toolbar" RelativePanel.AlignLeftWithPanel="True" />
-                <InkToolbar
+                <InkToolbar TargetInkCanvas="{Binding ElementName=InkCanvas}"
                      x:Name="toolbar"
                      Background="Transparent"
                      Loaded="OnInkToolbarLoaded"
@@ -145,8 +145,8 @@
                 </InkToolbarCustomToggleButton>
             </InkToolbar>
         </DataTemplate>
-</Page.Resources>
-    <Grid x:Name="ContentArea">
+    </UserControl.Resources>
+    <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="visualStateGroup" CurrentStateChanged="VisualStateGroup_CurrentStateChanged">
                 <VisualState x:Name="SmallVisualState">
@@ -279,16 +279,10 @@
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto"
                           ZoomMode="Enabled">
-                <Grid Width="{Binding ElementName=inkCanvas, Path=Width}"
-                      Height="{Binding ElementName=IninkCanvaskCanvas, Path=Height}">
-                    <InkCanvas x:Name="inkCanvas"
-                               HorizontalAlignment="Stretch"
-                               VerticalAlignment="Stretch" />
-                    <Canvas x:Name="selectionCanvas"
-                            Width="{Binding ElementName=inkCanvas, Path=Width}"
-                            Height="{Binding ElementName=inkCanvas, Path=Height}" />
-                </Grid>
+                <InkCanvas x:Name="InkCanvas"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch" />
             </ScrollViewer>
         </SplitView>
     </Grid>
-</Page>
+</UserControl>

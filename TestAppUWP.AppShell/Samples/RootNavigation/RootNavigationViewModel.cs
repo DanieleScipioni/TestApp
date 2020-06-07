@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TestAppUWP.AppShell.Samples.Accounts;
 using TestAppUWP.AppShell.Samples.Animations;
 using TestAppUWP.AppShell.Samples.Calendar;
-using TestAppUWP.AppShell.Samples.PathButton;
+using TestAppUWP.AppShell.Samples.Test;
 using TestAppUWP.Core;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
@@ -15,7 +15,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using TestAppUWP.AppShell.Samples.Test;
 
 namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
@@ -63,7 +62,6 @@ namespace TestAppUWP.AppShell.Samples.RootNavigation
                 typeof(GeoLocationPage),
                 typeof(ControlsPage),
                 typeof(WebPage),
-                typeof(PathButtonPage),
                 typeof(CalendarExplorer),
                 typeof(AccountPage),
                 typeof(OcrPage),

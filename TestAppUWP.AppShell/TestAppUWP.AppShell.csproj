@@ -120,6 +120,9 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
+    <Compile Include="Samples\Test\InkCanvasUc.xaml.cs">
+      <DependentUpon>InkCanvasUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Test\ScrollBar.xaml.cs">
       <DependentUpon>ScrollBar.xaml</DependentUpon>
     </Compile>
@@ -169,10 +172,6 @@
     <Compile Include="Samples\Ocr\OcrPage.xaml.cs">
       <DependentUpon>OcrPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\PathButton\PathButtonPage.xaml.cs">
-      <DependentUpon>PathButtonPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\PathButton\StretchPathIcon.cs" />
     <Compile Include="Samples\RootNavigation\PageClassNameConverter.cs" />
     <Compile Include="Samples\RootNavigation\RootNavigationPage.xaml.cs">
       <DependentUpon>RootNavigationPage.xaml</DependentUpon>
@@ -410,10 +409,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\PathButton\PathButtonPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Samples\RootNavigation\RootNavigationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -471,6 +466,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\InterControlAnimation\InterControlAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\InkCanvasUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
