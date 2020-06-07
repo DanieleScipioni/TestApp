@@ -3,8 +3,38 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:test="using:TestAppUWP.AppShell.Samples.Test"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
-    </Grid>
+    <toolkitControls:TabView
+            Grid.Row="1"
+            x:Name="Tabs"
+            TabWidthBehavior="Actual"
+            CanCloseTabs="False"
+            IsCloseButtonOverlay="False"
+            CanDragItems="False"
+            CanReorderItems="False"
+            AllowDrop="False"
+            SelectedTabWidth="200">
+
+        <!-- Tabs -->
+        <toolkitControls:TabViewItem Header="Header 1">
+            <ListView x:Name="List"
+                          Padding="16"
+                          IsItemClickEnabled="True" ItemsSource="{x:Bind listItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="test:Book">
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Title}"
+                                           Style="{StaticResource TitleTextBlockStyle}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </toolkitControls:TabViewItem>
+        <toolkitControls:TabViewItem Header="Header 1">
+            <TextBlock Padding="16">You can enable drag-and-drop and reorder the tabs too.</TextBlock>
+        </toolkitControls:TabViewItem>
+    </toolkitControls:TabView>
 </Page>
