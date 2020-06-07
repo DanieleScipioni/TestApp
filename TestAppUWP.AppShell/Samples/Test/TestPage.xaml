@@ -6,7 +6,7 @@
       xmlns:test="using:TestAppUWP.AppShell.Samples.Test"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Pivot>
+    <Pivot x:Name="Pivot">
         <PivotItem Header="TabView toolkit" Margin="0">
             <test:TabViewToolkit/>
         </PivotItem>
