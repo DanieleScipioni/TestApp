@@ -44,6 +44,8 @@
             </Button>
             <Button Content="Open LocalState"  VerticalAlignment="Stretch"
                     Click="OpenLocalState_OnClick"/>
+            <Button Content="RequestRestartAsync"  VerticalAlignment="Stretch"
+                    Click="RequestRestartAsync_OnClick"/>
         </StackPanel>
     </Grid>
 </Page>
