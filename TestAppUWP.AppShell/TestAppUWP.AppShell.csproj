@@ -120,6 +120,9 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
+    <Compile Include="Samples\Test\ScrollBar.xaml.cs">
+      <DependentUpon>ScrollBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Test\TabViewToolkit.xaml.cs">
       <DependentUpon>TabViewToolkit.xaml</DependentUpon>
     </Compile>
@@ -468,6 +471,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\InterControlAnimation\InterControlAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\ScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
