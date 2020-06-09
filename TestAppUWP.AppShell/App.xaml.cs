@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using TestAppUWP.AppShell.Samples.RootNavigation;
 using TestAppUWP.Logic.Logs;
 using TestAppUWP.Samples.CertTutorial;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
@@ -19,6 +21,36 @@ namespace TestAppUWP.AppShell
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            UnhandledException += (sender, args) =>
+            {
+                Logger logger = LogFactory.GetLogger(nameof(UnhandledException));
+                logger.Log($"Exception.Message {args.Exception.Message}");
+                logger.Flush();
+            };
+            CoreApplication.UnhandledErrorDetected += (sender, args) =>
+            {
+                try
+                {
+                    // intentionally propagating exception to get the exception object that crashed the app.
+                    args.UnhandledError.Propagate();
+                }
+                catch (Exception e)
+                {
+                    Logger logger = LogFactory.GetLogger(nameof(CoreApplication.UnhandledErrorDetected));
+                    logger.Log($"Exception.Message {e.Message}");
+                    logger.Flush();
+
+                    // if we don't throw exception - app will not be crashed. We need to throw to not change the app behavior.
+                    // known issue: stack trace will contain SDK methods from now on.
+                    throw;
+                }
+            };
+            TaskScheduler.UnobservedTaskException += (sender, args) =>
+            {
+                Logger logger = LogFactory.GetLogger(nameof(TaskScheduler.UnobservedTaskException));
+                logger.Log($"Exception.Message {args.Exception.Message}");
+                logger.Flush();
+            };
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
