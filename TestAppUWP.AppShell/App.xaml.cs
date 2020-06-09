@@ -26,7 +26,7 @@ namespace TestAppUWP.AppShell
             LogFactory.Init(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Logs"));
 
             Logger logger = LogFactory.GetLogger(nameof(OnLaunched));
-            logger.Log($"OnLaunched {args.PreviousExecutionState}");
+            logger.Log($"PreviousExecutionState {args.PreviousExecutionState}");
 
 #if DEBUG
             if (Debugger.IsAttached)
@@ -65,7 +65,9 @@ namespace TestAppUWP.AppShell
 
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            LogFactory.GetLogger(nameof(OnSuspending)).Flush();
+            Logger logger = LogFactory.GetLogger(nameof(OnSuspending));
+            logger.Log($"SuspendingOperation.Deadline {e.SuspendingOperation.Deadline}");
+            logger.Flush();
         }
     }
 }
