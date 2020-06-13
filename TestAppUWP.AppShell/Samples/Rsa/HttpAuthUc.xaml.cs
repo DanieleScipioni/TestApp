@@ -1,4 +1,4 @@
-﻿namespace TestAppUWP.Samples.Rsa
+﻿namespace TestAppUWP.AppShell.Samples.Rsa
 {
     public sealed partial class HttpAuthUc
     {
