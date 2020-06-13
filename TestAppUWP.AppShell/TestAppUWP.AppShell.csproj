@@ -123,6 +123,9 @@
     <Compile Include="Samples\Test\InkCanvasUc.xaml.cs">
       <DependentUpon>InkCanvasUc.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Test\RandomTestsUc.xaml.cs">
+      <DependentUpon>RandomTestsUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Test\ScrollBar.xaml.cs">
       <DependentUpon>ScrollBar.xaml</DependentUpon>
     </Compile>
@@ -470,6 +473,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\Test\InkCanvasUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\RandomTestsUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
