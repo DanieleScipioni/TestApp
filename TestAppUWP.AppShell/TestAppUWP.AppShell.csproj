@@ -265,6 +265,7 @@
     <PRIResource Include="Resources\it-IT\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Dark\circle.png" />
     <Content Include="Assets\flags\flag_blue_mini.png" />
     <Content Include="Assets\flags\flag_blue_mini_phone.png" />
     <Content Include="Assets\flags\flag_green_mini.png" />
@@ -280,6 +281,7 @@
     <Content Include="Assets\flags\flag_red_mini_phone.png" />
     <Content Include="Assets\flags\flag_up_red_mini.png" />
     <Content Include="Assets\flags\map_circle_mini.png" />
+    <Content Include="Assets\Light\circle.png" />
     <Content Include="Assets\Photos\pic00.jpg" />
     <Content Include="Assets\Photos\pic01.jpg" />
     <Content Include="Assets\Photos\pic02.jpg" />

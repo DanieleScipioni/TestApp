@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:appShell="using:TestAppUWP.AppShell"
-             xmlns:converters="using:TestAppUWP.AppShell.Converters">
+             xmlns:converters="using:TestAppUWP.AppShell.Converters"
+             xmlns:foundation="using:Windows.Foundation">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -32,9 +33,11 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="MyBackgroundColorBrush" Color="White"/>
+                    <BitmapImage x:Key="CircleImage" UriSource="ms-appx:///Assets/Light/circle.png"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="MyBackgroundColorBrush" Color="#2E2E2E"/>
+                    <BitmapImage x:Key="CircleImage" UriSource="ms-appx:///Assets/Dark/circle.png"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
