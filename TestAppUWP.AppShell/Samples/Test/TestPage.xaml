@@ -10,6 +10,9 @@
         <PivotItem Header="TabView toolkit" Margin="0">
             <test:TabViewToolkit/>
         </PivotItem>
+        <PivotItem Header="TabView toolkit" Margin="0">
+            <test:TabViewUi/>
+        </PivotItem>
         <PivotItem Header="ScrollBar" Margin="0">
             <test:ScrollBar/>
         </PivotItem>

@@ -1,0 +1,24 @@
+<UserControl x:Class="TestAppUWP.AppShell.Samples.Test.TabViewUi"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+             xmlns:test="using:TestAppUWP.AppShell.Samples.Test">
+    <controls:TabView x:Name="TabView">
+        <controls:TabViewItem Header="Header 1">
+            <ListView Padding="16"
+                      IsItemClickEnabled="True" ItemsSource="{x:Bind listItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="test:Book">
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Title}"
+                                       Style="{StaticResource TitleTextBlockStyle}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </controls:TabViewItem>
+        <controls:TabViewItem Header="Header 1">
+            <TextBlock Padding="16">You can enable drag-and-drop and reorder the tabs too.</TextBlock>
+        </controls:TabViewItem>
+    </controls:TabView>
+</UserControl>

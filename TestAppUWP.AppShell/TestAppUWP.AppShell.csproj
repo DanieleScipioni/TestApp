@@ -131,6 +131,9 @@
     <Compile Include="Samples\Test\TabViewToolkit.xaml.cs">
       <DependentUpon>TabViewToolkit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Test\TabViewUi.xaml.cs">
+      <DependentUpon>TabViewUi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Test\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
@@ -492,6 +495,10 @@
     <Page Include="Samples\Test\TabViewToolkit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\TabViewUi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\Test\TestPage.xaml">
       <SubType>Designer</SubType>
