@@ -120,6 +120,9 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
+    <Compile Include="Samples\Test\ChessBoardUc.xaml.cs">
+      <DependentUpon>ChessBoardUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\Test\InkCanvasUc.xaml.cs">
       <DependentUpon>InkCanvasUc.xaml</DependentUpon>
     </Compile>
@@ -265,6 +268,7 @@
     <PRIResource Include="Resources\it-IT\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\chessboard.jpg" />
     <Content Include="Assets\Dark\circle.png" />
     <Content Include="Assets\flags\flag_blue_mini.png" />
     <Content Include="Assets\flags\flag_blue_mini_phone.png" />
@@ -328,6 +332,7 @@
     <Content Include="Assets\Photos\pic43.jpg" />
     <Content Include="Assets\Photos\pic44.jpg" />
     <Content Include="Assets\Photos\pic45.jpg" />
+    <Content Include="Assets\queen.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -471,6 +476,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\InterControlAnimation\InterControlAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\Test\ChessBoardUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
