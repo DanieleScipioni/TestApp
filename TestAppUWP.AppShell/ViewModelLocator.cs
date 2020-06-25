@@ -1,6 +1,7 @@
 ﻿using System;
 using TestAppUWP.AppShell.Samples.Accounts;
 using TestAppUWP.AppShell.Samples.Animations.ColorAnimation;
+using TestAppUWP.AppShell.Samples.Chess;
 using TestAppUWP.Pages.Frame;
 using TestAppUWP.Samples.Animations.ColorAnimation;
 using TestAppUWP.Samples.Map;
@@ -33,6 +34,8 @@ namespace TestAppUWP.AppShell
                     return new GeoLocationPageViewModel();
                 case OcrPage _:
                     return new OcrPageViewModel();
+                case ChessBoardPage _:
+                    return new ChessBoardViewModel();
             }
 
             return null;
