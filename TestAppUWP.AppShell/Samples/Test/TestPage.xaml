@@ -19,11 +19,8 @@
         <PivotItem Header="InkCanvas" Margin="0">
             <test:InkCanvasUc/>
         </PivotItem>
-        <PivotItem Header="Random Tests" Margin="0" Padding="40">
-            <StackPanel Background="{ThemeResource MyBackgroundColorBrush}">
-                <test:RandomTestsUc Text="Short" HorizontalAlignment="Left"/>
-                <test:RandomTestsUc Text="Long text" HorizontalAlignment="Left"/>
-            </StackPanel>
+        <PivotItem Header="Chess">
+            <test:ChessBoardUc/>
         </PivotItem>
     </Pivot>
 </Page>

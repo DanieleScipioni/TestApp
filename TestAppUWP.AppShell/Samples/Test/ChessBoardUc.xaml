@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="TestAppUWP.AppShell.Samples.Test.ChessBoardUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400">
+    <Canvas x:Name="Board" AllowDrop="True" Width="400" Height="400"
+            DragOver="Board_OnDragOver" DragEnter="Board_OnDragEnter">
+        <Canvas.Background>
+            <ImageBrush ImageSource="/Assets/chessboard.jpg" />
+        </Canvas.Background>
+        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
+               Stretch="Fill" DragStarting="Image_OnDragStarting"
+               Canvas.Top="100" Canvas.Left="150"/>
+        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
+               Stretch="Fill" DragStarting="Image_OnDragStarting"
+               Canvas.Top="250" Canvas.Left="50"/>
+        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
+               Stretch="Fill" DragStarting="Image_OnDragStarting"
+               Canvas.Top="300" Canvas.Left="250"/>
+    </Canvas>
+</UserControl>

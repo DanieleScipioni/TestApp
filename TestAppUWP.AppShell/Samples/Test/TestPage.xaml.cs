@@ -1,6 +1,13 @@
-﻿using Windows.ApplicationModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace TestAppUWP.AppShell.Samples.Test
 {
