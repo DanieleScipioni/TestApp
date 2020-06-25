@@ -17,9 +17,6 @@
         <PivotItem Header="InkCanvas" Margin="0">
             <test:InkCanvasUc/>
         </PivotItem>
-        <PivotItem Header="Chess">
-            <chess:ChessBoardUc/>
-        </PivotItem>
         <PivotItem Header="Random tests">
         </PivotItem>
     </Pivot>

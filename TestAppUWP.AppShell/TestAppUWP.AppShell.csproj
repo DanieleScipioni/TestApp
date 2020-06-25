@@ -120,8 +120,8 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
-    <Compile Include="Samples\Chess\ChessBoardUc.xaml.cs">
-      <DependentUpon>ChessBoardUc.xaml</DependentUpon>
+    <Compile Include="Samples\Chess\ChessBoardPage.xaml.cs">
+      <DependentUpon>ChessBoardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\Test\InkCanvasUc.xaml.cs">
       <DependentUpon>InkCanvasUc.xaml</DependentUpon>
@@ -479,7 +479,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\Chess\ChessBoardUc.xaml">
+    <Page Include="Samples\Chess\ChessBoardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

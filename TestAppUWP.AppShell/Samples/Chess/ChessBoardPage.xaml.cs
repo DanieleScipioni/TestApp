@@ -7,9 +7,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace TestAppUWP.AppShell.Samples.Chess
 {
-    public sealed partial class ChessBoardUc
+    public sealed partial class ChessBoardPage
     {
-        public ChessBoardUc()
+        public ChessBoardPage()
         {
             InitializeComponent();
         }
