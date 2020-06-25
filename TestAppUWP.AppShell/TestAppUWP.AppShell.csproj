@@ -120,7 +120,7 @@
     <Compile Include="Samples\Controls\IncrementalGroupedListViewHelper.cs" />
     <Compile Include="Samples\Controls\IncremetalStringGroups.cs" />
     <Compile Include="Samples\Controls\ListViewDdBehavior.cs" />
-    <Compile Include="Samples\Test\ChessBoardUc.xaml.cs">
+    <Compile Include="Samples\Chess\ChessBoardUc.xaml.cs">
       <DependentUpon>ChessBoardUc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\Test\InkCanvasUc.xaml.cs">
@@ -479,7 +479,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\Test\ChessBoardUc.xaml">
+    <Page Include="Samples\Chess\ChessBoardUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -543,6 +543,7 @@
       <Name>TestAppUWP.View</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace TestAppUWP.AppShell.Samples.Test
+namespace TestAppUWP.AppShell.Samples.Chess
 {
     public sealed partial class ChessBoardUc
     {
         public ChessBoardUc()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void Image_OnDragStarting(UIElement sender, DragStartingEventArgs args)
