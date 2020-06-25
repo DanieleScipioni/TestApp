@@ -19,5 +19,7 @@
         <PivotItem Header="Chess">
             <test:ChessBoardUc/>
         </PivotItem>
+        <PivotItem Header="Random tests">
+        </PivotItem>
     </Pivot>
 </Page>
