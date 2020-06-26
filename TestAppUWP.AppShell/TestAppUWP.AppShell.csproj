@@ -102,6 +102,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\Chess\XToLeftConverter.cs" />
+    <Compile Include="Samples\Chess\YToTopConverter.cs" />
     <Compile Include="Samples\Chess\ChessBoardViewModel.cs" />
     <Compile Include="Converters\ListToCommaSeparatedStringConverter.cs" />
     <Compile Include="Converters\TrueToCollapsedConverter.cs" />
