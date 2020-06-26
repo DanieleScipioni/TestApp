@@ -5,19 +5,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
       DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
-    <Canvas x:Name="Board" AllowDrop="True" Width="400" Height="400"
-            DragOver="Board_OnDragOver" DragEnter="Board_OnDragEnter">
-        <Canvas.Background>
-            <ImageBrush ImageSource="/Assets/chessboard.jpg" />
-        </Canvas.Background>
-        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
-               Stretch="Fill" DragStarting="Image_OnDragStarting"
-               Canvas.Top="100" Canvas.Left="150"/>
-        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
-               Stretch="Fill" DragStarting="Image_OnDragStarting"
-               Canvas.Top="250" Canvas.Left="50"/>
-        <Image Source="/Assets/queen.png" CanDrag="True" Width="50" Height="50"
-               Stretch="Fill" DragStarting="Image_OnDragStarting"
-               Canvas.Top="300" Canvas.Left="250"/>
-    </Canvas>
+    <ItemsControl ItemsSource="{x:Bind _viewModel.Pieces}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Canvas AllowDrop="True" Width="400" Height="400"
+                        DragOver="Board_OnDragOver" DragEnter="Board_OnDragEnter">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="/Assets/chessboard.jpg" />
+                    </Canvas.Background>
+                </Canvas>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
 </Page>

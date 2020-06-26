@@ -9,9 +9,12 @@ namespace TestAppUWP.AppShell.Samples.Chess
 {
     public sealed partial class ChessBoardPage
     {
+        private ChessBoardViewModel _viewModel;
+
         public ChessBoardPage()
         {
             InitializeComponent();
+            _viewModel = (ChessBoardViewModel) DataContext;
         }
 
         private void Image_OnDragStarting(UIElement sender, DragStartingEventArgs args)
@@ -31,20 +34,20 @@ namespace TestAppUWP.AppShell.Samples.Chess
             DataPackageView dataPackageView = e.DataView;
             var chessman = (Image)dataPackageView.Properties["chessman"];
 
-            (int x, int y)[] others = Board.Children.Where(c => c != chessman).Select(i => (GetCoordinates(canvas, i))).ToArray();
+            //(int x, int y)[] others = Board.Children.Where(c => c != chessman).Select(i => (GetCoordinates(canvas, i))).ToArray();
 
-            (int x, int y) chessmanPoint = GetCoordinates(canvas, e.GetPosition(Board));
+            //(int x, int y) chessmanPoint = GetCoordinates(canvas, e.GetPosition(Board));
 
-            foreach ((int x, int y) other in others)
-            {
-                if (other.x == chessmanPoint.x || other.y == chessmanPoint.y || Math.Abs(other.x - chessmanPoint.x) == Math.Abs(other.y - chessmanPoint.y))
-                {
-                    e.AcceptedOperation = DataPackageOperation.None;
-                    return;
-                }
+            //foreach ((int x, int y) other in others)
+            //{
+            //    if (other.x == chessmanPoint.x || other.y == chessmanPoint.y || Math.Abs(other.x - chessmanPoint.x) == Math.Abs(other.y - chessmanPoint.y))
+            //    {
+            //        e.AcceptedOperation = DataPackageOperation.None;
+            //        return;
+            //    }
 
-                e.AcceptedOperation = DataPackageOperation.Move;
-            }
+            //    e.AcceptedOperation = DataPackageOperation.Move;
+            //}
         }
 
         private static (int x, int y) GetCoordinates(Canvas canvas, Point point)
