@@ -15,6 +15,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+using TestAppUWP.AppShell.Samples.Chess;
 
 namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
@@ -65,6 +66,7 @@ namespace TestAppUWP.AppShell.Samples.RootNavigation
                 typeof(CalendarExplorer),
                 typeof(AccountPage),
                 typeof(OcrPage),
+                typeof(ChessBoardPage),
                 typeof(TestPage)
             };
 

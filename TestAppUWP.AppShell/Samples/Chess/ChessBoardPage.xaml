@@ -1,0 +1,33 @@
+﻿<Page x:Class="TestAppUWP.AppShell.Samples.Chess.ChessBoardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:chess="using:TestAppUWP.AppShell.Samples.Chess"
+      mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400"
+      DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <chess:YToTopConverter x:Key="YToTopConverter" />
+        <chess:XToLeftConverter x:Key="XToLeftConverter" />
+    </Page.Resources>
+    <ItemsControl ItemsSource="{x:Bind _viewModel.Pieces}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="chess:Piece">
+                <Image Source="/Assets/Chess/queen.png" CanDrag="True" Width="50" Height="50"
+                       Stretch="Fill" DragStarting="Image_OnDragStarting"
+                       Canvas.Top="{x:Bind Y, Converter={StaticResource YToTopConverter}}"
+                       Canvas.Left="{x:Bind X, Converter={StaticResource XToLeftConverter}}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Canvas AllowDrop="True" Width="400" Height="400"
+                        DragOver="Board_OnDragOver" DragEnter="Board_OnDragEnter">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="/Assets/Chess/chessboard.jpg" />
+                    </Canvas.Background>
+                </Canvas>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
+</Page>

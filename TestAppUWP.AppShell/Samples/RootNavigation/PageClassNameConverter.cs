@@ -2,12 +2,13 @@
 using TestAppUWP.AppShell.Samples.Accounts;
 using TestAppUWP.AppShell.Samples.Animations;
 using TestAppUWP.AppShell.Samples.Calendar;
+using TestAppUWP.AppShell.Samples.Chess;
+using TestAppUWP.AppShell.Samples.Test;
 using TestAppUWP.Samples.Controls;
 using TestAppUWP.Samples.Map;
 using TestAppUWP.Samples.Ocr;
 using TestAppUWP.Samples.Rsa;
 using Windows.UI.Xaml.Data;
-using TestAppUWP.AppShell.Samples.Test;
 
 namespace TestAppUWP.AppShell.Samples.RootNavigation
 {
@@ -35,6 +36,8 @@ namespace TestAppUWP.AppShell.Samples.RootNavigation
             if (type == typeof(WebPage)) return "\xE701";
             if (type == typeof(OcrPage)) return "\xE8C1";
             if (type == typeof(TestPage)) return "\xE74C";
+            if (type == typeof(ChessBoardPage)) return "\xE809";
+            
             return "\xF142";
         }
 
